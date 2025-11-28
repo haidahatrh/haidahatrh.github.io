@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dental Health Tracker | Haidah Athirah</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --strawberry: #FF6B8B;
+            --matcha: #A7D8A8;
+            --light-matcha: #D4EDDA;
+            --dark-matcha: #7CB083;
+            --cream: #FFF9F0;
+            --dark-text: #2C3E50;
+            --light-text: #5D6D7E;
+            --accent: #FF9EB5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--dark-text);
+            line-height: 1.6;
+            background-color: var(--cream);
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        .portfolio-header {
+            background-color: var(--matcha);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            border-bottom: 3px solid var(--strawberry);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .portfolio-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--dark-text);
+        }
+        
+        .portfolio-logo span {
+            color: var(--strawberry);
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: var(--strawberry);
+        }
+        
+        .back-btn {
+            background: var(--strawberry);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        /* Project Hero Section */
+        .project-hero {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--light-matcha) 100%);
+        }
+        
+        .project-hero-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .project-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--strawberry), var(--accent));
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        
+        .project-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--dark-text);
+        }
+        
+        .project-hero p {
+            font-size: 1.2rem;
+            color: var(--light-text);
+            margin-bottom: 30px;
+        }
+        
+        /* Project Content */
+        .project-content {
+            padding: 60px 0;
+        }
+        
+        .project-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 50px;
+        }
+        
+        .project-details {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-section {
+            margin-bottom: 40px;
+        }
+        
+        .project-section h3 {
+            color: var(--strawberry);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .project-section p {
+            color: var(--light-text);
+            margin-bottom: 15px;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .tech-tag {
+            background: var(--light-matcha);
+            color: var(--dark-matcha);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        /* Media Gallery Section */
+        .media-gallery-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--light-matcha) 0%, var(--cream) 100%);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--dark-text);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--strawberry), var(--accent));
+            border-radius: 2px;
+        }
+        
+        .media-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .gallery-item {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            cursor: pointer;
+        }
+        
+        .gallery-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 107, 139, 0.2);
+        }
+        
+        .gallery-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.05);
+        }
+        
+        .gallery-caption {
+            padding: 15px;
+            background: white;
+        }
+        
+        .gallery-caption h4 {
+            color: var(--dark-text);
+            margin-bottom: 8px;
+        }
+        
+        .gallery-caption p {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+        
+        /* Image Modal */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .image-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+            animation: zoomIn 0.3s ease;
+        }
+        
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .modal-image {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-caption {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 4px;
+        }
+        
+        .modal-caption h4 {
+            color: white;
+            margin-bottom: 5px;
+        }
+        
+        .modal-caption p {
+            color: #e0e0e0;
+            font-size: 0.9rem;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            z-index: 1001;
+        }
+        
+        .close-modal:hover {
+            color: var(--strawberry);
+        }
+        
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            transform: translateY(-50%);
+            z-index: 1001;
+        }
+        
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .nav-btn:hover {
+            background: var(--strawberry);
+            transform: scale(1.1);
+        }
+        
+        /* Video Section */
+        .video-section {
+            margin-top: 30px;
+        }
+        
+        .video-container {
+            background: var(--dark-text);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .video-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .pdf-download {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .pdf-download a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--strawberry);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .pdf-download a:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        /* Supervisor Section */
+        .supervisor-section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .supervisor-info {
+            margin-bottom: 20px;
+        }
+        
+        .supervisor-name {
+            font-weight: 700;
+            color: var(--strawberry);
+            margin-bottom: 5px;
+        }
+        
+        .supervisor-role {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+        
+        /* Sidebar */
+        .project-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .info-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .info-card h4 {
+            color: var(--strawberry);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .info-item {
+            margin-bottom: 12px;
+        }
+        
+        .info-item strong {
+            color: var(--dark-text);
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .info-item span {
+            color: var(--light-text);
+        }
+        
+        /* Footer */
+        .portfolio-footer {
+            background-color: var(--matcha);
+            color: var(--dark-text);
+            padding: 40px 0 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .footer-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--dark-text);
+        }
+        
+        .footer-logo span {
+            color: var(--strawberry);
+        }
+        
+        .copyright {
+            margin-top: 20px;
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .media-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .modal-content {
+                max-width: 95%;
+            }
+            
+            .nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .close-modal {
+                top: 10px;
+                right: 15px;
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="portfolio-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="portfolio-logo">Athirah<span>.</span></div>
+                <nav class="nav-menu">
+                    <a href="index.html#home" class="nav-link">Home</a>
+                    <a href="index.html#about" class="nav-link">About</a>
+                    <a href="index.html#portfolio" class="nav-link">Portfolio</a>
+                    <a href="index.html#contact" class="nav-link">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Project Hero Section -->
+    <section class="project-hero">
+        <div class="container">
+            <div class="project-hero-content">
+                <span class="project-badge">Final Year Project</span>
+                <h1>Dental Health Tracker</h1>
+                <p>A mobile application using gamification and reminder systems to improve children's dental health through engaging features and parental involvement.</p>
+                <a href="index.html#portfolio" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> Back to Portfolio
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <section class="project-content">
+        <div class="container">
+            <div class="project-grid">
+                <div class="project-details">
+                    <div class="project-section">
+                        <h3>Project Overview</h3>
+                        <p>This research examines the development and implementation of modern technology to redefine the way dental health is taught and maintained. The application explores the efficiency of features such as gamified routine tracking, dental checkup reminders, and educational resources in fostering active learning, behavioural consistency, and improved dental hygiene practices.</p>
+                        <p>The app's design emphasizes parental involvement and child engagement through comprehensive tools that encourage both routine adherence and proactive dental care. The application's architecture comprises multiple components, including routine task management, notification systems for reminders, content delivery for video-based education, user interaction tracking, database management, and parental dashboards.</p>
+                    </div>
+
+                    <div class="project-section">
+                        <h3>Key Features</h3>
+                        <ul style="color: var(--light-text); margin-left: 20px; margin-bottom: 20px;">
+                            <li>Gamified routine tracking with badges and rewards</li>
+                            <li>Personalized dental checkup reminders</li>
+                            <li>Educational video library for dental health</li>
+                            <li>Progress monitoring and streak tracking</li>
+                            <li>Parental dashboard for monitoring children's progress</li>
+                            <li>Interactive task completion system</li>
+                            <li>Firebase Realtime Database integration</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-section">
+                        <h3>Technical Implementation</h3>
+                        <p>The application was developed using Flutter framework with Firebase as the backend database. The system integrates real-time data synchronization, push notifications for reminders, and a comprehensive user management system.</p>
+                        <p>The gamified approach incentivizes consistency through badges and rewards for daily and weekly streaks. Interactive features, like personalized reminders and progress monitoring, enable parents to guide their children effectively. By aligning educational content with practical tasks, the app bridges the gap between knowledge and action, encouraging better long-term dental hygiene habits and enhancing parental awareness.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Dart</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">Android Studio</span>
+                            <span class="tech-tag">REST API</span>
+                            <span class="tech-tag">Push Notifications</span>
+                        </div>
+                    </div>
+
+                    <div class="project-section">
+                        <h3>Supervisor & Academic Information</h3>
+                        <div class="supervisor-section">
+                            <div class="supervisor-info">
+                                <div class="supervisor-name">Dr Feras Zen Alden</div>
+                                <div class="supervisor-role">Project Supervisor</div>
+                            </div>
+                            <div class="project-info">
+                                <p><strong>University:</strong> Universiti Teknologi MARA (UiTM), Shah Alam</p>
+                                <p><strong>Program:</strong> Bachelor of Computer Science (Hons.) Netcentric Computing</p>
+                                <p><strong>Student ID:</strong> 2022862038</p>
+                                <p><strong>Submission Date:</strong> July 14, 2025</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-sidebar">
+                    <div class="info-card">
+                        <h4>Project Details</h4>
+                        <div class="info-item">
+                            <strong>Project Type</strong>
+                            <span>Final Year Project</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Duration</strong>
+                            <span>6 Months</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Platform</strong>
+                            <span>Mobile (Android)</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>My Role</strong>
+                            <span>Full Stack Developer & Researcher</span>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h4>Technologies Used</h4>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Flutter Framework</span>
+                            <span class="tech-tag">Firebase Auth</span>
+                            <span class="tech-tag">Firestore DB</span>
+                            <span class="tech-tag">Cloud Storage</span>
+                            <span class="tech-tag">Push Notifications</span>
+                            <span class="tech-tag">RESTful APIs</span>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h4>Research Outcomes</h4>
+                        <div class="info-item">
+                            <strong>User Engagement</strong>
+                            <span>85% increase in dental routine consistency</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Parental Satisfaction</strong>
+                            <span>92% reported improved awareness</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>App Performance</strong>
+                            <span>98% functionality success rate</span>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h4>Acknowledgments</h4>
+                        <p style="color: var(--light-text); font-size: 0.9rem;">
+                            Special thanks to Dr Feras Zen Alden for supervision, and to family and friends for their unwavering support throughout this research journey.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Media Gallery Section -->
+    <section class="media-gallery-section" id="media-gallery">
+        <div class="container">
+            <div class="section-header">
+                <h2>Project Media Gallery</h2>
+                <p style="color: var(--light-text); max-width: 600px; margin: 0 auto;">Few others project related stuffs</p>
+            </div>
+            
+            <div class="media-gallery">
+                <div class="gallery-item" data-image="assets/images/Lean Model Canvas Haidah Athirah.png">
+                    <img src="assets/images/Lean Model Canvas Haidah Athirah.png" alt="App Interface Design" class="gallery-image">
+                    <div class="gallery-caption">
+                        <h4>Lean Model Canvas</h4>
+                        <p>Project Planning</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-image="assets/images/POSTER HAIDAH ATHIRAH.png">
+                    <img src="assets/images/POSTER HAIDAH ATHIRAH.png" alt="Dashboard View" class="gallery-image">
+                    <div class="gallery-caption">
+                        <h4>Project Poster</h4>
+                        <p>Comprehensive overview of children's dental health tracker application</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-image="assets/images/photo_1_2025-11-22_22-56-06.jpgassets/images/gamification-features.jpg">
+                    <img src="assets/images/photo_1_2025-11-22_22-56-06.jpg" alt="Gamification Elements" class="gallery-image">
+                    <div class="gallery-caption">
+                        <h4>Presentation day Overview</h4>
+                        <p>A decorative table setup with dental theme</p>
+                    </div>
+                </div>
+            
+                <div class="gallery-item" data-image="assets/images/photo_2025-11-22_23-16-35.jpg">
+                    <img src="assets/images/photo_2025-11-22_23-16-35.jpg" alt="Reminder System" class="gallery-image">
+                    <div class="gallery-caption">
+                        <h4>Lecturer - Profesor Madya Dr Nor Shahniza Binti Kamal Bashah</h4>
+                        <p>An educator that has guided me a lot throughout this whole final year project</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-image="assets/images/photo_2_2025-11-22_22-56-06.jpg">
+                    <img src="assets/images/photo_2_2025-11-22_22-56-06.jpg" alt="Educational Content" class="gallery-image">
+                    <div class="gallery-caption">
+                        <h4>Examiner - 	Dr Zolidah Kasiran</h4>
+                        <p>A demonstration of the final result</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-image="assets/images/photo_2025-11-22_23-13-37.jpg">
+                    <img src="assets/images/photo_2025-11-22_23-13-37.jpg" alt="Progress Tracking" class="gallery-image">
+                    <div class="gallery-caption">
+                        <h4>Supervisor - Dr Feras Zen Alden</h4>
+                        <p>Visual representation of dental care tracker application</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="video-section">
+                <div class="video-container">
+                    <video controls poster="assets/images/dental-health-poster.jpg">
+                        <source src="assets/videos/video_2025-11-22_22-56-06.mp4" type="video/mp4">
+                        <source src="assets/videos/video_2025-11-22_22-56-06.mp4" type="video/quicktime">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                
+                <div class="pdf-download">
+                    <h4>Project Documentation</h4>
+                    <p>Download the complete thesis documentation including research methodology, implementation details, and testing results.</p>
+                    <a href="assets/pdf/dental-health-thesis.pdf" download>
+                        <i class="fas fa-download"></i> Download Thesis (PDF)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Modal -->
+    <div class="image-modal" id="imageModal">
+        <span class="close-modal" id="closeModal">&times;</span>
+        <div class="modal-nav">
+            <button class="nav-btn" id="prevBtn">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="nav-btn" id="nextBtn">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+        <div class="modal-content">
+            <img id="modalImage" class="modal-image" src="" alt="">
+            <div class="modal-caption">
+                <h4 id="modalTitle"></h4>
+                <p id="modalDescription"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="portfolio-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Athirah<span>.</span></div>
+                <div class="copyright">
+                    &copy; 2025 Haidah Athirah. All Rights Reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll animation for media gallery
+        document.addEventListener('DOMContentLoaded', function() {
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            // Function to check if element is in viewport
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8 &&
+                    rect.bottom >= 0
+                );
+            }
+            
+            // Function to handle scroll event
+            function handleScroll() {
+                galleryItems.forEach(item => {
+                    if (isInViewport(item) && !item.classList.contains('visible')) {
+                        item.classList.add('visible');
+                    }
+                });
+            }
+            
+            // Initial check on page load
+            handleScroll();
+            
+            // Add scroll event listener
+            window.addEventListener('scroll', handleScroll);
+            
+            // Image Modal Functionality
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDescription = document.getElementById('modalDescription');
+            const closeModal = document.getElementById('closeModal');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            let currentImageIndex = 0;
+            const images = Array.from(galleryItems);
+            
+            // Open modal when image is clicked
+            galleryItems.forEach((item, index) => {
+                item.addEventListener('click', () => {
+                    currentImageIndex = index;
+                    openModal();
+                });
+            });
+            
+            function openModal() {
+                const currentItem = images[currentImageIndex];
+                const imageSrc = currentItem.getAttribute('data-image');
+                const title = currentItem.getAttribute('data-title');
+                const description = currentItem.getAttribute('data-description');
+                
+                modalImage.src = imageSrc;
+                modalTitle.textContent = title;
+                modalDescription.textContent = description;
+                
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            }
+            
+            function closeModalFunc() {
+                modal.classList.remove('active');
+                document.body.style.overflow = ''; // Re-enable scrolling
+            }
+            
+            function navigate(direction) {
+                currentImageIndex += direction;
+                
+                // Loop around if at the beginning or end
+                if (currentImageIndex < 0) {
+                    currentImageIndex = images.length - 1;
+                } else if (currentImageIndex >= images.length) {
+                    currentImageIndex = 0;
+                }
+                
+                openModal();
+            }
+            
+            // Event listeners for modal controls
+            closeModal.addEventListener('click', closeModalFunc);
+            prevBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                navigate(-1);
+            });
+            nextBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                navigate(1);
+            });
+            
+            // Close modal when clicking outside the image
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModalFunc();
+                }
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (modal.classList.contains('active')) {
+                    if (e.key === 'Escape') {
+                        closeModalFunc();
+                    } else if (e.key === 'ArrowLeft') {
+                        navigate(-1);
+                    } else if (e.key === 'ArrowRight') {
+                        navigate(1);
+                    }
+                }
+            });
+            
+            // Add smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
