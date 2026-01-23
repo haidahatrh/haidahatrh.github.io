@@ -1030,26 +1030,26 @@
                 </div>
                 
                 <div class="contact-form">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label for="name">Full Name</label>
-                            <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" class="form-control" placeholder="What is this regarding?" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" class="form-control" placeholder="Your message here..." required></textarea>
-                        </div>
+                   <form id="contactForm" method="POST">
+<div class="form-group">
+    <label for="name">Full Name</label>
+    <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name" required>
+</div>
+
+<div class="form-group">
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+</div>
+
+<div class="form-group">
+    <label for="subject">Subject</label>
+    <input type="text" id="subject" name="subject" class="form-control" placeholder="What is this regarding?" required>
+</div>
+
+<div class="form-group">
+    <label for="message">Message</label>
+    <textarea id="message" name="message" class="form-control" placeholder="Your message here..." required></textarea>
+</div>
                         
                         <button type="submit" class="btn btn-primary" style="width: 100%;">
                             <i class="fas fa-paper-plane"></i> Send Message
@@ -1148,30 +1148,159 @@
         if (skillsSection) {
             observer.observe(skillsSection);
         }
-        
-        // Form Submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            
-            // Simple validation
-            if (!name || !email) {
-                alert('Please fill in all required fields.');
-                return;
-            }
-            
-            // In a real application, you would send this data to a server
-            alert(`Thank you, ${name}! Your message has been sent. I'll get back to you soon.`);
-            
-            // Reset form
-            this.reset();
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    // Your Google Apps Script URL from Step 3
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
+    
+    // Get form data
+    const formData = {
+        name: document.getElementById('name').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        subject: document.getElementById('subject').value.trim(),
+        message: document.getElementById('message').value.trim()
+    };
+    
+    // Validate
+    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+        showNotification('Please fill in all fields.', 'error');
+        return;
+    }
+    
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+        showNotification('Please enter a valid email address.', 'error');
+        return;
+    }
+    
+    // Show loading
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+    submitBtn.disabled = true;
+    
+    try {
+        // Send to Google Sheets
+        const response = await fetch(https://script.google.com/macros/s/AKfycbzhsrTx2SU5LHNZ1akDGmY89Y3tFeBy-MuuPpbDLfuBVDuu2riWGSp4BwfGf-l8OcYp/exec, {
+            method: 'POST',
+            mode: 'no-cors', // Important for Google Apps Script
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify(formData)
         });
         
-        // Initialize animations
-        animateSkills();
+        // Success - show confirmation
+        showNotification(
+            `Thank you, ${formData.name}! Your message has been received. I'll get back to you within 24 hours.`,
+            'success'
+        );
+        
+        // Also send to your email (optional backup)
+        sendEmailBackup(formData);
+        
+        // Reset form
+        this.reset();
+        
+    } catch (error) {
+        // Fallback to mailto if fetch fails
+        console.log('Using mailto fallback');
+        const mailtoLink = `mailto:haidahatrh@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`From: ${formData.name} (${formData.email})\n\n${formData.message}`)}`;
+        window.location.href = mailtoLink;
+        
+        showNotification('Opening email client... Please send your message there.', 'info');
+        
+    } finally {
+        // Reset button
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    }
+});
+
+// Backup: Send email using mailto
+function sendEmailBackup(data) {
+    // This creates a mailto link but doesn't send automatically
+    const mailtoBody = `
+Name: ${data.name}
+Email: ${data.email}
+Subject: ${data.subject}
+
+Message:
+${data.message}
+
+--- 
+Submitted via Portfolio Contact Form
+`;
+    
+    // You can optionally open mailto
+    // const mailtoLink = `mailto:haidahatrh@gmail.com?subject=Portfolio Contact: ${encodeURIComponent(data.subject)}&body=${encodeURIComponent(mailtoBody)}`;
+    // window.open(mailtoLink, '_blank');
+}
+
+// Notification function
+function showNotification(message, type = 'info') {
+    // Remove existing notifications
+    const existing = document.querySelector('.custom-notification');
+    if (existing) existing.remove();
+    
+    // Create notification
+    const notification = document.createElement('div');
+    notification.className = 'custom-notification';
+    notification.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 16px 24px;
+            background: ${type === 'success' ? '#10B981' : type === 'error' ? '#EF4444' : '#3B82F6'};
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            max-width: 400px;
+            animation: slideIn 0.3s ease;
+        ">
+            <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}" 
+               style="font-size: 20px;"></i>
+            <div style="flex: 1; font-size: 14px; line-height: 1.5;">${message}</div>
+            <button onclick="this.parentElement.parentElement.remove()" 
+                    style="background: none; border: none; color: white; cursor: pointer; font-size: 18px;">
+                ×
+            </button>
+        </div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.remove();
+        }
+    }, 5000);
+}
+
+// Add CSS animation
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+`;
+document.head.appendChild(style);
+
     </script>
 </body>
 </html>
