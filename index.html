@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Haidah Athirah | Computer Science Graduate</title>
+    <title>Haidah Athirah | Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,9 +33,8 @@
             box-sizing: border-box;
         }
         
-        html, body {
-            height: 100%;
-            overflow: hidden;
+        html {
+            scroll-behavior: smooth;
         }
         
         body {
@@ -50,49 +49,13 @@
             font-weight: 600;
         }
         
-        /* SLIDES CONTAINER - Horizontal Scroll */
-        .slides-container {
-            display: flex;
-            height: 100vh;
-            width: 600vw; /* 6 slides * 100vw */
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-            scroll-snap-type: x mandatory;
-        }
-        
-        .slide {
-            width: 100vw;
-            height: 100vh;
-            flex-shrink: 0;
-            scroll-snap-align: start;
-            overflow-y: auto;
-            padding: 100px 24px 80px;
-        }
-        
-        .slide::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        .slide::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 4px;
-        }
-        
-        .slide::-webkit-scrollbar-thumb {
-            background: var(--primary-light);
-            border-radius: 4px;
-        }
-        
-        /* SLIDE CONTENT */
-        .slide-content {
+        .container {
             max-width: 1200px;
             margin: 0 auto;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
+            padding: 0 24px;
         }
         
-        /* HEADER - Fixed Navigation */
+        /* Header */
         .header {
             position: fixed;
             top: 0;
@@ -102,16 +65,18 @@
             background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border);
-            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .header.scrolled {
+            box-shadow: var(--shadow-md);
         }
         
         .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            height: 70px;
         }
         
         .logo {
@@ -126,100 +91,248 @@
             color: var(--secondary);
         }
         
-        /* SLIDE NAVIGATION DOTS */
-        .slide-nav {
-            position: fixed;
-            right: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 1000;
+        .nav-menu {
             display: flex;
-            flex-direction: column;
+            gap: 32px;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 15px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+        
+        /* Main Sections */
+        .main-section {
+            padding: 120px 0 80px;
+        }
+        
+        .section-title {
+            margin-bottom: 40px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
             gap: 15px;
         }
         
-        .nav-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: var(--border);
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .section-title h2 i {
+            color: var(--primary);
+        }
+        
+        .section-title p {
+            color: var(--text-secondary);
+            max-width: 600px;
+        }
+        
+        /* HORIZONTAL SCROLL SECTIONS */
+        .horizontal-scroll-section {
             position: relative;
+            margin-bottom: 60px;
         }
         
-        .nav-dot.active {
-            background-color: var(--primary);
-            transform: scale(1.3);
+        .scroll-container {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            padding: 20px 10px 40px;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Firefox */
         }
         
-        .nav-dot:hover::after {
-            content: attr(data-title);
-            position: absolute;
-            right: 25px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: var(--secondary);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 6px;
+        .scroll-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        .scroll-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        
+        .scroll-container::-webkit-scrollbar-thumb {
+            background: var(--primary-light);
+            border-radius: 4px;
+        }
+        
+        .scroll-container::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+        
+        /* Scroll Cards */
+        .scroll-card {
+            min-width: 350px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+        
+        .scroll-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .card-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .scroll-card:hover .card-image img {
+            transform: scale(1.05);
+        }
+        
+        .card-content {
+            padding: 24px;
+        }
+        
+        .card-content h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+        
+        .card-date {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .card-content p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            background: var(--accent);
+            color: var(--primary-dark);
+            padding: 4px 12px;
+            border-radius: 20px;
             font-size: 12px;
             font-weight: 500;
-            white-space: nowrap;
-            pointer-events: none;
         }
         
-        /* SLIDE NAVIGATION ARROWS */
-        .nav-arrows {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            display: flex;
-            gap: 15px;
-            z-index: 1000;
-        }
-        
-        .nav-arrow {
-            width: 50px;
-            height: 50px;
+        /* Scroll Arrows */
+        .scroll-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            background: var(--card-bg);
+            background: white;
             border: 2px solid var(--border);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s ease;
+            z-index: 10;
             color: var(--text-primary);
-            font-size: 20px;
+            font-size: 18px;
         }
         
-        .nav-arrow:hover {
+        .scroll-arrow:hover {
             background: var(--primary);
             color: white;
             border-color: var(--primary);
-            transform: translateY(-2px);
         }
         
-        /* SLIDE PROGRESS */
-        .slide-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--border);
-            z-index: 1001;
+        .scroll-arrow.left {
+            left: -20px;
         }
         
-        .slide-progress-bar {
-            height: 100%;
-            background: var(--gradient);
-            width: 16.66%; /* 100% / 6 slides */
-            transition: transform 0.3s ease;
+        .scroll-arrow.right {
+            right: -20px;
         }
         
-        /* COMMON STYLES */
+        /* Profile Section */
+        .profile-section {
+            padding: 160px 0 100px;
+            background: linear-gradient(135deg, #fdf2ff 0%, #fff0f7 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .profile-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--primary-light) 0%, transparent 70%);
+            opacity: 0.15;
+            border-radius: 50%;
+        }
+        
+        .profile-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .profile-text {
+            position: relative;
+            z-index: 1;
+        }
+        
         .badge {
             display: inline-block;
             background: var(--gradient);
@@ -230,6 +343,33 @@
             font-weight: 500;
             margin-bottom: 24px;
             box-shadow: var(--shadow-md);
+        }
+        
+        .profile-text h1 {
+            font-size: 48px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+        
+        .profile-text h1 span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .profile-text p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            max-width: 500px;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
         }
         
         .btn {
@@ -269,36 +409,6 @@
             border-color: var(--primary-light);
         }
         
-        /* SLIDE 1: PROFILE */
-        .profile-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-            height: 100%;
-        }
-        
-        .profile-text h1 {
-            font-size: 48px;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            color: var(--text-primary);
-        }
-        
-        .profile-text h1 span {
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .profile-text p {
-            font-size: 18px;
-            color: var(--text-secondary);
-            margin-bottom: 32px;
-            max-width: 500px;
-        }
-        
         .profile-image {
             position: relative;
             border-radius: 16px;
@@ -311,260 +421,21 @@
             width: 100%;
             height: auto;
             display: block;
-        }
-        
-        /* SLIDE 2: EDUCATION */
-        .education-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .education-card {
-            background: var(--card-bg);
-            padding: 32px;
-            border-radius: 16px;
-            box-shadow: var(--shadow-md);
-            border-left: 4px solid var(--primary);
-        }
-        
-        .education-card h3 {
-            color: var(--text-primary);
-            margin-bottom: 10px;
-        }
-        
-        .education-date {
-            color: var(--primary);
-            font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 15px;
-            display: block;
-        }
-        
-        /* SLIDE 3: WORK EXPERIENCE */
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 40px auto 0;
-        }
-        
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 30px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--border);
-        }
-        
-        .timeline-item {
-            position: relative;
-            margin-bottom: 40px;
-            padding-left: 80px;
-        }
-        
-        .timeline-dot {
-            position: absolute;
-            left: 22px;
-            width: 16px;
-            height: 16px;
-            background: var(--gradient);
-            border-radius: 50%;
-        }
-        
-        .timeline-content {
-            background: var(--card-bg);
-            padding: 24px;
-            border-radius: 12px;
-            box-shadow: var(--shadow-sm);
-        }
-        
-        /* SLIDE 4: PROJECTS */
-        .projects-container {
-            margin-top: 40px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-        }
-        
-        .project-card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-            transition: all 0.3s ease;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .project-image {
-            height: 200px;
-            overflow: hidden;
-        }
-        
-        .project-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
             transition: transform 0.5s ease;
         }
         
-        .project-card:hover .project-image img {
-            transform: scale(1.1);
+        .profile-image:hover img {
+            transform: scale(1.05);
         }
         
-        .project-content {
-            padding: 24px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .project-content h3 {
-            font-size: 20px;
-            margin-bottom: 8px;
-            color: var(--text-primary);
-        }
-        
-        .project-content p {
-            color: var(--text-secondary);
-            font-size: 14px;
-            margin-bottom: 16px;
-            flex-grow: 1;
-        }
-        
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: auto;
-        }
-        
-        .tag {
-            background: var(--accent);
-            color: var(--primary-dark);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-        
-        /* SLIDE 5: SKILLS */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .skill-category {
-            background: var(--card-bg);
-            padding: 32px;
-            border-radius: 16px;
-            box-shadow: var(--shadow-md);
-        }
-        
-        .skill-category h3 {
-            color: var(--text-primary);
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .skill-list {
-            list-style: none;
-        }
-        
-        .skill-list li {
-            padding: 8px 0;
-            color: var(--text-secondary);
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .skill-list li:last-child {
-            border-bottom: none;
-        }
-        
-        /* SLIDE 6: CONTACT */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            margin-top: 40px;
-        }
-        
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-        
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-        }
-        
-        .contact-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--gradient);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 20px;
-        }
-        
-        .contact-details h4 {
-            margin-bottom: 4px;
-            color: var(--text-primary);
-        }
-        
-        .contact-details p {
-            color: var(--text-secondary);
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 12px;
-            margin-top: 8px;
-        }
-        
-        .social-link {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            background: var(--light-bg);
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .social-link:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-2px);
-        }
-        
+        /* Contact Form */
         .contact-form {
             background: var(--card-bg);
             padding: 40px;
             border-radius: 16px;
             box-shadow: var(--shadow-md);
+            max-width: 600px;
+            margin: 40px auto 0;
         }
         
         .form-group {
@@ -599,50 +470,150 @@
             resize: vertical;
         }
         
-        /* RESPONSIVE */
+        /* Footer */
+        .footer {
+            background: var(--secondary);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+        
+        .footer-logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+        }
+        
+        .footer-logo span {
+            color: var(--primary-light);
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .footer-link {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: var(--primary-light);
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 16px;
+        }
+        
+        .footer-social a {
+            color: white;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-social a:hover {
+            color: var(--primary-light);
+        }
+        
+        .copyright {
+            margin-top: 40px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+        }
+        
+        /* Responsive */
         @media (max-width: 992px) {
-            .profile-section,
-            .contact-grid {
+            .profile-content {
                 grid-template-columns: 1fr;
             }
             
             .profile-text h1 {
-                font-size: 36px;
+                font-size: 40px;
             }
             
-            .slide-nav {
-                right: 15px;
+            .scroll-arrow.left {
+                left: 10px;
             }
             
-            .nav-arrows {
-                right: 15px;
-                bottom: 15px;
+            .scroll-arrow.right {
+                right: 10px;
             }
         }
         
         @media (max-width: 768px) {
-            .slide {
-                padding: 100px 16px 80px;
+            .nav-menu {
+                display: none;
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: white;
+                padding: 24px;
+                box-shadow: var(--shadow-md);
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
             }
             
             .profile-text h1 {
                 font-size: 32px;
             }
             
-            .projects-container {
-                grid-template-columns: 1fr;
+            .btn-group {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .section-title h2 {
+                font-size: 28px;
+            }
+            
+            .scroll-card {
+                min-width: 300px;
             }
             
             .contact-form {
                 padding: 24px;
             }
             
-            .nav-dot:hover::after {
+            .scroll-arrow {
                 display: none;
             }
         }
         
         @media (max-width: 480px) {
+            .container {
+                padding: 0 16px;
+            }
+            
             .profile-text h1 {
                 font-size: 28px;
             }
@@ -651,235 +622,294 @@
                 font-size: 16px;
             }
             
-            .btn {
-                padding: 12px 24px;
-                font-size: 14px;
-            }
-        }
-        
-        /* SECTION TITLES */
-        .section-title {
-            margin-bottom: 40px;
-        }
-        
-        .section-title h2 {
-            font-size: 36px;
-            color: var(--text-primary);
-            margin-bottom: 16px;
-        }
-        
-        .section-title p {
-            color: var(--text-secondary);
-            max-width: 600px;
-        }
-        
-        .title-line {
-            width: 80px;
-            height: 4px;
-            background: var(--gradient);
-            border-radius: 2px;
-            margin-top: 10px;
-        }
-        
-        /* MOBILE MENU */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 24px;
-            color: var(--text-primary);
-            cursor: pointer;
-        }
-        
-        @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: block;
+            .section-title h2 {
+                font-size: 24px;
             }
             
-            .slide-nav {
-                display: none;
-            }
-            
-            .nav-arrows {
-                display: none;
+            .scroll-card {
+                min-width: 280px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Progress Bar -->
-    <div class="slide-progress">
-        <div class="slide-progress-bar" id="progressBar"></div>
-    </div>
-    
     <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <div class="logo">Haidah<span>Athirah</span></div>
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
-            </button>
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">Haidah<span>Athirah</span></a>
+                
+                <nav class="nav-menu" id="navMenu">
+                    <a href="#profile" class="nav-link">Profile</a>
+                    <a href="#education" class="nav-link">Education</a>
+                    <a href="#work" class="nav-link">Work</a>
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </nav>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
         </div>
     </header>
-    
-    <!-- Slide Navigation Dots -->
-    <div class="slide-nav" id="slideNav">
-        <div class="nav-dot active" data-slide="0" data-title="Profile"></div>
-        <div class="nav-dot" data-slide="1" data-title="Education"></div>
-        <div class="nav-dot" data-slide="2" data-title="Work Experience"></div>
-        <div class="nav-dot" data-slide="3" data-title="Projects"></div>
-        <div class="nav-dot" data-slide="4" data-title="Skills"></div>
-        <div class="nav-dot" data-slide="5" data-title="Contact"></div>
-    </div>
-    
-    <!-- Navigation Arrows -->
-    <div class="nav-arrows">
-        <button class="nav-arrow" id="prevSlide">
-            <i class="fas fa-chevron-left"></i>
-        </button>
-        <button class="nav-arrow" id="nextSlide">
-            <i class="fas fa-chevron-right"></i>
-        </button>
-    </div>
-    
-    <!-- Slides Container -->
-    <div class="slides-container" id="slidesContainer">
-        
-        <!-- SLIDE 1: PROFILE -->
-        <section class="slide" id="slide-0">
-            <div class="slide-content">
-                <div class="profile-section">
-                    <div class="profile-text">
-                        <span class="badge">Computer Science Graduate</span>
-                        <h1>Haidah <span>Athirah</span></h1>
-                        <p>A passionate Netcentric Computing graduate with hands-on experience in mobile and web development. Seeking opportunities to apply technical skills in innovative projects.</p>
-                        <div class="btn-group" style="display: flex; gap: 16px; flex-wrap: wrap;">
-                            <a href="#slide-3" class="btn btn-primary" onclick="goToSlide(3)">
-                                <i class="fas fa-briefcase"></i> View Projects
-                            </a>
-                            <a href="#slide-5" class="btn btn-secondary" onclick="goToSlide(5)">
-                                <i class="fas fa-envelope"></i> Contact Me
-                            </a>
-                        </div>
+
+    <!-- PROFILE SECTION -->
+    <section class="profile-section" id="profile">
+        <div class="container">
+            <div class="profile-content">
+                <div class="profile-text">
+                    <span class="badge">Computer Science Graduate</span>
+                    <h1>Haidah <span>Athirah</span></h1>
+                    <p>A passionate Netcentric Computing graduate with hands-on experience in mobile and web development. Seeking opportunities to apply technical skills in innovative projects.</p>
+                    <div class="btn-group">
+                        <a href="#projects" class="btn btn-primary">
+                            <i class="fas fa-briefcase"></i> View Projects
+                        </a>
+                        <a href="#contact" class="btn btn-secondary">
+                            <i class="fas fa-envelope"></i> Contact Me
+                        </a>
                     </div>
-                    <div class="profile-image">
-                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1061&q=80" alt="Haidah Athirah">
-                    </div>
+                </div>
+                <div class="profile-image">
+                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1061&q=80" alt="Haidah Athirah">
                 </div>
             </div>
-        </section>
-        
-        <!-- SLIDE 2: EDUCATION -->
-        <section class="slide" id="slide-1">
-            <div class="slide-content">
-                <div class="section-title">
-                    <h2>Education</h2>
-                    <p>My academic journey and qualifications</p>
-                    <div class="title-line"></div>
-                </div>
-                <div class="education-grid">
-                    <div class="education-card">
-                        <h3>Bachelor of Computer Science (Hons.)</h3>
-                        <span class="education-date">2022 – Present</span>
-                        <p><strong>Universiti Teknologi MARA (UiTM), Shah Alam</strong><br>
-                        Netcentric Computing | CGPA: 3.28<br>
-                        <em>Dean's List Award (Semester 4, 5 & 6)</em></p>
-                    </div>
-                    
-                    <div class="education-card">
-                        <h3>Physical Science (Module 2)</h3>
-                        <span class="education-date">2020 – 2022</span>
-                        <p><strong>Kolej Matrikulasi Selangor (KMS)</strong><br>
-                        CGPA: 3.57<br>
-                        <em>MUET Band 4</em></p>
-                    </div>
-                    
-                    <div class="education-card">
-                        <h3>Additional Certifications</h3>
-                        <span class="education-date">Ongoing</span>
-                        <p>• Cybersecurity Fundamentals<br>
-                           • Flutter Mobile Development<br>
-                           • Laravel Web Development<br>
-                           • Database Management (SQL)</p>
-                    </div>
-                </div>
+        </div>
+    </section>
+
+    <!-- EDUCATION SECTION -->
+    <section class="main-section" id="education">
+        <div class="container">
+            <div class="section-title">
+                <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+                <p>My academic journey and qualifications</p>
             </div>
-        </section>
-        
-        <!-- SLIDE 3: WORK EXPERIENCE -->
-        <section class="slide" id="slide-2">
-            <div class="slide-content">
-                <div class="section-title">
-                    <h2>Work Experience</h2>
-                    <p>Professional journey and roles</p>
-                    <div class="title-line"></div>
-                </div>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <h3>IT Operations - Marketing System</h3>
-                            <div class="timeline-date">2026 - Present</div>
-                            <p><strong>SK Rich Trading Sdn Bhd</strong><br>
-                            Developing and optimizing the marketing system to increase sales and improve customer engagement.</p>
+            
+            <div class="horizontal-scroll-section">
+                <div class="scroll-container" id="educationScroll">
+                    <!-- School -->
+                    <div class="scroll-card">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="School">
                         </div>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <h3>IT Department Intern</h3>
-                            <div class="timeline-date">2025</div>
-                            <p><strong>SK Rich Trading Sdn Bhd</strong><br>
-                            Developed and optimized internal systems and processes. Assisted in database management and system documentation.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <h3>Freelance Web Developer</h3>
-                            <div class="timeline-date">2023 - Present</div>
-                            <p>Developed responsive websites and web applications for small businesses using Laravel and modern frontend technologies.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- SLIDE 4: PROJECTS -->
-        <section class="slide" id="slide-3">
-            <div class="slide-content">
-                <div class="section-title">
-                    <h2>Projects</h2>
-                    <p>A showcase of my technical skills and development capabilities</p>
-                    <div class="title-line"></div>
-                </div>
-                <div class="projects-container">
-                    <div class="project-card">
-                        <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Dental Health Tracker">
-                        </div>
-                        <div class="project-content">
-                            <h3>Dental Health Tracker</h3>
-                            <p>A mobile application using reminders and gamification to engage parents in their children's dental health management. Features include brushing reminders, achievement badges, and progress tracking.</p>
-                            <div class="project-tags">
-                                <span class="tag">Flutter</span>
-                                <span class="tag">Firebase</span>
-                                <span class="tag">Mobile App</span>
-                                <span class="tag">Healthcare</span>
+                        <div class="card-content">
+                            <h3>Secondary School</h3>
+                            <span class="card-date">2015 - 2019</span>
+                            <p>Completed secondary education with focus on science and mathematics. Active in co-curricular activities and competitions.</p>
+                            <div class="card-tags">
+                                <span class="tag">SPM</span>
+                                <span class="tag">Science Stream</span>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="project-card">
-                        <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Task Management System">
+                    <!-- Diploma/Matriculation -->
+                    <div class="scroll-card">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Matriculation">
                         </div>
-                        <div class="project-content">
+                        <div class="card-content">
+                            <h3>Physical Science (Module 2)</h3>
+                            <span class="card-date">2020 – 2022</span>
+                            <p><strong>Kolej Matrikulasi Selangor (KMS)</strong><br>
+                            CGPA: 3.57<br>
+                            <em>MUET Band 4</em><br>
+                            Focus on Physics, Chemistry, and Mathematics</p>
+                            <div class="card-tags">
+                                <span class="tag">Matriculation</span>
+                                <span class="tag">Science</span>
+                                <span class="tag">CGPA 3.57</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Degree -->
+                    <div class="scroll-card">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="University">
+                        </div>
+                        <div class="card-content">
+                            <h3>Bachelor of Computer Science (Hons.)</h3>
+                            <span class="card-date">2022 – Present</span>
+                            <p><strong>Universiti Teknologi MARA (UiTM), Shah Alam</strong><br>
+                            Netcentric Computing | CGPA: 3.28<br>
+                            <em>Dean's List Award (Semester 4, 5 & 6)</em><br>
+                            Specialization in web and mobile development</p>
+                            <div class="card-tags">
+                                <span class="tag">Degree</span>
+                                <span class="tag">Netcentric Computing</span>
+                                <span class="tag">Dean's List</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="scroll-arrow left" onclick="scrollLeft('educationScroll')">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="scroll-arrow right" onclick="scrollRight('educationScroll')">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- WORK EXPERIENCE SECTION -->
+    <section class="main-section" id="work" style="background: #f8f9fa;">
+        <div class="container">
+            <div class="section-title">
+                <h2><i class="fas fa-briefcase"></i> Work Experience</h2>
+                <p>Professional journey and roles</p>
+            </div>
+            
+            <div class="horizontal-scroll-section">
+                <div class="scroll-container" id="workScroll">
+                    <!-- Internship -->
+                    <div class="scroll-card">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Internship">
+                        </div>
+                        <div class="card-content">
+                            <h3>IT Department Intern</h3>
+                            <span class="card-date">2025</span>
+                            <p><strong>SK Rich Trading Sdn Bhd</strong><br>
+                            • Developed and optimized internal systems<br>
+                            • Assisted in database management<br>
+                            • Created system documentation<br>
+                            • Supported IT operations and troubleshooting</p>
+                            <div class="card-tags">
+                                <span class="tag">Internship</span>
+                                <span class="tag">IT Support</span>
+                                <span class="tag">Database</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- IT Operations -->
+                    <div class="scroll-card">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="IT Operations">
+                        </div>
+                        <div class="card-content">
+                            <h3>IT Operations - Marketing System</h3>
+                            <span class="card-date">2026 - Present</span>
+                            <p><strong>SK Rich Trading Sdn Bhd</strong><br>
+                            • Developing marketing system to increase sales<br>
+                            • Implementing customer engagement features<br>
+                            • Optimizing system performance<br>
+                            • Integrating analytics and reporting tools</p>
+                            <div class="card-tags">
+                                <span class="tag">Full-time</span>
+                                <span class="tag">Marketing System</span>
+                                <span class="tag">Development</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="scroll-arrow left" onclick="scrollLeft('workScroll')">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="scroll-arrow right" onclick="scrollRight('workScroll')">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- WORK PROJECTS SECTION -->
+    <section class="main-section" id="projects">
+        <div class="container">
+            <div class="section-title">
+                <h2><i class="fas fa-laptop-code"></i> Work Projects</h2>
+                <p>Professional projects developed during work</p>
+            </div>
+            
+            <div class="horizontal-scroll-section">
+                <div class="scroll-container" id="workProjectsScroll">
+                    <!-- Valoobuy -->
+                    <div class="scroll-card">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80" alt="Valoobuy">
+                        </div>
+                        <div class="card-content">
+                            <h3>VALOOBUY Contractor Hub</h3>
+                            <span class="card-date">2024 - Present</span>
+                            <p>E-commerce platform for registered contractors with custom pricing and affiliate sales system.</p>
+                            <p><strong>Features:</strong><br>
+                            • Contractor registration & verification<br>
+                            • Custom pricing based on volume<br>
+                            • Affiliate sales tracking<br>
+                            • Order management system<br>
+                            • Supplier integration</p>
+                            <div class="card-tags">
+                                <span class="tag">PHP</span>
+                                <span class="tag">Plesk</span>
+                                <span class="tag">Boost.Space</span>
+                                <span class="tag">E-commerce</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sales Page -->
+                    <div class="scroll-card">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1115&q=80" alt="Sales Page">
+                        </div>
+                        <div class="card-content">
+                            <h3>Sales & Landing Pages</h3>
+                            <span class="card-date">2024 - Present</span>
+                            <p>Multiple sales and landing pages for marketing campaigns and product promotions.</p>
+                            <p><strong>Technologies:</strong><br>
+                            • HTML5, CSS3, JavaScript<br>
+                            • Bootstrap & Tailwind CSS<br>
+                            • PHP form handling<br>
+                            • Integration with CRM systems<br>
+                            • A/B testing implementation</p>
+                            <div class="card-tags">
+                                <span class="tag">HTML/CSS</span>
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">PHP</span>
+                                <span class="tag">Marketing</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="scroll-arrow left" onclick="scrollLeft('workProjectsScroll')">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="scroll-arrow right" onclick="scrollRight('workProjectsScroll')">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- UNIVERSITY PROJECTS SECTION -->
+    <section class="main-section" id="university-projects" style="background: #f8f9fa;">
+        <div class="container">
+            <div class="section-title">
+                <h2><i class="fas fa-university"></i> University Projects</h2>
+                <p>Academic projects and coursework</p>
+            </div>
+            
+            <div class="horizontal-scroll-section">
+                <div class="scroll-container" id="uniProjectsScroll">
+                    <!-- Task Management -->
+                    <div class="scroll-card">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Task Management">
+                        </div>
+                        <div class="card-content">
                             <h3>Task Management System</h3>
-                            <p>Backend development for a comprehensive task management system with web and mobile integration. Includes user authentication, task assignment, progress tracking, and reporting features.</p>
-                            <div class="project-tags">
+                            <span class="card-date">2024</span>
+                            <p>Backend development for a comprehensive task management system with web and mobile integration.</p>
+                            <p><strong>Features:</strong><br>
+                            • User authentication & authorization<br>
+                            • Task creation & assignment<br>
+                            • Progress tracking<br>
+                            • Notification system<br>
+                            • API for mobile app</p>
+                            <div class="card-tags">
                                 <span class="tag">Laravel</span>
                                 <span class="tag">API</span>
                                 <span class="tag">Backend</span>
@@ -888,14 +918,46 @@
                         </div>
                     </div>
                     
-                    <div class="project-card">
-                        <div class="project-image">
+                    <!-- Dental Health Tracker -->
+                    <div class="scroll-card">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Dental Health">
+                        </div>
+                        <div class="card-content">
+                            <h3>Dental Health Tracker</h3>
+                            <span class="card-date">2024</span>
+                            <p>Mobile application using reminders and gamification to engage parents in children's dental health.</p>
+                            <p><strong>Features:</strong><br>
+                            • Brushing reminders<br>
+                            • Achievement badges<br>
+                            • Progress tracking<br>
+                            • Educational content<br>
+                            • Parent dashboard</p>
+                            <div class="card-tags">
+                                <span class="tag">Flutter</span>
+                                <span class="tag">Firebase</span>
+                                <span class="tag">Mobile App</span>
+                                <span class="tag">Healthcare</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Missing Child Detector -->
+                    <div class="scroll-card">
+                        <div class="card-image">
                             <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="IoT Device">
                         </div>
-                        <div class="project-content">
-                            <h3>Missing Child Detector</h3>
-                            <p>IoT solution using GPS and GSM technologies for child safety with real-time tracking capabilities. Includes panic button, location sharing, and emergency alerts to registered contacts.</p>
-                            <div class="project-tags">
+                        <div class="card-content">
+                            <h3>Missing Child Detector (IoT)</h3>
+                            <span class="card-date">2023</span>
+                            <p>IoT solution using GPS and GSM technologies for child safety with real-time tracking capabilities.</p>
+                            <p><strong>Features:</strong><br>
+                            • GPS location tracking<br>
+                            • GSM communication<br>
+                            • Panic button<br>
+                            • Real-time alerts<br>
+                            • Mobile app integration</p>
+                            <div class="card-tags">
                                 <span class="tag">IoT</span>
                                 <span class="tag">Arduino</span>
                                 <span class="tag">GPS</span>
@@ -904,254 +966,150 @@
                         </div>
                     </div>
                 </div>
+                <button class="scroll-arrow left" onclick="scrollLeft('uniProjectsScroll')">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="scroll-arrow right" onclick="scrollRight('uniProjectsScroll')">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
-        </section>
-        
-        <!-- SLIDE 5: SKILLS -->
-        <section class="slide" id="slide-4">
-            <div class="slide-content">
-                <div class="section-title">
-                    <h2>Skills</h2>
-                    <p>Technical competencies and expertise</p>
-                    <div class="title-line"></div>
-                </div>
-                <div class="skills-grid">
-                    <div class="skill-category">
-                        <h3><i class="fas fa-mobile-alt"></i> Mobile Development</h3>
-                        <ul class="skill-list">
-                            <li>Flutter & Dart</li>
-                            <li>Firebase Integration</li>
-                            <li>REST API Integration</li>
-                            <li>State Management (Provider)</li>
-                            <li>Mobile UI/UX Design</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="skill-category">
-                        <h3><i class="fas fa-code"></i> Web Development</h3>
-                        <ul class="skill-list">
-                            <li>Laravel & PHP</li>
-                            <li>HTML5, CSS3, JavaScript</li>
-                            <li>RESTful API Development</li>
-                            <li>MySQL Database Design</li>
-                            <li>Bootstrap & Tailwind CSS</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="skill-category">
-                        <h3><i class="fas fa-database"></i> Database & Tools</h3>
-                        <ul class="skill-list">
-                            <li>MySQL & Database Design</li>
-                            <li>Git & Version Control</li>
-                            <li>Postman API Testing</li>
-                            <li>XAMPP Development</li>
-                            <li>VS Code & Android Studio</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="skill-category">
-                        <h3><i class="fas fa-shield-alt"></i> Other Skills</h3>
-                        <ul class="skill-list">
-                            <li>Cybersecurity Fundamentals</li>
-                            <li>Problem Solving</li>
-                            <li>Analytical Thinking</li>
-                            <li>Project Documentation</li>
-                            <li>Team Collaboration</li>
-                        </ul>
-                    </div>
-                </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="main-section" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2><i class="fas fa-envelope"></i> Contact</h2>
+                <p>Let's connect and discuss opportunities</p>
             </div>
-        </section>
-        
-        <!-- SLIDE 6: CONTACT -->
-        <section class="slide" id="slide-5">
-            <div class="slide-content">
-                <div class="section-title">
-                    <h2>Contact</h2>
-                    <p>Let's connect and discuss opportunities</p>
-                    <div class="title-line"></div>
-                </div>
-                <div class="contact-grid">
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h4>Location</h4>
-                                <p>Ampang, Selangor, Malaysia</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h4>Email</h4>
-                                <p>haidahatrh@gmail.com</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h4>Phone</h4>
-                                <p>(+60) 19-215 2972</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-share-alt"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h4>Connect With Me</h4>
-                                <div class="social-links">
-                                    <a href="https://www.linkedin.com/in/haidah-athirah-a90526305/" class="social-link" target="_blank">
-                                        <i class="fab fa-linkedin-in"></i>
-                                    </a>
-                                    <a href="https://www.instagram.com/haidahatrh_" class="social-link" target="_blank">
-                                        <i class="fab fa-instagram"></i>
-                                    </a>
-                                    <a href="#" class="social-link">
-                                        <i class="fab fa-github"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+            
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name" required>
                     </div>
                     
-                    <div class="contact-form">
-                        <form id="contactForm">
-                            <div class="form-group">
-                                <label for="name">Full Name</label>
-                                <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="email">Email Address</label>
-                                <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="subject">Subject</label>
-                                <input type="text" id="subject" name="subject" class="form-control" placeholder="What is this regarding?" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="message">Message</label>
-                                <textarea id="message" name="message" class="form-control" placeholder="Your message here..." required></textarea>
-                            </div>
-                            
-                            <button type="submit" class="btn btn-primary" style="width: 100%;">
-                                <i class="fas fa-paper-plane"></i> Send Message
-                            </button>
-                        </form>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
                     </div>
-                </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" class="form-control" placeholder="What is this regarding?" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" class="form-control" placeholder="Your message here..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
             </div>
-        </section>
-    </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <div class="social-links" style="justify-content: center;">
+                    <a href="https://www.linkedin.com/in/haidah-athirah-a90526305/" class="social-link" target="_blank">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://www.instagram.com/haidahatrh_" class="social-link" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+                <p style="margin-top: 20px; color: var(--text-secondary);">
+                    <i class="fas fa-envelope"></i> haidahatrh@gmail.com<br>
+                    <i class="fas fa-phone"></i> (+60) 19-215 2972
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">Haidah<span>Athirah</span></div>
+            
+            <div class="footer-links">
+                <a href="#profile" class="footer-link">Profile</a>
+                <a href="#education" class="footer-link">Education</a>
+                <a href="#work" class="footer-link">Work</a>
+                <a href="#projects" class="footer-link">Projects</a>
+                <a href="#contact" class="footer-link">Contact</a>
+            </div>
+            
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/haidah-athirah-a90526305/"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.instagram.com/haidahatrh_"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2025 Haidah Athirah. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
 
     <script>
-        // SLIDE NAVIGATION SYSTEM
-        const slidesContainer = document.getElementById('slidesContainer');
-        const navDots = document.querySelectorAll('.nav-dot');
-        const progressBar = document.getElementById('progressBar');
-        const prevBtn = document.getElementById('prevSlide');
-        const nextBtn = document.getElementById('nextSlide');
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('navMenu').classList.toggle('active');
+        });
         
-        let currentSlide = 0;
-        const totalSlides = 6;
+        // Header Scroll Effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
         
-        // Initialize
-        updateNavigation();
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    document.getElementById('navMenu').classList.remove('active');
+                }
+            });
+        });
         
-        // Function to go to specific slide
-        function goToSlide(slideIndex) {
-            currentSlide = slideIndex;
-            slidesContainer.scrollTo({
-                left: window.innerWidth * currentSlide,
+        // HORIZONTAL SCROLL FUNCTIONS
+        function scrollLeft(containerId) {
+            const container = document.getElementById(containerId);
+            container.scrollBy({
+                left: -400,
                 behavior: 'smooth'
             });
-            updateNavigation();
         }
         
-        // Function to update navigation state
-        function updateNavigation() {
-            // Update dots
-            navDots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
+        function scrollRight(containerId) {
+            const container = document.getElementById(containerId);
+            container.scrollBy({
+                left: 400,
+                behavior: 'smooth'
             });
-            
-            // Update progress bar
-            progressBar.style.transform = `translateX(${currentSlide * 100}%)`;
-            
-            // Update URL hash
-            window.location.hash = `slide-${currentSlide}`;
         }
-        
-        // Navigation dots click event
-        navDots.forEach((dot, index) => {
-            dot.addEventListener('click', () => goToSlide(index));
-        });
-        
-        // Previous button
-        prevBtn.addEventListener('click', () => {
-            if (currentSlide > 0) {
-                goToSlide(currentSlide - 1);
-            }
-        });
-        
-        // Next button
-        nextBtn.addEventListener('click', () => {
-            if (currentSlide < totalSlides - 1) {
-                goToSlide(currentSlide + 1);
-            }
-        });
-        
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft' && currentSlide > 0) {
-                goToSlide(currentSlide - 1);
-            } else if (e.key === 'ArrowRight' && currentSlide < totalSlides - 1) {
-                goToSlide(currentSlide + 1);
-            } else if (e.key >= '1' && e.key <= '6') {
-                goToSlide(parseInt(e.key) - 1);
-            }
-        });
-        
-        // Scroll detection for slide changes
-        slidesContainer.addEventListener('scroll', () => {
-            const scrollPosition = slidesContainer.scrollLeft;
-            const newSlide = Math.round(scrollPosition / window.innerWidth);
-            
-            if (newSlide !== currentSlide) {
-                currentSlide = newSlide;
-                updateNavigation();
-            }
-        });
-        
-        // Mobile menu toggle (for small screens)
-        mobileMenuBtn.addEventListener('click', () => {
-            const slideNav = document.getElementById('slideNav');
-            slideNav.style.display = slideNav.style.display === 'flex' ? 'none' : 'flex';
-        });
-        
-        // Handle URL hash on page load
-        window.addEventListener('load', () => {
-            const hash = window.location.hash;
-            if (hash) {
-                const slideIndex = parseInt(hash.split('-')[1]);
-                if (!isNaN(slideIndex) && slideIndex >= 0 && slideIndex < totalSlides) {
-                    goToSlide(slideIndex);
-                }
-            }
-        });
         
         // CONTACT FORM HANDLER
         document.getElementById('contactForm').addEventListener('submit', async function(e) {
@@ -1268,41 +1226,45 @@
                     to { transform: translateX(0); opacity: 1; }
                 }
             `;
-            document.head.appendChild(style);
+            if (!document.querySelector('#notification-style')) {
+                style.id = 'notification-style';
+                document.head.appendChild(style);
+            }
             
             setTimeout(() => notification.remove(), 5000);
         }
         
-        // Touch/swipe support for mobile
-        let touchStartX = 0;
-        let touchEndX = 0;
-        
-        slidesContainer.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-        
-        slidesContainer.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
-        
-        function handleSwipe() {
-            const swipeThreshold = 50;
+        // Touch/swipe support for horizontal scroll containers
+        document.querySelectorAll('.scroll-container').forEach(container => {
+            let isDown = false;
+            let startX;
+            let scrollLeft;
             
-            if (touchEndX < touchStartX - swipeThreshold) {
-                // Swipe left - next slide
-                if (currentSlide < totalSlides - 1) {
-                    goToSlide(currentSlide + 1);
-                }
-            }
+            container.addEventListener('mousedown', (e) => {
+                isDown = true;
+                container.classList.add('active');
+                startX = e.pageX - container.offsetLeft;
+                scrollLeft = container.scrollLeft;
+            });
             
-            if (touchEndX > touchStartX + swipeThreshold) {
-                // Swipe right - previous slide
-                if (currentSlide > 0) {
-                    goToSlide(currentSlide - 1);
-                }
-            }
-        }
+            container.addEventListener('mouseleave', () => {
+                isDown = false;
+                container.classList.remove('active');
+            });
+            
+            container.addEventListener('mouseup', () => {
+                isDown = false;
+                container.classList.remove('active');
+            });
+            
+            container.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - container.offsetLeft;
+                const walk = (x - startX) * 2;
+                container.scrollLeft = scrollLeft - walk;
+            });
+        });
     </script>
 </body>
 </html>
