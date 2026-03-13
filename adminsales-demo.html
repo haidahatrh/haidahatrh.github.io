@@ -1,0 +1,1704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Valoobuy · Demo Portfolio</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" type="image/svg+xml">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        :root {
+            --primary-green: #10b981;
+            --green-dark: #0d9488;
+            --green-light: #e9f9f2;
+            --white: #ffffff;
+            --gray-bg: #f4f7fb;
+            --card-border: #eef2f6;
+            --text-dark: #1e293b;
+            --text-gray: #6b7a8f;
+            --text-light: #7e8a98;
+            --danger: #ef4444;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+            --demo-badge: #8b5cf6;
+        }
+
+        body {
+            background: var(--gray-bg);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Demo Badge */
+        .demo-badge {
+            background: var(--demo-badge);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-left: 10px;
+        }
+        
+        .demo-badge i {
+            font-size: 10px;
+        }
+
+        .demo-notice {
+            background: #fef3c7;
+            border-left: 4px solid var(--warning);
+            padding: 15px 20px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+        
+        .demo-notice i {
+            color: var(--warning);
+            font-size: 24px;
+        }
+        
+        .demo-notice strong {
+            color: var(--warning);
+            font-weight: 700;
+        }
+
+        /* ===== LOGIN MODAL ===== */
+        .buddy-login-modal {
+            display: flex;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(145deg, #f4f7fb 0%, #e9f9f2 100%);
+            z-index: 5000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            transition: opacity 0.3s;
+            overflow-y: auto;
+        }
+        
+        .buddy-login-modal.hidden { display: none; }
+
+        .buddy-container {
+            width: 100%;
+            max-width: 1000px;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px 0;
+        }
+
+        .buddy-character {
+            flex: 1;
+            min-width: 280px;
+            text-align: center;
+            animation: float 3s ease-in-out infinite;
+            margin: 20px 0;
+        }
+        
+        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-20px)} }
+
+        .character-wrapper {
+            position: relative;
+            display: inline-block;
+            max-width: 100%;
+        }
+
+        .character-body {
+            width: 250px; height: 250px;
+            background: linear-gradient(135deg, #10b981, #047857);
+            border-radius: 50% 50% 40% 40%;
+            position: relative;
+            margin:0 auto;
+            box-shadow: 0 20px 40px rgba(16,185,129,0.3);
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
+
+        .face-buddy {
+            position: absolute; top:60px; left:0; right:0; text-align:center;
+        }
+        
+        .eyes-buddy {
+            display: flex; justify-content: center; gap:30px; margin-bottom:20px;
+        }
+        
+        .eye-buddy {
+            width:30px; height:30px; background:white; border-radius:50%; position:relative;
+            animation: blink 3s infinite;
+        }
+        
+        .eye-buddy::after {
+            content:''; position:absolute; width:15px; height:15px; background:#1e293b; border-radius:50%;
+            top:5px; left:5px; animation: lookAround 5s infinite;
+        }
+        
+        @keyframes blink { 0%,45%,55%,100%{transform:scaleY(1)} 50%{transform:scaleY(0.1)} }
+        @keyframes lookAround { 0%,100%{transform:translate(0,0)} 25%{transform:translate(5px,0)} 50%{transform:translate(0,5px)} 75%{transform:translate(-5px,0)} }
+
+        .mouth-buddy {
+            width:60px; height:30px; background:#ff6b6b; border-radius:0 0 50px 50px; margin:0 auto;
+            transition: all 0.2s;
+        }
+        
+        .mouth-buddy.smile { border-radius:50px 50px 0 0; }
+        
+        .cheeks-buddy {
+            display: flex; justify-content: center; gap:50px; margin-top:15px;
+        }
+        
+        .cheek-buddy {
+            width:20px; height:10px; background:rgba(255,107,107,0.3); border-radius:50%;
+            animation: blush 2s infinite;
+        }
+        
+        @keyframes blush { 0%,100%{opacity:0.3;transform:scale(1)} 50%{opacity:0.6;transform:scale(1.2)} }
+
+        .hand-buddy {
+            width:40px; height:40px; background:#047857; border-radius:50%; position:absolute; bottom:30px;
+            animation: wave 1s infinite;
+        }
+        
+        .hand-buddy.left { left:-20px; animation-delay:0.2s; }
+        .hand-buddy.right { right:-20px; }
+        
+        @keyframes wave { 0%,100%{transform:rotate(0)} 50%{transform:rotate(20deg)} }
+
+        .speech-bubble-buddy {
+            position: absolute; top:-50px; right:-100px; background:white; padding:15px 25px;
+            border-radius:40px 40px 40px 0; box-shadow:0 10px 20px rgba(0,0,0,0.1);
+            white-space: nowrap; border:2px solid var(--primary-green);
+            z-index: 10;
+        }
+        
+        .speech-bubble-buddy::after {
+            content:''; position:absolute; bottom:-10px; left:20px;
+            border-left:15px solid transparent; border-right:15px solid transparent; border-top:15px solid white;
+        }
+        
+        .speech-bubble-buddy span { font-weight:600; color:var(--text-dark); }
+
+        .buddy-card {
+            flex:1; 
+            background:white; 
+            border-radius:32px; 
+            padding:40px; 
+            box-shadow:0 20px 40px rgba(16,185,129,0.15);
+            border:1px solid rgba(16,185,129,0.1); 
+            animation: slideIn 0.6s;
+            min-width:300px;
+            max-width: 450px;
+            margin: 0 auto;
+        }
+        
+        @keyframes slideIn { from{opacity:0;transform:translateX(50px)} to{opacity:1;transform:translateX(0)} }
+
+        .buddy-logo { text-align:center; margin-bottom:30px; }
+        .buddy-logo h1 { font-size:36px; font-weight:800; color:#1e293b; }
+        .buddy-logo h1 span { color:var(--primary-green); font-weight:400; }
+        .buddy-logo p { color: var(--text-gray); font-size: 14px; }
+
+        .error-message-buddy {
+            background:#fee2e2; color:var(--danger); padding:12px 16px; border-radius:16px; margin-bottom:20px;
+            display:none; align-items:center; gap:10px; font-weight:500;
+        }
+        
+        .error-message-buddy.show { display:flex; }
+
+        .form-group { margin-bottom:20px; }
+        .form-group label { font-weight:600; font-size:14px; color:var(--text-dark); margin-bottom:8px; display:block; }
+        
+        .input-wrapper-buddy { position:relative; }
+        .input-wrapper-buddy i:first-child { position:absolute; left:16px; top:50%; transform:translateY(-50%); color:var(--primary-green); }
+        
+        .input-wrapper-buddy input {
+            width:100%; padding:14px 16px 14px 45px; border:2px solid #eef2f6; border-radius:20px;
+            font-size:15px; background:var(--gray-bg); transition:0.3s;
+        }
+        
+        .input-wrapper-buddy input:focus {
+            border-color:var(--primary-green); background:white; outline:none;
+        }
+        
+        .toggle-password-buddy {
+            position:absolute; right:16px; top:50%; transform:translateY(-50%);
+            cursor:pointer; color:var(--text-gray);
+        }
+        
+        .options-buddy { display:flex; justify-content:space-between; margin:20px 0; flex-wrap: wrap; gap: 10px; }
+        .remember-buddy { display:flex; align-items:center; gap:8px; }
+        .remember-buddy input { accent-color:var(--primary-green); }
+
+        .login-btn-buddy {
+            width:100%; padding:14px; border:none; border-radius:20px;
+            background:linear-gradient(135deg, #10b981, #0d9488); color:white; font-weight:600;
+            display:flex; align-items:center; justify-content:center; gap:10px; cursor:pointer;
+            transition:0.3s;
+        }
+        
+        .login-btn-buddy:hover { transform:translateY(-2px); box-shadow:0 10px 25px rgba(16,185,129,0.3); }
+        .spinner-buddy { display:none; width:20px; height:20px; border:2px solid rgba(255,255,255,0.3); border-top-color:white; border-radius:50%; animation:spin 0.8s linear infinite; }
+
+        .footer-buddy { text-align:center; margin-top:30px; color:var(--text-gray); font-size:12px; }
+        .footer-buddy .demo-highlight { color: var(--demo-badge); font-weight: 600; }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* ===== MAIN DASHBOARD STYLES ===== */
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 20px 30px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            border: 1px solid var(--card-border);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .page-title h1 {
+            font-size: 28px;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .page-title p {
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+
+        .date-display {
+            background: var(--green-light);
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-size: 14px;
+            color: var(--text-dark);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .logout-btn {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .logout-btn:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            background: linear-gradient(135deg, var(--primary-green), var(--green-dark));
+            border-radius: 28px;
+            padding: 30px;
+            margin-bottom: 30px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.2);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .welcome-text h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .welcome-text p {
+            opacity: 0.9;
+            font-size: 16px;
+        }
+
+        .welcome-stats {
+            display: flex;
+            gap: 40px;
+            background: rgba(255,255,255,0.15);
+            padding: 20px 30px;
+            border-radius: 60px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .welcome-stat {
+            text-align: center;
+        }
+
+        .welcome-stat .number {
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .welcome-stat .label {
+            font-size: 12px;
+            opacity: 0.9;
+            white-space: nowrap;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.3s;
+            border: 1px solid var(--card-border);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.05);
+            border-color: var(--primary-green);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .stat-icon.orders { background: var(--green-light); color: var(--primary-green); }
+        .stat-icon.revenue { background: var(--green-light); color: var(--primary-green); }
+        .stat-icon.pages { background: var(--green-light); color: var(--primary-green); }
+        .stat-icon.status { background: var(--green-light); color: var(--primary-green); }
+
+        .stat-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .stat-info h3 {
+            font-size: 14px;
+            color: var(--text-gray);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-info .value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .stat-trend {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 13px;
+            color: var(--text-gray);
+        }
+
+        .trend-up { color: var(--primary-green); }
+        .trend-down { color: var(--danger); }
+
+        /* Charts Row */
+        .charts-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .chart-container, .quick-actions {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            border: 1px solid var(--card-border);
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .chart-header h3 {
+            color: var(--text-dark);
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chart-wrapper {
+            height: 300px;
+            position: relative;
+        }
+
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .action-item {
+            background: var(--green-light);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .action-item:hover {
+            background: var(--primary-green);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .action-item i {
+            font-size: 24px;
+            color: var(--primary-green);
+            margin-bottom: 10px;
+        }
+
+        .action-item:hover i { color: white; }
+
+        .action-item span {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .status-summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .status-mini-card {
+            background: var(--green-light);
+            border-radius: 20px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .status-mini-card .count {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .status-mini-card .label {
+            font-size: 12px;
+            color: var(--text-gray);
+        }
+
+        /* Section Tabs */
+        .section-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            border-bottom: 2px solid var(--card-border);
+            padding-bottom: 15px;
+        }
+
+        .section-tab {
+            padding: 12px 30px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: var(--white);
+            color: var(--text-gray);
+            border: 2px solid var(--card-border);
+        }
+
+        .section-tab:hover {
+            background: var(--green-light);
+            border-color: var(--primary-green);
+        }
+
+        .section-tab.active {
+            background: var(--primary-green);
+            color: white;
+            border-color: var(--primary-green);
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        /* Orders Table */
+        .table-container {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 25px;
+            border: 1px solid var(--card-border);
+            overflow-x: auto;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .table-header h3 {
+            color: var(--text-dark);
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .orders-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .orders-table th {
+            text-align: left;
+            padding: 15px 10px;
+            color: var(--text-gray);
+            font-weight: 600;
+            font-size: 13px;
+            border-bottom: 2px solid var(--card-border);
+        }
+
+        .orders-table td {
+            padding: 15px 10px;
+            border-bottom: 1px solid var(--card-border);
+            color: var(--text-dark);
+        }
+
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .status-badge.pending { background: #fff3e0; color: #b85e00; }
+        .status-badge.shipped { background: var(--green-light); color: var(--green-dark); }
+        .status-badge.delivered { background: #e0f2e9; color: #0b7e5b; }
+
+        /* Customers Grid */
+        .customers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .customer-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid var(--card-border);
+            transition: all 0.3s;
+        }
+
+        .customer-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary-green);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+        }
+
+        .customer-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .customer-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--green-light);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-green);
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .customer-info h4 {
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+
+        .customer-info p {
+            color: var(--text-gray);
+            font-size: 13px;
+        }
+
+        .customer-stats {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 15px;
+            border-top: 1px solid var(--card-border);
+        }
+
+        .customer-stat {
+            text-align: center;
+        }
+
+        .customer-stat .number {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .customer-stat .label {
+            font-size: 11px;
+            color: var(--text-gray);
+        }
+
+        /* Sales Pages Grid */
+        .pages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .page-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+            transition: all 0.3s;
+        }
+
+        .page-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary-green);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+        }
+
+        .page-image {
+            height: 140px;
+            background: linear-gradient(135deg, var(--primary-green), var(--green-dark));
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 40px;
+        }
+
+        .page-status {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .page-status.draft { background: rgba(107, 122, 143, 0.9); }
+        .page-status.active { background: rgba(16, 185, 129, 0.9); }
+        .page-status.paused { background: rgba(245, 158, 11, 0.9); }
+
+        .page-content {
+            padding: 20px;
+        }
+
+        .page-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-category {
+            font-size: 11px;
+            color: var(--text-gray);
+            background: var(--green-light);
+            padding: 3px 10px;
+            border-radius: 30px;
+        }
+
+        .page-description {
+            color: var(--text-gray);
+            font-size: 13px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .search-bar {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            border: 1px solid var(--card-border);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 12px 20px;
+            border: 2px solid var(--card-border);
+            border-radius: 40px;
+            font-size: 14px;
+            background: var(--gray-bg);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+        }
+
+        .filter-btn {
+            background: var(--green-light);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 40px;
+            color: var(--text-dark);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .filter-btn:hover {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+            padding: 20px;
+        }
+
+        .modal.active { display: flex; }
+
+        .modal-content {
+            background: var(--white);
+            border-radius: 30px;
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h3 {
+            color: var(--text-dark);
+            font-size: 20px;
+        }
+
+        .close-modal {
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--text-gray);
+        }
+
+        .close-modal:hover { color: var(--danger); }
+
+        .modal-demo-content {
+            background: var(--green-light);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .modal-demo-content i {
+            font-size: 48px;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+        }
+
+        .modal-demo-content p {
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        .modal-demo-content small {
+            color: var(--text-gray);
+            font-size: 12px;
+        }
+
+        .modal-btn {
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 40px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        /* Loading */
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--green-light);
+            border-top: 4px solid var(--primary-green);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--white);
+            color: var(--text-dark);
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            z-index: 4000;
+            animation: slideIn 0.3s ease;
+            border-left: 4px solid var(--primary-green);
+            font-weight: 500;
+            max-width: 90%;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .charts-row { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid { gap: 15px; }
+            .stat-card { padding: 20px; }
+            .stat-info .value { font-size: 24px; }
+            .stat-icon { width: 50px; height: 50px; }
+            .welcome-section { flex-direction: column; align-items: flex-start; }
+            .welcome-stats { width: 100%; justify-content: space-around; }
+            .welcome-stat .number { font-size: 22px; }
+            .top-bar { flex-direction: column; align-items: flex-start; }
+            .admin-profile { width: 100%; justify-content: space-between; }
+            .section-tabs { justify-content: flex-start; overflow-x: auto; }
+            .section-tab { flex-shrink: 0; }
+            .search-bar { flex-direction: column; }
+            .search-input { width: 100%; }
+            .filter-btn { width: 100%; }
+            .customers-grid, .pages-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 576px) {
+            .stats-grid { grid-template-columns: 1fr; }
+            .welcome-stats { flex-direction: column; gap: 15px; }
+            .welcome-stat { display: flex; justify-content: space-between; width: 100%; }
+            .page-title h1 { font-size: 22px; }
+            .orders-table { font-size: 13px; }
+            .orders-table th, .orders-table td { padding: 10px 5px; }
+        }
+
+        /* Character mobile adjustments */
+        @media (max-width: 768px) {
+            .character-body { width: 200px; height: 200px; }
+            .speech-bubble-buddy { right: -20px; top: -40px; padding: 10px 15px; font-size: 12px; }
+            .eye-buddy { width: 20px; height: 20px; }
+            .eye-buddy::after { width: 10px; height: 10px; top: 3px; left: 3px; }
+            .buddy-card { padding: 30px 20px; }
+        }
+
+        @keyframes shake {
+            0%,100%{transform:translateX(0)} 10%,30%,50%,70%,90%{transform:translateX(-5px)} 20%,40%,60%,80%{transform:translateX(5px)}
+        }
+    </style>
+</head>
+<body>
+    <!-- Buddy Login Modal -->
+    <div class="buddy-login-modal" id="buddyLoginModal">
+        <div class="buddy-container">
+            <div class="buddy-character">
+                <div class="character-wrapper">
+                    <div class="character-body">
+                        <div class="face-buddy">
+                            <div class="eyes-buddy">
+                                <div class="eye-buddy"></div>
+                                <div class="eye-buddy"></div>
+                            </div>
+                            <div class="mouth-buddy" id="buddyMouth"></div>
+                            <div class="cheeks-buddy">
+                                <div class="cheek-buddy"></div>
+                                <div class="cheek-buddy"></div>
+                            </div>
+                        </div>
+                        <div class="hand-buddy left"></div>
+                        <div class="hand-buddy right"></div>
+                    </div>
+                    <div class="speech-bubble-buddy" id="buddySpeech">
+                        <i class="fas fa-comment" style="color:var(--primary-green);"></i>
+                        <span id="buddySpeechText">Hello! Password is demo123</span>
+                    </div>
+                </div>
+            </div>
+            <div class="buddy-card">
+                <div class="buddy-logo">
+                    <h1>Valoobuy<span>⚡</span></h1>
+                    <p>Portfolio Demo</p>
+                    <span class="demo-badge"><i class="fas fa-code"></i> DEMO VERSION</span>
+                </div>
+                <div class="error-message-buddy" id="buddyError">
+                    <i class="fas fa-exclamation-circle"></i> <span>Wrong password. Try demo123</span>
+                </div>
+                <form id="buddyLoginForm">
+                    <div class="form-group">
+                        <label>Password</label>
+                        <div class="input-wrapper-buddy">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="buddyPassword" placeholder="Enter password" autofocus required
+                                   onfocus="buddyHappy()" onblur="buddyNormal()">
+                            <i class="fas fa-eye toggle-password-buddy" onclick="toggleBuddyPassword()" id="buddyToggleIcon"></i>
+                        </div>
+                    </div>
+                    <div class="options-buddy">
+                        <div class="remember-buddy">
+                            <input type="checkbox" id="buddyRemember"> <label for="buddyRemember">Remember me</label>
+                        </div>
+                        <div><span style="color:var(--primary-green);">demo mode</span></div>
+                    </div>
+                    <button type="submit" class="login-btn-buddy" id="buddyLoginBtn">
+                        <span>Enter Demo</span> <i class="fas fa-arrow-right"></i>
+                        <div class="spinner-buddy" id="buddySpinner"></div>
+                    </button>
+                </form>
+                <div class="footer-buddy">
+                    <p>© 2026 SK Rich Group · <span class="demo-highlight">Demo Portfolio</span></p>
+                    <p style="font-size:11px; margin-top:5px;">All data shown is for demonstration only</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Dashboard (hidden until login) -->
+    <div class="dashboard-container" id="mainContent" style="display: none;">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="page-title">
+                <h1>
+                    Valoobuy Demo Dashboard
+                    <span class="demo-badge"><i class="fas fa-info-circle"></i> DEMO MODE</span>
+                </h1>
+                <p><i class="fas fa-info-circle" style="color: var(--info);"></i> This is a portfolio demonstration - all data shown is dummy/fake</p>
+            </div>
+            <div class="admin-profile">
+                <div class="date-display" id="currentDateTime"></div>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Exit Demo
+                </button>
+            </div>
+        </div>
+
+        <!-- Demo Notice -->
+        <div class="demo-notice">
+            <i class="fas fa-flask"></i>
+            <div>
+                <strong>📢 DEMO PORTFOLIO SHOWCASE</strong> — This is a demonstration website created for portfolio purposes. All data, statistics, and information shown are completely fictional/dummy data. No real database is connected. Feel free to explore all sections!
+            </div>
+        </div>
+
+        <!-- Welcome Section -->
+        <div class="welcome-section">
+            <div class="welcome-text">
+                <h2>Welcome to Demo, <span style="font-size: 16px; opacity: 0.9;">(Demo User)</span> 👋</h2>
+                <p><i class="fas fa-info-circle"></i> Sample performance summary (all numbers are dummy data)</p>
+            </div>
+            <div class="welcome-stats">
+                <div class="welcome-stat">
+                    <div class="number">1,284</div>
+                    <div class="label">📦 Total Orders</div>
+                </div>
+                <div class="welcome-stat">
+                    <div class="number">RM 284k</div>
+                    <div class="label">💰 Total Revenue</div>
+                </div>
+                <div class="welcome-stat">
+                    <div class="number">842</div>
+                    <div class="label">👥 Customers</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card" onclick="showDemoModal('Orders Overview')">
+                <div class="stat-icon orders"><i class="fas fa-shopping-cart"></i></div>
+                <div class="stat-info">
+                    <h3>Total Orders <span class="demo-badge" style="background: var(--info);">demo</span></h3>
+                    <div class="value">1,284</div>
+                    <div class="stat-trend"><i class="fas fa-arrow-up trend-up"></i> +12% from last month</div>
+                </div>
+            </div>
+            <div class="stat-card" onclick="showDemoModal('Revenue Details')">
+                <div class="stat-icon revenue"><i class="fas fa-dollar-sign"></i></div>
+                <div class="stat-info">
+                    <h3>Revenue <span class="demo-badge" style="background: var(--info);">demo</span></h3>
+                    <div class="value">RM 284.5k</div>
+                    <div class="stat-trend"><i class="fas fa-arrow-up trend-up"></i> +8% from last month</div>
+                </div>
+            </div>
+            <div class="stat-card" onclick="showDemoModal('Sales Pages')">
+                <div class="stat-icon pages"><i class="fas fa-file-alt"></i></div>
+                <div class="stat-info">
+                    <h3>Sales Pages <span class="demo-badge" style="background: var(--info);">demo</span></h3>
+                    <div class="value">18</div>
+                    <div class="stat-trend"><i class="fas fa-circle" style="color: var(--primary-green);"></i> 8 active</div>
+                </div>
+            </div>
+            <div class="stat-card" onclick="showDemoModal('Order Status')">
+                <div class="stat-icon status"><i class="fas fa-clock"></i></div>
+                <div class="stat-info">
+                    <h3>Pending Orders <span class="demo-badge" style="background: var(--info);">demo</span></h3>
+                    <div class="value">42</div>
+                    <div class="stat-trend">awaiting processing</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Tabs -->
+        <div class="section-tabs">
+            <button class="section-tab active" onclick="switchSection('dashboard')">📊 Dashboard</button>
+            <button class="section-tab" onclick="switchSection('orders')">📦 Orders</button>
+            <button class="section-tab" onclick="switchSection('customers')">👥 Customers</button>
+            <button class="section-tab" onclick="switchSection('pages')">📄 Sales Pages</button>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="section-dashboard" class="content-section active">
+            <div class="charts-row">
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3>📈 Sales Trend (7 days) <span class="demo-badge" style="background: var(--info);">demo chart</span></h3>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="salesChart"></canvas>
+                    </div>
+                </div>
+                <div class="quick-actions">
+                    <h3>⚡ Quick Actions</h3>
+                    <div class="actions-grid">
+                        <div class="action-item" onclick="showDemoModal('Create New Order')">
+                            <i class="fas fa-plus-circle"></i>
+                            <span>New Order</span>
+                        </div>
+                        <div class="action-item" onclick="showDemoModal('Create New Page')">
+                            <i class="fas fa-file-alt"></i>
+                            <span>New Page</span>
+                        </div>
+                        <div class="action-item" onclick="showDemoModal('Update Status')">
+                            <i class="fas fa-sync-alt"></i>
+                            <span>Update Status</span>
+                        </div>
+                        <div class="action-item" onclick="showDemoModal('Export Report')">
+                            <i class="fas fa-download"></i>
+                            <span>Export</span>
+                        </div>
+                    </div>
+                    <div class="status-summary">
+                        <div class="status-mini-card" onclick="showDemoModal('Draft Pages')">
+                            <div class="count">5</div>
+                            <div class="label">Draft</div>
+                        </div>
+                        <div class="status-mini-card" onclick="showDemoModal('Active Pages')">
+                            <div class="count">8</div>
+                            <div class="label">Active</div>
+                        </div>
+                        <div class="status-mini-card" onclick="showDemoModal('Paused Pages')">
+                            <div class="count">5</div>
+                            <div class="label">Paused</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Orders Section -->
+        <div id="section-orders" class="content-section">
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="🔍 Search orders (demo)..." onclick="showDemoModal('Search Orders')">
+                <button class="filter-btn" onclick="showDemoModal('Filter Orders')"><i class="fas fa-filter"></i> Filter</button>
+                <button class="filter-btn" onclick="showDemoModal('Export Orders')"><i class="fas fa-download"></i> Export</button>
+            </div>
+
+            <div class="table-container">
+                <div class="table-header">
+                    <h3>📦 Recent Orders <span class="demo-badge" style="background: var(--info);">sample data</span></h3>
+                    <span style="color: var(--text-gray);">1,284 total orders</span>
+                </div>
+                <table class="orders-table">
+                    <thead>
+                        <tr>
+                            <th>Order No</th>
+                            <th>Customer</th>
+                            <th>Contact</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr onclick="showDemoModal('Order ORD-001')">
+                            <td><strong>ORD-001</strong></td>
+                            <td>Ahmad Bin Abdullah</td>
+                            <td>60123456789</td>
+                            <td><strong>RM 250.00</strong></td>
+                            <td><span class="status-badge delivered">delivered</span></td>
+                            <td>15 Mar 2025</td>
+                        </tr>
+                        <tr onclick="showDemoModal('Order ORD-002')">
+                            <td><strong>ORD-002</strong></td>
+                            <td>Siti Nurhaliza</td>
+                            <td>60139876543</td>
+                            <td><strong>RM 450.00</strong></td>
+                            <td><span class="status-badge shipped">shipped</span></td>
+                            <td>15 Mar 2025</td>
+                        </tr>
+                        <tr onclick="showDemoModal('Order ORD-003')">
+                            <td><strong>ORD-003</strong></td>
+                            <td>Raj Kumar</td>
+                            <td>60125556677</td>
+                            <td><strong>RM 180.00</strong></td>
+                            <td><span class="status-badge pending">pending</span></td>
+                            <td>14 Mar 2025</td>
+                        </tr>
+                        <tr onclick="showDemoModal('Order ORD-004')">
+                            <td><strong>ORD-004</strong></td>
+                            <td>Lee Chong Wei</td>
+                            <td>60195551122</td>
+                            <td><strong>RM 890.00</strong></td>
+                            <td><span class="status-badge shipped">shipped</span></td>
+                            <td>14 Mar 2025</td>
+                        </tr>
+                        <tr onclick="showDemoModal('Order ORD-005')">
+                            <td><strong>ORD-005</strong></td>
+                            <td>Michelle Yeoh</td>
+                            <td>60123334455</td>
+                            <td><strong>RM 1,250.00</strong></td>
+                            <td><span class="status-badge delivered">delivered</span></td>
+                            <td>13 Mar 2025</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Customers Section -->
+        <div id="section-customers" class="content-section">
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="🔍 Search customers (demo)..." onclick="showDemoModal('Search Customers')">
+                <button class="filter-btn" onclick="showDemoModal('Filter Customers')"><i class="fas fa-filter"></i> All</button>
+                <button class="filter-btn" onclick="showDemoModal('Export Customers')"><i class="fas fa-download"></i> Export</button>
+            </div>
+
+            <div class="customers-grid">
+                <div class="customer-card" onclick="showDemoModal('Customer: Ahmad')">
+                    <div class="customer-header">
+                        <div class="customer-avatar">AB</div>
+                        <div class="customer-info">
+                            <h4>Ahmad Bin Abdullah</h4>
+                            <p><i class="fas fa-envelope"></i> ahmad@email.com</p>
+                            <p><i class="fas fa-phone"></i> 60123456789</p>
+                        </div>
+                    </div>
+                    <div class="customer-stats">
+                        <div class="customer-stat">
+                            <div class="number">5</div>
+                            <div class="label">orders</div>
+                        </div>
+                        <div class="customer-stat">
+                            <div class="number">RM 1,250</div>
+                            <div class="label">spent</div>
+                        </div>
+                        <div class="customer-stat">
+                            <div class="number">⭐ VIP</div>
+                            <div class="label">status</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="customer-card" onclick="showDemoModal('Customer: Siti')">
+                    <div class="customer-header">
+                        <div class="customer-avatar">SN</div>
+                        <div class="customer-info">
+                            <h4>Siti Nurhaliza</h4>
+                            <p><i class="fas fa-envelope"></i> siti@email.com</p>
+                            <p><i class="fas fa-phone"></i> 60139876543</p>
+                        </div>
+                    </div>
+                    <div class="customer-stats">
+                        <div class="customer-stat">
+                            <div class="number">3</div>
+                            <div class="label">orders</div>
+                        </div>
+                        <div class="customer-stat">
+                            <div class="number">RM 890</div>
+                            <div class="label">spent</div>
+                        </div>
+                        <div class="customer-stat">
+                            <div class="number">⭐ Regular</div>
+                            <div class="label">status</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="customer-card" onclick="showDemoModal('Customer: Raj')">
+                    <div class="customer-header">
+                        <div class="customer-avatar">RK</div>
+                        <div class="customer-info">
+                            <h4>Raj Kumar</h4>
+                            <p><i class="fas fa-envelope"></i> raj@email.com</p>
+                            <p><i class="fas fa-phone"></i> 60125556677</p>
+                        </div>
+                    </div>
+                    <div class="customer-stats">
+                        <div class="customer-stat">
+                            <div class="number">2</div>
+                            <div class="label">orders</div>
+                        </div>
+                        <div class="customer-stat">
+                            <div class="number">RM 430</div>
+                            <div class="label">spent</div>
+                        </div>
+                        <div class="customer-stat">
+                            <div class="number">⭐ Regular</div>
+                            <div class="label">status</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="customer-card" onclick="showDemoModal('Customer: Lee')">
+                    <div class="customer-header">
+                        <div class="customer-avatar">LC</div>
+                        <div class="customer-info">
+                            <h4>Lee Chong Wei</h4>
+                            <p><i class="fas fa-envelope"></i> lee@email.com</p>
+                            <p><i class="fas fa-phone"></i> 60195551122</p>
+                        </div>
+                    </div>
+                    <div class="customer-stats">
+                        <div class="customer-stat">
+                            <div class="number">8</div>
+                            <div class="label">orders</div>
+                        </div>
+                        <div class="customer-stat">
+                            <div class="number">RM 3,450</div>
+                            <div class="label">spent</div>
+                        </div>
+                        <div class="customer-stat">
+                            <div class="number">⭐ VIP</div>
+                            <div class="label">status</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sales Pages Section -->
+        <div id="section-pages" class="content-section">
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="🔍 Search pages (demo)..." onclick="showDemoModal('Search Pages')">
+                <select class="search-input" style="max-width: 200px;" onchange="showDemoModal('Filter by category')">
+                    <option>All Categories</option>
+                    <option>Kaligrafi</option>
+                    <option>3D Panel</option>
+                    <option>Marble</option>
+                </select>
+            </div>
+
+            <div class="pages-grid">
+                <div class="page-card" onclick="showDemoModal('Page: Kaligrafi Gold')">
+                    <div class="page-image">
+                        <i class="fas fa-paint-brush"></i>
+                        <span class="page-status active">active</span>
+                    </div>
+                    <div class="page-content">
+                        <div class="page-title">
+                            Kaligrafi Gold
+                            <span class="page-category">kaligrafi</span>
+                        </div>
+                        <div class="page-description">
+                            Premium kaligrafi dengan sentuhan emas 24K.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="page-card" onclick="showDemoModal('Page: 3D Panel')">
+                    <div class="page-image">
+                        <i class="fas fa-cube"></i>
+                        <span class="page-status draft">draft</span>
+                    </div>
+                    <div class="page-content">
+                        <div class="page-title">
+                            3D Panel Modern
+                            <span class="page-category">3d-panel</span>
+                        </div>
+                        <div class="page-description">
+                            Panel dinding 3D dengan design modern.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="page-card" onclick="showDemoModal('Page: Marble Sheet')">
+                    <div class="page-image">
+                        <i class="fas fa-gem"></i>
+                        <span class="page-status paused">paused</span>
+                    </div>
+                    <div class="page-content">
+                        <div class="page-title">
+                            Marble Sheet
+                            <span class="page-category">marble</span>
+                        </div>
+                        <div class="page-description">
+                            Lembaran marble berkualiti tinggi.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="page-card" onclick="showDemoModal('Page: Wallpaper 3D')">
+                    <div class="page-image">
+                        <i class="fas fa-magic"></i>
+                        <span class="page-status active">active</span>
+                    </div>
+                    <div class="page-content">
+                        <div class="page-title">
+                            Wallpaper 3D
+                            <span class="page-category">3d-panel</span>
+                        </div>
+                        <div class="page-description">
+                            Koleksi wallpaper 3D exclusive.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Demo Modal -->
+    <div class="modal" id="demoModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="demoModalTitle">Demo Feature</h3>
+                <span class="close-modal" onclick="closeDemoModal()">&times;</span>
+            </div>
+            <div class="modal-demo-content">
+                <i class="fas fa-flask"></i>
+                <p id="demoModalMessage">This is a demonstration feature. All data shown is for portfolio purposes only.</p>
+                <small>No actual database or real transactions are involved.</small>
+                <div style="margin-top: 20px;">
+                    <button class="modal-btn" onclick="closeDemoModal()">Got it</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <script>
+        (function() {
+            // Global variables
+            let salesChart = null;
+            
+            // ---------- BUDDY LOGIN ----------
+            const buddyModal = document.getElementById('buddyLoginModal');
+            const mainContent = document.getElementById('mainContent');
+            const buddyMouth = document.getElementById('buddyMouth');
+            const buddySpeechText = document.getElementById('buddySpeechText');
+            const buddyError = document.getElementById('buddyError');
+            const buddyPassword = document.getElementById('buddyPassword');
+            const buddyLoginBtn = document.getElementById('buddyLoginBtn');
+            const buddySpinner = document.getElementById('buddySpinner');
+            const buddyBtnSpan = buddyLoginBtn.querySelector('span');
+            const buddyBtnIcon = buddyLoginBtn.querySelector('.fa-arrow-right');
+
+            // Character functions
+            window.buddyHappy = function() {
+                buddyMouth.style.borderRadius = '50px 50px 0 0';
+                buddySpeechText.innerText = 'Type demo123 to enter! ✨';
+            };
+            
+            window.buddyNormal = function() {
+                buddyMouth.style.borderRadius = '0 0 50px 50px';
+                buddySpeechText.innerText = 'Hello! Password is demo123';
+            };
+            
+            function buddySad() {
+                buddyMouth.style.borderRadius = '50px 50px 0 0';
+                buddyMouth.style.transform = 'scaleX(0.8)';
+                buddySpeechText.innerText = 'Oops! Wrong password 😢';
+                setTimeout(() => { buddyMouth.style.transform = ''; buddyNormal(); }, 2000);
+            }
+            
+            function buddyExcited() {
+                buddyMouth.style.borderRadius = '50px 50px 0 0';
+                buddyMouth.style.transform = 'scale(1.2)';
+                buddySpeechText.innerText = 'Welcome to the demo! 🎉';
+            }
+            
+            window.toggleBuddyPassword = function() {
+                const inp = buddyPassword;
+                const icon = document.getElementById('buddyToggleIcon');
+                if (inp.type === 'password') { 
+                    inp.type = 'text'; 
+                    icon.classList.replace('fa-eye','fa-eye-slash'); 
+                    buddySpeechText.innerText = 'Demo mode! 🤫'; 
+                } else { 
+                    inp.type = 'password'; 
+                    icon.classList.replace('fa-eye-slash','fa-eye'); 
+                    buddySpeechText.innerText = 'Hidden again! 😊'; 
+                }
+            };
+
+            // Login handler
+            document.getElementById('buddyLoginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const pwd = buddyPassword.value;
+                buddyError.classList.remove('show');
+                
+                buddyBtnSpan.style.opacity = '0';
+                buddyBtnIcon.style.display = 'none';
+                buddySpinner.style.display = 'inline-block';
+                buddyLoginBtn.disabled = true;
+                buddySpeechText.innerText = 'Checking... 🤔';
+
+                setTimeout(() => {
+                    if (pwd === 'demo123') {
+                        buddyExcited();
+                        sessionStorage.setItem('demo_logged_in', 'true');
+                        buddyBtnSpan.textContent = 'Success!';
+                        buddyBtnSpan.style.opacity = '1';
+                        setTimeout(() => {
+                            buddyModal.classList.add('hidden');
+                            mainContent.style.display = 'block';
+                            updateDateTime();
+                            setInterval(updateDateTime, 1000);
+                            initSalesChart();
+                        }, 800);
+                    } else {
+                        buddySad();
+                        buddyError.classList.add('show');
+                        buddyBtnSpan.style.opacity = '1';
+                        buddyBtnIcon.style.display = 'inline-block';
+                        buddySpinner.style.display = 'none';
+                        buddyLoginBtn.disabled = false;
+                        buddyPassword.value = '';
+                        buddyPassword.focus();
+                        document.querySelector('.input-wrapper-buddy').style.animation = 'shake 0.5s';
+                        setTimeout(()=> document.querySelector('.input-wrapper-buddy').style.animation='', 500);
+                    }
+                }, 800);
+            });
+
+            // Check session
+            if (sessionStorage.getItem('demo_logged_in')) {
+                buddyModal.classList.add('hidden');
+                mainContent.style.display = 'block';
+                setTimeout(() => { 
+                    updateDateTime(); 
+                    setInterval(updateDateTime, 1000); 
+                    initSalesChart(); 
+                }, 50);
+            }
+
+            // ---------- DASHBOARD FUNCTIONS ----------
+            window.updateDateTime = function() {
+                const now = new Date();
+                document.getElementById('currentDateTime').innerText = now.toLocaleDateString('en-MY', { 
+                    weekday:'long', year:'numeric', month:'long', day:'numeric', hour:'2-digit', minute:'2-digit' 
+                });
+            };
+
+            window.logout = function() { 
+                sessionStorage.removeItem('demo_logged_in'); 
+                location.reload(); 
+            };
+
+            window.switchSection = function(section) {
+                // Update tabs
+                document.querySelectorAll('.section-tab').forEach(tab => tab.classList.remove('active'));
+                event.currentTarget.classList.add('active');
+                
+                // Show selected section
+                document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
+                document.getElementById(`section-${section}`).classList.add('active');
+            };
+
+            window.showDemoModal = function(feature) {
+                document.getElementById('demoModalTitle').innerText = feature;
+                document.getElementById('demoModalMessage').innerHTML = `"${feature}" is a demonstration feature. All data shown is for portfolio purposes only.`;
+                document.getElementById('demoModal').classList.add('active');
+            };
+
+            window.closeDemoModal = function() {
+                document.getElementById('demoModal').classList.remove('active');
+            };
+
+            function initSalesChart() {
+                const ctx = document.getElementById('salesChart').getContext('2d');
+                const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+                const data = [2850, 3200, 2980, 3450, 4100, 3850, 3650];
+                
+                if (salesChart) salesChart.destroy();
+                salesChart = new Chart(ctx, {
+                    type:'line',
+                    data:{ 
+                        labels, 
+                        datasets:[{ 
+                            label:'Demo Sales (RM)', 
+                            data, 
+                            borderColor:'#10b981', 
+                            backgroundColor:'rgba(16,185,129,0.1)', 
+                            borderWidth:3, 
+                            pointBackgroundColor:'#10b981', 
+                            pointBorderColor:'white', 
+                            tension:0.4, 
+                            fill:true 
+                        }] 
+                    },
+                    options:{ 
+                        responsive:true, 
+                        maintainAspectRatio:false, 
+                        plugins:{ 
+                            legend:{display:false}, 
+                            tooltip:{callbacks:{label:(ctx)=>'RM '+ctx.raw.toFixed(2)}} 
+                        }, 
+                        scales:{ y:{ beginAtZero:true, ticks:{callback:(val)=>'RM '+val} } } 
+                    }
+                });
+            }
+
+            // Close modal when clicking outside
+            window.onclick = function(event) {
+                const modal = document.getElementById('demoModal');
+                if (event.target == modal) {
+                    closeDemoModal();
+                }
+            };
+
+            // Initialize
+            buddyNormal();
+        })();
+    </script>
+</body>
+</html>
