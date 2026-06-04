@@ -40,7 +40,6 @@
       50% { opacity: 0.85; }
     }
 
-    /* soft cloud-like shapes */
     .bg-dream::before {
       content: "";
       position: absolute;
@@ -87,14 +86,15 @@
 
     .swiper-slide {
       display: flex;
-      align-items: center;
+      align-items: flex-start;  /* CHANGED: from 'center' to 'flex-start' - pages start at TOP */
       justify-content: center;
       padding: 28px 20px 50px;
-      overflow-y: auto;
+      overflow-y: auto;  /* SCROLL WORKS */
     }
 
+    /* VISIBLE SCROLLBAR STYLING */
     .swiper-slide::-webkit-scrollbar {
-      width: 4px;
+      width: 6px;
     }
     .swiper-slide::-webkit-scrollbar-track {
       background: #f5e6c8;
@@ -103,6 +103,9 @@
     .swiper-slide::-webkit-scrollbar-thumb {
       background: #a8c4e0;
       border-radius: 10px;
+    }
+    .swiper-slide::-webkit-scrollbar-thumb:hover {
+      background: #8faec9;
     }
 
     /* elegant card — soft yellow/blue theme with animation */
