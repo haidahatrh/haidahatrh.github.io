@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>Our Story 💖 - Happy Birthday Sayang</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #fef9e6 0%, #e8f0fe 100%);
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    /* Soft yellow & blue dreamy background */
+    .bg-dream {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 15% 20%, rgba(255, 245, 200, 0.5) 0%, rgba(232, 240, 254, 0) 60%),
+        radial-gradient(circle at 85% 70%, rgba(200, 225, 255, 0.4) 0%, rgba(254, 249, 230, 0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* soft cloud-like shapes */
+    .bg-dream::before {
+      content: "";
+      position: absolute;
+      top: 10%;
+      left: -5%;
+      width: 300px;
+      height: 300px;
+      background: rgba(255, 250, 210, 0.3);
+      border-radius: 70% 30% 60% 40%;
+      filter: blur(60px);
+      pointer-events: none;
+    }
+    .bg-dream::after {
+      content: "";
+      position: absolute;
+      bottom: 5%;
+      right: -5%;
+      width: 350px;
+      height: 350px;
+      background: rgba(190, 220, 255, 0.3);
+      border-radius: 40% 60% 30% 70%;
+      filter: blur(70px);
+      pointer-events: none;
+    }
+
+    .swiper {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+      z-index: 2;
+    }
+
+    .swiper-slide {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 20px 50px;
+      overflow-y: auto;
+    }
+
+    .swiper-slide::-webkit-scrollbar {
+      width: 4px;
+    }
+    .swiper-slide::-webkit-scrollbar-track {
+      background: #f5e6c8;
+      border-radius: 10px;
+    }
+    .swiper-slide::-webkit-scrollbar-thumb {
+      background: #a8c4e0;
+      border-radius: 10px;
+    }
+
+    /* elegant card — soft yellow/blue theme */
+    .story-card {
+      max-width: 560px;
+      width: 100%;
+      margin: 0 auto;
+      background: rgba(255, 253, 248, 0.96);
+      backdrop-filter: blur(2px);
+      border-radius: 48px 32px 56px 32px;
+      padding: 36px 30px;
+      box-shadow: 
+        0 25px 45px rgba(170, 190, 210, 0.2),
+        0 8px 20px rgba(0,0,0,0.02),
+        inset 0 1px 0 rgba(255,255,245,0.9);
+      border: 1px solid rgba(245, 225, 170, 0.5);
+      transition: transform 0.2s ease;
+    }
+
+    /* delicate floral divider top */
+    .story-card::before {
+      content: "✽  ✿  ✽";
+      display: block;
+      text-align: center;
+      letter-spacing: 10px;
+      color: #d4c5a0;
+      font-size: 11px;
+      margin-bottom: 20px;
+      opacity: 0.6;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: #8b7a5b;
+      text-align: center;
+      margin-bottom: 16px;
+      letter-spacing: -0.2px;
+    }
+
+    p {
+      font-size: 0.98rem;
+      line-height: 1.7;
+      color: #4a4a4a;
+      margin-bottom: 1rem;
+      font-weight: 400;
+    }
+
+    b, strong {
+      color: #7c9ec9;
+      font-weight: 600;
+    }
+
+    .swiper-pagination-bullet {
+      background: #c9d4b5;
+      opacity: 0.5;
+    }
+    .swiper-pagination-bullet-active {
+      background: #8faec9 !important;
+      opacity: 1;
+      transform: scale(1.1);
+    }
+
+    .swipe-hint {
+      position: fixed;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 500;
+      color: #b8c2a3;
+      background: rgba(255, 252, 240, 0.8);
+      backdrop-filter: blur(8px);
+      width: fit-content;
+      margin: 0 auto;
+      padding: 5px 22px;
+      border-radius: 60px;
+      z-index: 20;
+      pointer-events: none;
+      letter-spacing: 1.5px;
+      font-family: monospace;
+      border: 0.5px solid rgba(210, 195, 150, 0.5);
+    }
+
+    @media (max-width: 520px) {
+      .story-card {
+        padding: 28px 22px;
+      }
+      h1 {
+        font-size: 1.75rem;
+      }
+      p {
+        font-size: 0.93rem;
+      }
+    }
+
+    /* floating soft elements */
+    .floating-soft {
+      position: fixed;
+      pointer-events: none;
+      z-index: 10;
+      font-size: 14px;
+      opacity: 0.35;
+    }
+  </style>
+</head>
+<body>
+<div class="bg-dream"></div>
+
+<div class="swiper">
+  <div class="swiper-wrapper">
+
+    <!-- COVER - words unchanged -->
+    <div class="swiper-slide slide">
+      <div class="story-card" style="text-align: center;">
+        <h1>Happy 24th Birthday ❤️</h1>
+        <p>My love, this is our little storybook.</p>
+        <p>Swipe to read our journey ➜</p>
+      </div>
+    </div>
+
+    <!-- PAGE 1 - words exactly as original -->
+    <div class="swiper-slide slide">
+      <div class="story-card">
+        <h1>Chapter 1: The First Impression</h1>
+        <p>
+          On <b>February 16th</b>,
+          we met on an app and started talking through a call.
+        </p>
+        <p>
+          I still remember liking your voice first — that’s probably the reason
+          I wanted to keep talking to you.
+        </p>
+        <p>
+          What made me click with you was simple — you are from Johor, same state as me,
+          and we are the same age too (26???).
+        </p>
+        <p>
+          That night, I didn’t know much… but I found myself thinking about you.
+        </p>
+        <p>
+          And when you mentioned needing a K-drama list, I was literally on Netflix
+          checking what to recommend, making sure it had a good storyline for you.
+        </p>
+        <p>
+          I even listed everything properly for you… even though I could’ve just ignored it.
+          But I didn’t.
+        </p>
+        <p><b>And that’s how it started.</b> 💗</p>
+      </div>
+    </div>
+
+    <!-- PAGE 2 - words unchanged -->
+    <div class="swiper-slide slide">
+      <div class="story-card">
+        <h1>Chapter 2: The First Meeting</h1>
+        <p>
+          When you told me you wanted to meet me, I honestly thought it was just words…
+          not something that would really happen.
+        </p>
+        <p>
+          But then you said you wanted to bring your family and come to my hometown —
+          and that’s when I realized you were serious.
+        </p>
+        <p>
+          We even made a deal — if either of us didn’t like the first meeting,
+          we could just block each other and walk away.
+        </p>
+        <p>
+          That’s when my mind started overthinking everything…
+          what if I don’t like you? How am I going to tell my family after this?
+        </p>
+        <p>
+          Because it wasn’t just a simple meeting for me.
+          You were meeting my whole family — my relatives, my cousins, my aunties…
+          everyone already knew about you.
+        </p>
+        <p>
+          And the same goes for me too.
+          What if I get blocked after this? What if you just disappear?
+        </p>
+        <p>
+          How am I supposed to explain to my family that I brought someone home…
+          someone I wasn’t even sure would stay?
+        </p>
+        <p>
+          And I still remember… when you kind of expressed your feelings to me.
+          Not a proper confession… but enough for me to feel it.
+        </p>
+        <p>
+          I didn’t have any feelings for you at that time.
+          Not even a tiny little bit.
+        </p>
+        <p>
+          But that night, I started asking myself so many questions…
+          what if you are not the right one?
+          what if one day you hurt me?
+          what if everything repeats again like before?
+        </p>
+        <p>
+          So I asked ChatGPT… how do I even know if someone is the right person for me?
+        </p>
+        <p>
+          And then there was a question that stuck with me…
+          “Would you mind if he is not with you anymore?”
+          “Would you mind if someone else ends up marrying him?”
+        </p>
+        <p>
+          And that’s when I realized…
+          it wasn’t exactly “I like you.”
+        </p>
+        <p>
+          It was more like…
+          <b>I don’t want to lose you.</b>
+        </p>
+        <p><b>And that scared me the most. 💭</b></p>
+      </div>
+    </div>
+
+    <!-- PAGE 3 - words unchanged -->
+    <div class="swiper-slide slide">
+      <div class="story-card">
+        <h1>Chapter 3: Officially Us</h1>
+        <p>
+          It was on <b>25 March 2026</b> when we officially became a couple.
+        </p>
+        <p>
+          And honestly… it became one of the happiest moments of my life.
+        </p>
+        <p>
+          Even though at that time, I was still confused inside.
+          It wasn’t “I like you”… it was still more like
+          “I don’t want to lose you.”
+        </p>
+        <p>
+          Everything felt a little awkward too.
+          I kept thinking… am I doing the right thing?
+          I was still in that dilemma, not fully sure of myself.
+        </p>
+        <p>
+          But then, day by day, something started to change.
+        </p>
+        <p>
+          I began to realize… I like you.
+          Not just a little.
+          I like you so, so much.
+        </p>
+        <p>
+          The way you treat me… the way you always look for me,
+          even for the smallest things.
+        </p>
+        <p>
+          When I tell you something I like, you remember it.
+          You actually write it down.
+        </p>
+        <p>
+          And when I tell you something I don’t like,
+          you make sure you never let it happen to me.
+        </p>
+        <p>
+          Little by little… I felt myself falling without even realizing it.
+        </p>
+        <p><b>And that’s when “us” slowly started to feel real. 💗</b></p>
+      </div>
+    </div>
+
+    <!-- PAGE 4 - words unchanged -->
+    <div class="swiper-slide slide">
+      <div class="story-card">
+        <h1>Chapter 4: Sayang</h1>
+        <p>
+          Then suddenly… you started calling me “sayang”.
+        </p>
+        <p>
+          And honestly… that became one of my favorite things to hear.
+        </p>
+        <p>
+          When you call me sayang… when you call me princess…
+          when you call me your future wife…
+          I like all of it.
+        </p>
+        <p>
+          I never thought I would like being spoiled like that.
+          I used to think I would dislike it when someone babies me too much.
+        </p>
+        <p>
+          But with you… I didn’t even realize I changed.
+        </p>
+        <p>
+          I became softer.
+          I became someone who actually enjoys being cared for.
+        </p>
+        <p>
+          I’m not always sad… I’m not always down…
+          but somehow, I just want to be close to you all the time.
+        </p>
+        <p>
+          I want to tell you everything about my day,
+          even the smallest things that don’t even matter.
+        </p>
+        <p>
+          It’s not that I can’t live without you…
+          it’s just that life feels better when I share it with you.
+        </p>
+        <p>
+          And somehow… you make me feel like I can always come home to someone.
+        </p>
+        <p><b>And I think that’s what I love the most. 💗</b></p>
+      </div>
+    </div>
+
+    <!-- PAGE 5 - words unchanged -->
+    <div class="swiper-slide slide">
+      <div class="story-card">
+        <h1>Chapter 5: Raya Edition</h1>
+        <p>
+          This part of our story feels different… because it’s the Raya edition.
+        </p>
+        <p>
+          We met twice during Raya — once at Kak Ngah’s house, and once at my brother’s house in Kajang,
+          and also at Ijat’s house.
+        </p>
+        <p>
+          I still remember when you invited me to your sister’s open house.
+          Honestly, I had no intention to come at first.
+        </p>
+        <p>
+          I kept thinking… I’m a girl going alone.
+          I don’t have anyone to accompany me.
+          I would be coming all the way from my house to yours alone.
+        </p>
+        <p>
+          And what if when I arrive… you don’t really layan me?
+          What if you’re busy with your own things and I just feel left out?
+        </p>
+        <p>
+          I also kept overthinking about your family.
+          It’s an open house, and if one day I were to be part of your family,
+          I should at least help with something…
+          even though you already have many sisters there.
+        </p>
+        <p>
+          I was afraid of making a bad impression without even realizing it.
+        </p>
+        <p>
+          But in the end… everything went smoothly.
+          Your family made me feel comfortable,
+          and I never felt neglected or left out.
+        </p>
+        <p>
+          Then at Ijat’s house, I didn’t expect much either.
+          I thought you would be busy with work and might not come.
+        </p>
+        <p>
+          But deep inside, I had a very tiny hope… that you would come.
+        </p>
+        <p>
+          So when you told me you were coming — even if it was already Maghrib —
+          I was still happy.
+        </p>
+        <p>
+          I used Hannan as a reason to make things less awkward,
+          but from my side… everything felt okay.
+        </p>
+        <p>
+          You got to know my siblings, and they got to know you too.
+        </p>
+        <p>
+          I just hope you felt as comfortable with my family
+          as I did with yours.
+        </p>
+        <p>
+          And I’m sorry if at any point I made you feel neglected or uncomfortable. 💭
+        </p>
+        <p><b>But that Raya… became one of the moments that stayed with me. 💗</b></p>
+      </div>
+    </div>
+
+    <!-- PAGE 6 - words unchanged -->
+    <div class="swiper-slide slide">
+      <div class="story-card">
+        <h1>Chapter 6: Our First Date</h1>
+        <p>
+          Our first date… started with Ira — my office mate — and her boyfriend.
+          We planned it like a double date, but in the end, it was just us first before meeting them later.
+        </p>
+        <p>
+          The day started at Pasar Seni.
+          Honestly, I didn’t even plan much… I didn’t book anything properly,
+          and I wasn’t in the mood to shop because I didn’t really know you that deeply yet.
+        </p>
+        <p>
+          Then we went for food at BBQ Town / Sukiya — my comfort food place.
+          I wanted you to try it with me.
+        </p>
+        <p>
+          Thank you for treating me… for belanja me,
+          for grilling meat and cooking for me,
+          for just being there with me.
+        </p>
+        <p>
+          I don’t even know why we both ate so little at that time…
+          maybe because we were just full from looking at each other. Hehe.
+        </p>
+        <p>
+          I still remember you said you were very hungry,
+          and you even bought chicken tenders… which somehow ended up in the bin. 😭
+        </p>
+        <p>
+          After that, we went to the photo booth.
+          I thought the pictures would turn out cute…
+          but I wasn’t really satisfied with how I looked.
+        </p>
+        <p>
+          But you told me something that stayed in my mind —
+          you said you put that picture on your mirror and look at it every day.
+        </p>
+        <p>
+          After that, we went to watch a movie.
+          I don’t really like movies because I can just watch them on Netflix,
+          but I chose it anyway because I was afraid things would feel awkward.
+        </p>
+        <p>
+          Then we met Ira and her boyfriend after that,
+          and the day slowly came to an end.
+        </p>
+        <p>
+          You accompanied me the whole time… even until late at night,
+          even when we had to take LRT back and you walked me safely.
+        </p>
+        <p>
+          Even though you could have just left earlier,
+          you stayed with me until the end of the day.
+        </p>
+        <p><b>And that first date… I will never forget it. 💗</b></p>
+        <p><b>Thank you for that day. For everything.</b></p>
+      </div>
+    </div>
+
+    <!-- FINAL PAGE - words unchanged -->
+    <div class="swiper-slide slide">
+      <div class="story-card">
+        <h1>Final Message</h1>
+        <p>
+          And now… you are literally my favourite notification,
+          my favourite person, my favourite teammate, my favourite best friend…
+          and everything in between.
+        </p>
+        <p>
+          I just want you to know… thank you for being honest with me.
+          And thank you for everything you’ve done throughout these past few months of knowing each other.
+        </p>
+        <p>
+          I’m sorry that I didn’t manage to plan a surprise or get a cake for you like I wanted to.
+          I thought we would meet tomorrow, so I could prepare something for you…
+          but things changed and we couldn’t.
+        </p>
+        <p>
+          The reason I made this instead… is because I realized something.
+          You always like writing long messages before you sleep.
+          You’re good with words… but I’m not like you.
+        </p>
+        <p>
+          So I thought… maybe I can love you in your language.
+          By writing something like this.
+        </p>
+        <p>
+          And I know you might understand better in Malay, so this part is for you:
+        </p>
+        <p><b>
+          Aku tahu kau susah nak faham semua benda dalam English ni, tapi aku nak kau faham satu benda je —
+          aku tak nak hilang kau.
+        </b></p>
+        <p>
+          Aku tak tahu apa yang akan jadi antara kita satu hari nanti.
+          Sama ada kau akan jadi milik aku, atau kau akan jadi milik orang lain.
+        </p>
+        <p>
+          Tapi apa yang aku tahu… aku sangat bahagia bila dengan kau.
+          Selalunya aku rasa tenang dan gembira bila ada kau.
+        </p>
+        <p>
+          Dan aku harap… satu hari nanti kita boleh jadi sesuatu yang lebih sah dan lebih indah.
+          Amin ya Rabbal Alamin.
+        </p>
+        <p>
+          Lastly… happy 24th birthday, Muhammad Naqib.
+        </p>
+        <p><b>
+          I love you so much. Good night, sayang.
+        </b></p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="swipe-hint">
+  ✧ swipe to turn the page ✧
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  const swiper = new Swiper('.swiper', {
+    direction: 'horizontal',
+    loop: false,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+      dynamicBullets: true,
+    },
+    grabCursor: true,
+    speed: 450,
+  });
+
+  // gentle floating soft elements
+  setInterval(() => {
+    if (document.visibilityState === 'visible') {
+      const soft = document.createElement('div');
+      soft.className = 'floating-soft';
+      const icons = ['✽', '✿', '❁', '✧', '✦', '○', '◍'];
+      soft.textContent = icons[Math.floor(Math.random() * icons.length)];
+      soft.style.left = Math.random() * 100 + '%';
+      soft.style.bottom = '-20px';
+      soft.style.fontSize = (Math.random() * 14 + 10) + 'px';
+      soft.style.color = Math.random() > 0.5 ? '#e8d4a8' : '#b8cce4';
+      document.body.appendChild(soft);
+      requestAnimationFrame(() => {
+        soft.style.transition = 'transform 7s linear, opacity 2s';
+        soft.style.transform = `translateY(-110vh) rotate(${Math.random() * 40 - 20}deg)`;
+        soft.style.opacity = '0';
+      });
+      setTimeout(() => soft.remove(), 7000);
+    }
+  }, 4000);
+</script>
+</body>
+</html>
