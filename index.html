@@ -1,1398 +1,2871 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Haidah Athirah | Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #FF4D94;
-            --primary-light: #FF80B3;
-            --primary-dark: #E60073;
-            --secondary: #2D3748;
-            --accent: #FFB6D9;
-            --light-bg: #F9FAFB;
-            --card-bg: #FFFFFF;
-            --text-primary: #1A202C;
-            --text-secondary: #4A5568;
-            --border: #E2E8F0;
-            --success: #38B2AC;
-            --gradient: linear-gradient(135deg, #FF4D94 0%, #FF80B3 100%);
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
-            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
-            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            color: var(--text-primary);
-            line-height: 1.6;
-            background-color: var(--light-bg);
-        }
-        
-        h1, h2, h3, h4 {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-        
-        /* Header */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            transition: all 0.3s ease;
-        }
-        
-        .header.scrolled {
-            box-shadow: var(--shadow-md);
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px;
-        }
-        
-        .logo {
-            font-family: 'Poppins', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--primary);
-            text-decoration: none;
-        }
-        
-        .logo span {
-            color: var(--secondary);
-        }
-        
-        .nav-menu {
-            display: flex;
-            gap: 32px;
-        }
-        
-        .nav-link {
-            text-decoration: none;
-            color: var(--text-secondary);
-            font-weight: 500;
-            font-size: 15px;
-            position: relative;
-            transition: color 0.3s ease;
-        }
-        
-        .nav-link:hover {
-            color: var(--primary);
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gradient);
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 24px;
-            color: var(--text-primary);
-            cursor: pointer;
-        }
-        
-        /* Main Sections */
-        .main-section {
-            padding: 120px 0 80px;
-        }
-        
-        .section-title {
-            margin-bottom: 40px;
-        }
-        
-        .section-title h2 {
-            font-size: 36px;
-            color: var(--text-primary);
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .section-title h2 i {
-            color: var(--primary);
-        }
-        
-        .section-title p {
-            color: var(--text-secondary);
-            max-width: 600px;
-        }
-        
-        /* HORIZONTAL SCROLL SECTIONS */
-        .horizontal-scroll-section {
-            position: relative;
-            margin-bottom: 60px;
-        }
-        
-        .scroll-container {
-            display: flex;
-            gap: 30px;
-            overflow-x: auto;
-            padding: 20px 10px 40px;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none; /* Firefox */
-        }
-        
-        .scroll-container::-webkit-scrollbar {
-            height: 8px;
-        }
-        
-        .scroll-container::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 4px;
-        }
-        
-        .scroll-container::-webkit-scrollbar-thumb {
-            background: var(--primary-light);
-            border-radius: 4px;
-        }
-        
-        .scroll-container::-webkit-scrollbar-thumb:hover {
-            background: var(--primary);
-        }
-        
-        /* Scroll Cards */
-        .scroll-card {
-            min-width: 350px;
-            background: var(--card-bg);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-            transition: all 0.3s ease;
-            flex-shrink: 0;
-        }
-        
-        .scroll-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .card-image {
-            height: 200px;
-            overflow: hidden;
-        }
-        
-        .card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .scroll-card:hover .card-image img {
-            transform: scale(1.05);
-        }
-        
-        .card-content {
-            padding: 24px;
-        }
-        
-        .card-content h3 {
-            font-size: 20px;
-            margin-bottom: 10px;
-            color: var(--text-primary);
-        }
-        
-        .card-date {
-            color: var(--primary);
-            font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 10px;
-            display: block;
-        }
-        
-        .card-content p {
-            color: var(--text-secondary);
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
-        
-        .card-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        
-        .tag {
-            background: var(--accent);
-            color: var(--primary-dark);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-        
-        /* Scroll Arrows */
-        .scroll-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: white;
-            border: 2px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 10;
-            color: var(--text-primary);
-            font-size: 18px;
-        }
-        
-        .scroll-arrow:hover {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-        
-        .scroll-arrow.left {
-            left: -20px;
-        }
-        
-        .scroll-arrow.right {
-            right: -20px;
-        }
-        
-        /* Profile Section */
-        .profile-section {
-            padding: 160px 0 100px;
-            background: linear-gradient(135deg, #fdf2ff 0%, #fff0f7 100%);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .profile-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, var(--primary-light) 0%, transparent 70%);
-            opacity: 0.15;
-            border-radius: 50%;
-        }
-        
-        .profile-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .profile-text {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .badge {
-            display: inline-block;
-            background: var(--gradient);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 24px;
-            box-shadow: var(--shadow-md);
-        }
-        
-        .profile-text h1 {
-            font-size: 48px;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            color: var(--text-primary);
-        }
-        
-        .profile-text h1 span {
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .profile-text p {
-            font-size: 18px;
-            color: var(--text-secondary);
-            margin-bottom: 32px;
-            max-width: 500px;
-        }
-        
-        .btn-group {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 32px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 15px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-        }
-        
-        .btn-primary {
-            background: var(--gradient);
-            color: white;
-            box-shadow: var(--shadow-md);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .btn-secondary {
-            background: white;
-            color: var(--primary);
-            border: 2px solid var(--primary-light);
-        }
-        
-        .btn-secondary:hover {
-            background: var(--primary-light);
-            color: white;
-            border-color: var(--primary-light);
-        }
-        
-        .profile-image {
-            position: relative;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            border: 8px solid white;
-        }
-        
-        .profile-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-        
-        .profile-image:hover img {
-            transform: scale(1.05);
-        }
-        
-        /* Contact Form */
-        .contact-form {
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: var(--shadow-md);
-            max-width: 600px;
-            margin: 40px auto 0;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--text-primary);
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            font-family: 'Inter', sans-serif;
-            font-size: 15px;
-            transition: all 0.3s ease;
-        }
-        
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary-light);
-            box-shadow: 0 0 0 3px rgba(255, 77, 148, 0.1);
-        }
-        
-        textarea.form-control {
-            min-height: 140px;
-            resize: vertical;
-        }
-        
-        /* Footer */
-        .footer {
-            background: var(--secondary);
-            color: white;
-            padding: 60px 0 30px;
-            margin-top: 80px;
-        }
-        
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 24px;
-        }
-        
-        .footer-logo {
-            font-family: 'Poppins', sans-serif;
-            font-size: 28px;
-            font-weight: 700;
-        }
-        
-        .footer-logo span {
-            color: var(--primary-light);
-        }
-        
-        .footer-links {
-            display: flex;
-            gap: 24px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        
-        .footer-link {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .footer-link:hover {
-            color: var(--primary-light);
-        }
-        
-        .footer-social {
-            display: flex;
-            gap: 16px;
-        }
-        
-        .footer-social a {
-            color: white;
-            font-size: 18px;
-            transition: color 0.3s ease;
-        }
-        
-        .footer-social a:hover {
-            color: var(--primary-light);
-        }
-        
-        .copyright {
-            margin-top: 40px;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 14px;
-        }
-        
-        /* Responsive */
-        @media (max-width: 992px) {
-            .profile-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .profile-text h1 {
-                font-size: 40px;
-            }
-            
-            .scroll-arrow.left {
-                left: 10px;
-            }
-            
-            .scroll-arrow.right {
-                right: 10px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-                position: fixed;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                background: white;
-                padding: 24px;
-                box-shadow: var(--shadow-md);
-                flex-direction: column;
-                gap: 20px;
-            }
-            
-            .nav-menu.active {
-                display: flex;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .profile-text h1 {
-                font-size: 32px;
-            }
-            
-            .btn-group {
-                flex-direction: column;
-                width: 100%;
-            }
-            
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .section-title h2 {
-                font-size: 28px;
-            }
-            
-            .scroll-card {
-                min-width: 300px;
-            }
-            
-            .contact-form {
-                padding: 24px;
-            }
-            
-            .scroll-arrow {
-                display: none;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 16px;
-            }
-            
-            .profile-text h1 {
-                font-size: 28px;
-            }
-            
-            .profile-text p {
-                font-size: 16px;
-            }
-            
-            .section-title h2 {
-                font-size: 24px;
-            }
-            
-            .scroll-card {
-                min-width: 280px;
-            }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Haidah Athirah Hamzah — Portfolio</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  :root {
+    --paper: #ECE6D6;
+    --paper-2: #E3DCC5;
+    --receipt: #F5F0DE;
+    --ink: #1F1B14;
+    --ink-2: #4A4335;
+    --muted: #7A7266;
+    --accent: #2E5B3E;
+    --accent-tint: rgba(46, 91, 62, 0.10);
+    --amber: #A16217;
+    --amber-tint: rgba(161, 98, 23, 0.14);
+    --debit: #7A2018;
+    --rule: #C4BDA9;
+    --rule-soft: #D6CFB9;
+    --font-body: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    --font-display: Georgia, "Iowan Old Style", Charter, "Times New Roman", serif;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", "Cascadia Code", Consolas, "Roboto Mono", monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #17140F;
+      --paper-2: #1F1B14;
+      --receipt: #221E17;
+      --ink: #E5DFCF;
+      --ink-2: #B6AF9C;
+      --muted: #8A8275;
+      --accent: #6BAA82;
+      --accent-tint: rgba(107, 170, 130, 0.14);
+      --amber: #D4A15A;
+      --amber-tint: rgba(212, 161, 90, 0.16);
+      --debit: #C46A5F;
+      --rule: #3A3529;
+      --rule-soft: #2A2620;
+    }
+  }
+
+  :root[data-theme="light"] {
+    --paper: #ECE6D6; --paper-2: #E3DCC5; --receipt: #F5F0DE;
+    --ink: #1F1B14; --ink-2: #4A4335; --muted: #7A7266;
+    --accent: #2E5B3E; --accent-tint: rgba(46, 91, 62, 0.10);
+    --amber: #A16217; --amber-tint: rgba(161, 98, 23, 0.14);
+    --debit: #7A2018;
+    --rule: #C4BDA9; --rule-soft: #D6CFB9;
+  }
+  :root[data-theme="dark"] {
+    --paper: #17140F; --paper-2: #1F1B14; --receipt: #221E17;
+    --ink: #E5DFCF; --ink-2: #B6AF9C; --muted: #8A8275;
+    --accent: #6BAA82; --accent-tint: rgba(107, 170, 130, 0.14);
+    --amber: #D4A15A; --amber-tint: rgba(212, 161, 90, 0.16);
+    --debit: #C46A5F;
+    --rule: #3A3529; --rule-soft: #2A2620;
+  }
+
+  html { background: var(--paper); }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--accent); color: var(--paper); }
+
+  a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    transition: border-color 140ms ease, color 140ms ease;
+  }
+  a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-bottom-color: transparent; }
+
+  .page {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: clamp(1.25rem, 3vw, 2.5rem) clamp(1.25rem, 4vw, 3rem) 4rem;
+  }
+
+  /* ---------- Top nav ---------- */
+
+  .topnav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--ink);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .topnav .brand { color: var(--ink); }
+  .topnav nav { display: flex; gap: 1.5rem; }
+  .topnav nav a { border-bottom: none; color: var(--ink-2); }
+  .topnav nav a:hover { color: var(--accent); }
+  .topnav .status { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--accent); }
+  .topnav .status::before {
+    content: ""; width: 0.5rem; height: 0.5rem; background: var(--accent); border-radius: 50%;
+  }
+  @media (max-width: 620px) {
+    .topnav nav { display: none; }
+  }
+
+  /* ---------- Hero ---------- */
+
+  .hero {
+    padding-block: clamp(3rem, 8vw, 6rem) clamp(2rem, 5vw, 4rem);
+    display: grid;
+    gap: clamp(2rem, 4vw, 3rem);
+  }
+
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2.5rem, 7vw, 5.25rem);
+    line-height: 1.02;
+    letter-spacing: -0.028em;
+    margin: 0;
+    text-wrap: balance;
+    max-width: 18ch;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+  }
+
+  .hero-lower {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: end;
+  }
+  @media (min-width: 800px) {
+    .hero-lower { grid-template-columns: 1.7fr 1fr; gap: 4rem; }
+  }
+
+  .hero-lead {
+    font-family: var(--font-display);
+    font-size: clamp(1.15rem, 1.7vw, 1.35rem);
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 40rem;
+  }
+
+  .hero-lead strong { font-weight: 600; color: var(--ink); font-style: italic; }
+
+  .hero-meta {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 1.75;
+    color: var(--ink-2);
+    border-top: 1px solid var(--ink);
+    padding-top: 1rem;
+  }
+  .hero-meta .row { display: flex; justify-content: space-between; gap: 1rem; }
+  .hero-meta .row .k { color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.68rem; }
+  .hero-meta .row .v { color: var(--ink); }
+  .hero-meta .row .v a { border-bottom-color: var(--rule); }
+
+  /* ---------- Section chrome ---------- */
+
+  .work-section-head {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding-block: clamp(3rem, 5vw, 4.5rem) clamp(1.5rem, 3vw, 2.5rem);
+    border-top: 1px solid var(--rule);
+    margin-top: 1rem;
+  }
+  @media (min-width: 800px) {
+    .work-section-head { grid-template-columns: 1fr 1.6fr; gap: 3rem; align-items: baseline; }
+  }
+  .work-section-head .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .work-section-head p {
+    font-family: var(--font-display);
+    font-size: clamp(1.15rem, 1.7vw, 1.3rem);
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 44rem;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  /* ---------- Case studies ---------- */
+
+  .case {
+    padding-block: clamp(4.5rem, 9vw, 8rem);
+    border-top: 2px solid var(--ink);
+  }
+  .case:first-of-type { border-top: 1px solid var(--rule); }
+
+  .case-marker {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+  }
+  .case-marker b { color: var(--ink); font-weight: 700; margin-right: 0.5rem; }
+
+  .case-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: clamp(1.25rem, 2vw, 1.75rem);
+  }
+  .case-num {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .case-num b {
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.16em;
+    margin-right: 0.35rem;
+  }
+  .case-live {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .case-live a { border-bottom-color: var(--rule); }
+
+  .case-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2.15rem, 4.75vw, 3.75rem);
+    line-height: 1.05;
+    letter-spacing: -0.022em;
+    margin: 0 0 1.5rem;
+    max-width: 24ch;
+    text-wrap: balance;
+  }
+  .case-title em { font-style: italic; color: var(--accent); font-weight: 400; }
+
+  /* Mock viewport */
+  .mock-frame {
+    margin: clamp(1.5rem, 3vw, 2.5rem) 0 clamp(2rem, 4vw, 3rem);
+    border: 1px solid var(--rule);
+    background: var(--paper-2);
+    padding: clamp(1rem, 3vw, 2.5rem);
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+  }
+
+  /* ---- POS receipt mock ---- */
+
+  .receipt {
+    background: var(--receipt);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    line-height: 1.55;
+    padding: 1.75rem 1.5rem;
+    min-width: 300px;
+    max-width: 360px;
+    box-shadow: 0 1px 0 var(--rule-soft), 0 12px 24px -12px rgba(31, 27, 20, 0.18);
+    position: relative;
+  }
+  .receipt::before, .receipt::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 8px;
+    background: radial-gradient(circle at 6px 8px, transparent 4px, var(--receipt) 4.5px) repeat-x;
+    background-size: 12px 8px;
+  }
+  .receipt::before { top: -8px; transform: rotate(180deg); }
+  .receipt::after { bottom: -8px; }
+
+  .receipt h4 {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-align: center;
+    margin: 0 0 0.15rem;
+    color: var(--ink);
+  }
+  .receipt .subhead {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+  }
+  .receipt .r-meta { display: flex; justify-content: space-between; color: var(--ink-2); font-size: 0.72rem; }
+  .receipt .r-meta + .r-meta { margin-top: 0.15rem; }
+  .receipt hr {
+    border: 0;
+    border-top: 1px dashed var(--rule);
+    margin: 0.85rem 0;
+  }
+  .receipt .r-item { margin-bottom: 0.6rem; }
+  .receipt .r-item .name { color: var(--ink); }
+  .receipt .r-item .line {
+    display: flex; justify-content: space-between;
+    color: var(--ink-2);
+    font-variant-numeric: tabular-nums;
+  }
+  .receipt .r-line {
+    display: flex; justify-content: space-between;
+    font-variant-numeric: tabular-nums;
+  }
+  .receipt .r-total {
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+  }
+  .receipt .r-total b { color: var(--accent); }
+  .receipt .r-foot {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.68rem;
+    margin-top: 0.5rem;
+    letter-spacing: 0.05em;
+  }
+  .receipt .r-barcode {
+    display: grid;
+    grid-template-columns: repeat(40, 1fr);
+    gap: 1px;
+    margin: 0.75rem 0 0.35rem;
+    height: 32px;
+  }
+  .receipt .r-barcode span { background: var(--ink); }
+  .receipt .r-barcode span.w { grid-column: span 2; }
+  .receipt .r-barcode span.g { background: transparent; }
+
+  /* ---- Storefront product card mock ---- */
+
+  .store-mock {
+    width: 100%;
+    max-width: 720px;
+    background: var(--paper);
+    border: 1px solid var(--rule-soft);
+    padding: 1.25rem;
+  }
+  .store-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 0.85rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--rule-soft);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .store-toolbar b { color: var(--ink); letter-spacing: 0.12em; }
+  .store-toolbar .badge {
+    color: var(--accent);
+    background: var(--accent-tint);
+    padding: 0.25rem 0.5rem;
+    letter-spacing: 0.14em;
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  @media (min-width: 560px) {
+    .product-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .product-card {
+    background: var(--paper-2);
+    border: 1px solid var(--rule-soft);
+    padding: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .product-card.featured { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+
+  .product-image {
+    aspect-ratio: 16 / 10;
+    background: repeating-linear-gradient(
+      45deg,
+      var(--rule-soft) 0,
+      var(--rule-soft) 8px,
+      var(--paper) 8px,
+      var(--paper) 16px
+    );
+    position: relative;
+    overflow: hidden;
+  }
+  .product-image.oak {
+    background: repeating-linear-gradient(
+      90deg,
+      #C09468 0,
+      #C09468 3px,
+      #A87C4E 3px,
+      #A87C4E 6px,
+      #B58857 6px,
+      #B58857 22px
+    );
+  }
+  .product-image.grey {
+    background: repeating-linear-gradient(
+      90deg,
+      #98938A 0,
+      #98938A 3px,
+      #7F7A72 3px,
+      #7F7A72 6px,
+      #8F8A81 6px,
+      #8F8A81 24px
+    );
+  }
+  .product-image .sku {
+    position: absolute;
+    top: 0.4rem;
+    right: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    color: var(--paper);
+    background: rgba(31, 27, 20, 0.7);
+    padding: 0.15rem 0.4rem;
+  }
+
+  .product-name {
+    font-family: var(--font-display);
+    font-size: 1.02rem;
+    line-height: 1.25;
+    margin: 0;
+  }
+  .product-name .variant {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.15rem;
+    font-style: normal;
+  }
+
+  .price-block {
+    font-variant-numeric: tabular-nums;
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding-top: 0.35rem;
+    border-top: 1px solid var(--rule-soft);
+  }
+  .price-list {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-decoration: line-through;
+  }
+  .price-contractor {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    color: var(--accent);
+    letter-spacing: -0.01em;
+  }
+  .price-contractor .cur {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-right: 0.15rem;
+    vertical-align: 0.35em;
+  }
+
+  .product-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-2);
+  }
+  .stock-dot {
+    display: inline-block; width: 0.4rem; height: 0.4rem;
+    background: var(--accent); border-radius: 50%; margin-right: 0.35rem;
+  }
+  .add-btn {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.35rem 0.65rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 0;
+  }
+
+  /* ---- Admin table mock ---- */
+
+  .admin-mock {
+    width: 100%;
+    max-width: 820px;
+    background: var(--paper);
+    border: 1px solid var(--rule-soft);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+  }
+  .admin-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .admin-head h4 {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin: 0;
+    color: var(--ink);
+  }
+  .admin-head .action {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    border: 1px solid var(--rule);
+    padding: 0.3rem 0.65rem;
+  }
+
+  .admin-chips {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    padding: 0.85rem 1.25rem;
+    border-bottom: 1px solid var(--rule-soft);
+    background: var(--paper-2);
+  }
+  .chip {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.6rem;
+    border: 1px solid var(--rule);
+    color: var(--ink-2);
+    background: var(--paper);
+  }
+  .chip.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+  .admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+  }
+  .admin-table th, .admin-table td {
+    text-align: left;
+    padding: 0.7rem 1.25rem;
+    border-bottom: 1px solid var(--rule-soft);
+    font-size: 0.82rem;
+  }
+  .admin-table th {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    background: var(--paper-2);
+  }
+  .admin-table tr:last-child td { border-bottom: 0; }
+  .admin-table .order-id { font-family: var(--font-mono); color: var(--ink-2); }
+  .admin-table .amt { text-align: right; font-family: var(--font-mono); color: var(--ink); }
+  .admin-table .branch {
+    font-family: var(--font-mono); font-size: 0.68rem;
+    letter-spacing: 0.08em; color: var(--muted);
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.55rem;
+    background: var(--paper-2);
+    border: 1px solid var(--rule);
+    color: var(--ink-2);
+    white-space: nowrap;
+  }
+  .pill::before {
+    content: ""; width: 0.4rem; height: 0.4rem; border-radius: 50%; background: currentColor;
+  }
+  .pill.ready { color: var(--accent); background: var(--accent-tint); border-color: transparent; }
+  .pill.pack { color: var(--amber); background: var(--amber-tint); border-color: transparent; }
+  .pill.pending { color: var(--ink-2); }
+  .pill.done { color: var(--muted); background: var(--paper-2); border-color: transparent; }
+
+  /* Case body copy */
+
+  .case-copy {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: clamp(2rem, 3vw, 2.5rem);
+  }
+  @media (min-width: 800px) {
+    .case-copy { grid-template-columns: 3fr 2fr; gap: 4rem; }
+  }
+
+  .case-copy p {
+    font-family: var(--font-display);
+    font-size: 1.08rem;
+    line-height: 1.6;
+    margin: 0;
+    color: var(--ink);
+  }
+  .case-copy p + p { margin-top: 1rem; }
+
+  .case-side dt {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 1.25rem;
+  }
+  .case-side dt:first-child { margin-top: 0; }
+  .case-side dd {
+    margin: 0.25rem 0 0;
+    font-family: var(--font-body);
+    font-size: 0.92rem;
+    line-height: 1.45;
+    color: var(--ink);
+  }
+  .case-side .tags {
+    display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.4rem;
+  }
+  .case-side .tag {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    padding: 0.2rem 0.5rem;
+    color: var(--ink-2);
+    background: var(--paper-2);
+    border: 1px solid var(--rule-soft);
+  }
+
+  /* Feature grid */
+
+  .feat-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: clamp(2rem, 3vw, 2.5rem);
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--rule-soft);
+  }
+  @media (min-width: 640px) {
+    .feat-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  }
+  .feat h4 {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 0 0 0.4rem;
+    color: var(--accent);
+  }
+  .feat p {
+    font-family: var(--font-body);
+    font-size: 0.92rem;
+    line-height: 1.5;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  /* Stats bar */
+
+  .stats {
+    margin-top: clamp(1.75rem, 3vw, 2.25rem);
+    padding: 0.85rem 0;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
+  }
+  .stats span { white-space: nowrap; color: var(--ink); }
+  .stats b { color: var(--accent); font-weight: 700; }
+
+  /* ---------- Modules (deep-dive) ---------- */
+
+  .modules {
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    padding-top: clamp(2rem, 4vw, 3rem);
+    border-top: 1px solid var(--rule);
+  }
+  .modules-head {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 clamp(1.75rem, 3vw, 2.5rem);
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+  .modules-head::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--rule-soft);
+  }
+  .modules-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  @media (min-width: 720px) {
+    .modules-grid { grid-template-columns: 1fr 1fr; gap: 1.75rem; }
+  }
+  .module {
+    background: var(--paper-2);
+    border: 1px solid var(--rule-soft);
+    display: flex;
+    flex-direction: column;
+  }
+  .module-mock {
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule-soft);
+    padding: clamp(1.25rem, 2vw, 1.75rem);
+    min-height: 240px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: auto;
+  }
+  .module-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    flex: 1;
+  }
+  .module-body .m-tag {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .module-body h4 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.2rem;
+    line-height: 1.2;
+    margin: 0;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
+  }
+  .module-body p {
+    font-family: var(--font-body);
+    font-size: 0.92rem;
+    line-height: 1.55;
+    margin: 0;
+    color: var(--ink-2);
+  }
+  .module-body code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: var(--paper);
+    padding: 0.05em 0.3em;
+    border: 1px solid var(--rule-soft);
+    color: var(--ink);
+  }
+  .module.text-only .module-mock { display: none; }
+  .module.text-only .module-body { padding: 1.75rem; gap: 0.6rem; }
+
+  /* ---- CMF Closing Statement mini-mock ---- */
+  .cmf-mock {
+    width: 100%;
+    max-width: 300px;
+    background: var(--paper);
+    border: 1px solid var(--rule-soft);
+    padding: 14px 16px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+  }
+  .cmf-head {
+    border-bottom: 1px dashed var(--rule);
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+  .cmf-head b {
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    font-size: 10.5px;
+  }
+  .cmf-sub {
+    color: var(--muted);
+    margin-top: 3px;
+    font-size: 8.5px;
+    letter-spacing: 0.02em;
+  }
+  .cmf-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+  }
+  .cmf-table th {
+    text-align: right;
+    font-size: 7.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 400;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .cmf-table th:first-child { text-align: left; }
+  .cmf-table td {
+    padding: 3px 0;
+    color: var(--ink);
+    text-align: right;
+    font-size: 9.5px;
+  }
+  .cmf-table td:first-child { text-align: left; color: var(--ink-2); }
+  .cmf-total td {
+    border-top: 1px solid var(--ink);
+    padding-top: 6px;
+    font-weight: 700;
+  }
+  .cmf-neg { color: var(--debit); font-weight: 700; }
+
+  /* ---- Stock Card mini-mock ---- */
+  .sc-mock {
+    width: 100%;
+    max-width: 300px;
+    background: var(--paper);
+    border: 1px solid var(--rule-soft);
+    padding: 14px 16px;
+    font-family: var(--font-mono);
+  }
+  .sc-head {
+    padding-bottom: 8px;
+    border-bottom: 1px dashed var(--rule);
+    margin-bottom: 10px;
+  }
+  .sc-sku {
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: 0.06em;
+    font-size: 10px;
+  }
+  .sc-name {
+    color: var(--muted);
+    margin-top: 2px;
+    font-size: 9px;
+    letter-spacing: 0.02em;
+  }
+  .sc-table {
+    width: 100%;
+    font-variant-numeric: tabular-nums;
+    border-collapse: collapse;
+  }
+  .sc-table th {
+    text-align: right;
+    font-size: 7px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 400;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .sc-table th:first-child, .sc-table th:nth-child(2) { text-align: left; }
+  .sc-table td { padding: 2.5px 0; text-align: right; color: var(--ink); font-size: 9.5px; }
+  .sc-table td:first-child, .sc-table td:nth-child(2) { text-align: left; color: var(--ink-2); }
+  .sc-in { color: var(--accent); font-weight: 700; }
+  .sc-out { color: var(--debit); font-weight: 700; }
+  .sc-footer {
+    border-top: 1px solid var(--ink);
+    margin-top: 8px;
+    padding-top: 7px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .sc-footer .k {
+    font-size: 7.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .sc-footer .v {
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 13px;
+  }
+
+  /* ---- Admin Hub tile grid ---- */
+  .hub-mock {
+    width: 100%;
+    max-width: 240px;
+    background: var(--paper);
+    border: 1px solid var(--rule-soft);
+    padding: 12px;
+  }
+  .hub-head {
+    font-family: var(--font-mono);
+    font-size: 8.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule-soft);
+    margin-bottom: 10px;
+    display: flex; justify-content: space-between;
+  }
+  .hub-head .role { color: var(--accent); font-weight: 600; }
+  .hub-tiles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+  }
+  .hub-tile {
+    aspect-ratio: 1;
+    border: 1px solid var(--rule-soft);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    background: var(--paper-2);
+  }
+  .hub-tile.active {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .hub-tile.active .hub-abbr,
+  .hub-tile.active .hub-name { color: var(--paper); }
+  .hub-abbr {
+    font-family: var(--font-display);
+    font-size: 15px;
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: 0.02em;
+  }
+  .hub-name {
+    font-family: var(--font-mono);
+    font-size: 6px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 4px;
+    text-align: center;
+  }
+
+  /* ---- Approval workflow stepper ---- */
+  .appr-mock {
+    width: 100%;
+    max-width: 320px;
+    background: var(--paper);
+    border: 1px solid var(--rule-soft);
+    padding: 16px 18px;
+  }
+  .appr-head {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    margin-bottom: 22px;
+  }
+  .appr-stepper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+    position: relative;
+    margin-bottom: 18px;
+  }
+  .appr-stepper::before {
+    content: "";
+    position: absolute;
+    top: 7px;
+    left: 12.5%;
+    right: 12.5%;
+    height: 1px;
+    background: var(--rule);
+    z-index: 0;
+  }
+  .appr-step {
+    position: relative;
+    display: flex; flex-direction: column; align-items: center;
+    z-index: 1;
+  }
+  .appr-dot {
+    width: 15px; height: 15px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 50%;
+    margin-bottom: 8px;
+    box-shadow: 0 0 0 4px var(--paper);
+  }
+  .appr-dot.done {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .appr-dot.active {
+    background: var(--paper);
+    border: 2px solid var(--accent);
+  }
+  .appr-lbl {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+    line-height: 1.2;
+  }
+  .appr-lbl.current { color: var(--accent); font-weight: 700; }
+  .appr-status {
+    background: var(--accent-tint);
+    padding: 10px 12px;
+    font-family: var(--font-body);
+    font-size: 10.5px;
+    color: var(--ink);
+    line-height: 1.45;
+    border-left: 2px solid var(--accent);
+  }
+  .appr-status b { color: var(--accent); font-weight: 700; }
+
+  /* ---- Contractor Hub list ---- */
+  .ch-mock {
+    width: 100%;
+    max-width: 320px;
+    background: var(--paper);
+    border: 1px solid var(--rule-soft);
+    padding: 12px 14px;
+  }
+  .ch-head {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule-soft);
+    margin-bottom: 10px;
+  }
+  .ch-head .live {
+    color: var(--accent);
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .ch-head .live::before {
+    content: ""; width: 5px; height: 5px; background: var(--accent);
+    border-radius: 50%;
+  }
+  .ch-list { list-style: none; margin: 0; padding: 0; }
+  .ch-item {
+    padding: 6px 0;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 10px;
+    align-items: center;
+    font-size: 10.5px;
+    color: var(--ink);
+    border-top: 1px solid var(--rule-soft);
+    font-family: var(--font-body);
+  }
+  .ch-item:first-child { border-top: 0; }
+  .ch-phone {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--muted);
+  }
+  .ch-pill {
+    font-family: var(--font-mono);
+    font-size: 7px;
+    letter-spacing: 0.14em;
+    padding: 2px 5px;
+    background: var(--debit);
+    color: var(--paper);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .ch-more {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-top: 8px;
+    margin-top: 4px;
+    border-top: 1px solid var(--rule-soft);
+    text-align: center;
+  }
+
+  /* ---- Team Sales bar chart ---- */
+  .ts-mock {
+    width: 100%;
+    max-width: 320px;
+    background: var(--paper);
+    border: 1px solid var(--rule-soft);
+    padding: 12px 14px;
+  }
+  .ts-head {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    margin-bottom: 4px;
+  }
+  .ts-head .period { color: var(--accent); font-weight: 700; }
+  .ts-total {
+    font-family: var(--font-mono);
+    font-size: 8.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--rule-soft);
+    margin-bottom: 12px;
+  }
+  .ts-total b {
+    color: var(--ink);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
+    margin-left: 0.4em;
+  }
+  .ts-rows { display: flex; flex-direction: column; gap: 9px; }
+  .ts-row {
+    display: grid;
+    grid-template-columns: 74px 1fr 48px;
+    gap: 10px;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+  }
+  .ts-name { color: var(--ink); }
+  .ts-bar {
+    height: 6px;
+    background: var(--rule-soft);
+    position: relative;
+  }
+  .ts-fill {
+    position: absolute; left: 0; top: 0; bottom: 0;
+    background: var(--accent);
+  }
+  .ts-amt {
+    text-align: right;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- Academic grid ---------- */
+
+  .uni-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+  }
+  @media (min-width: 720px) {
+    .uni-grid { grid-template-columns: 1fr 1fr; gap: 1.75rem; }
+  }
+
+  .uni-case {
+    background: var(--paper-2);
+    border: 1px solid var(--rule-soft);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .uni-mock {
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule-soft);
+    padding: clamp(1.25rem, 2vw, 1.75rem);
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: auto;
+  }
+
+  .uni-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    flex: 1;
+  }
+  .uni-body .u-kind {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .uni-body h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.35rem;
+    line-height: 1.15;
+    margin: 0;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  .uni-body p {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+    color: var(--ink);
+    flex: 1;
+  }
+  .uni-body .u-tags {
+    display: flex; flex-wrap: wrap; gap: 0.3rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--rule-soft);
+    margin-top: 0.25rem;
+  }
+  .uni-body .u-tags .tag {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-2);
+    padding: 0.2rem 0.5rem;
+    background: var(--paper);
+    border: 1px solid var(--rule-soft);
+  }
+
+  /* ---- Phone frame (Dental) ---- */
+
+  .phone-mock {
+    --brand: #3E8272;
+    width: 195px;
+    aspect-ratio: 9 / 18;
+    background: #1F1B14;
+    border-radius: 22px;
+    padding: 7px;
+    position: relative;
+    box-shadow: 0 10px 30px -12px rgba(31, 27, 20, 0.35);
+  }
+  .phone-mock::before {
+    content: "";
+    position: absolute;
+    top: 12px; left: 50%;
+    transform: translateX(-50%);
+    width: 46px; height: 12px;
+    background: #1F1B14;
+    border-radius: 0 0 8px 8px;
+    z-index: 2;
+  }
+  .phone-screen {
+    background: #F5F0DE;
+    border-radius: 15px;
+    height: 100%;
+    padding: 24px 12px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow: hidden;
+  }
+  .dt-header {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--brand);
+  }
+  .dt-header .dt-logo { font-weight: 700; }
+  .dt-profile {
+    display: flex; align-items: center; gap: 8px;
+    padding: 4px 0;
+  }
+  .dt-avatar {
+    width: 30px; height: 30px;
+    background: var(--brand);
+    color: #F5F0DE;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display);
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .dt-name {
+    font-family: var(--font-display);
+    font-size: 12px;
+    color: #1F1B14;
+    line-height: 1.2;
+  }
+  .dt-streak {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    letter-spacing: 0.06em;
+    color: var(--brand);
+    margin-top: 1px;
+  }
+  .dt-reminder {
+    background: var(--brand);
+    color: #F5F0DE;
+    padding: 8px 10px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .dt-label {
+    font-family: var(--font-mono);
+    font-size: 7px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+  .dt-task {
+    font-family: var(--font-display);
+    font-size: 14px;
+    line-height: 1.1;
+  }
+  .dt-cta {
+    align-self: flex-start;
+    background: transparent;
+    color: #F5F0DE;
+    border: 1px solid rgba(245, 240, 222, 0.45);
+    padding: 3px 7px;
+    font-family: var(--font-mono);
+    font-size: 7px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 3px;
+    cursor: default;
+  }
+  .dt-week {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
+    margin-top: 2px;
+  }
+  .dt-day {
+    aspect-ratio: 1;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 8px;
+    border: 1px solid #C4BDA9;
+    color: #7A7266;
+    border-radius: 3px;
+  }
+  .dt-day.done {
+    background: var(--brand);
+    color: #F5F0DE;
+    border-color: var(--brand);
+  }
+  .dt-day.today {
+    border-color: var(--brand);
+    color: var(--brand);
+    font-weight: 700;
+  }
+  .dt-badges {
+    display: flex; gap: 6px; justify-content: center; margin-top: 4px;
+  }
+  .dt-badge {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    border: 1px solid #C4BDA9;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    color: #C4BDA9;
+    background: #F5F0DE;
+  }
+  .dt-badge.earned {
+    background: var(--brand);
+    color: #F5F0DE;
+    border-color: var(--brand);
+  }
+
+  /* ---- Kanban (Task Management) ---- */
+
+  .tm-board {
+    --brand: var(--accent);
+    width: 100%;
+    max-width: 400px;
+    background: var(--paper);
+    border: 1px solid var(--rule-soft);
+    font-family: var(--font-body);
+    padding: 12px;
+  }
+  .tm-head {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--rule-soft);
+    margin-bottom: 12px;
+  }
+  .tm-head .tm-ping { color: var(--brand); font-weight: 600; }
+  .tm-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 6px;
+    align-items: start;
+  }
+  .tm-col-head {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .tm-col-head b { color: var(--ink); font-weight: 700; }
+  .tm-card {
+    background: var(--paper-2);
+    border: 1px solid var(--rule-soft);
+    padding: 6px 8px;
+    margin-bottom: 6px;
+  }
+  .tm-card.highlight {
+    border-color: var(--brand);
+    box-shadow: 0 0 0 1px var(--brand);
+    background: var(--paper);
+  }
+  .tm-card.done { opacity: 0.55; }
+  .tm-lbl {
+    font-family: var(--font-mono);
+    font-size: 7px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 3px;
+  }
+  .tm-lbl.backend { color: var(--brand); }
+  .tm-title {
+    font-family: var(--font-body);
+    font-size: 10px;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .tm-meta {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .tm-meta b { color: var(--brand); }
+
+  /* ---- IoT dashboard (Missing Child) ---- */
+
+  .mc-mock {
+    --brand: #B65E22;
+    width: 100%;
+    max-width: 400px;
+    background: var(--paper);
+    border: 1px solid var(--rule-soft);
+    padding: 12px;
+  }
+  .mc-head {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule-soft);
+    margin-bottom: 10px;
+  }
+  .mc-status {
+    color: var(--accent);
+    display: inline-flex; align-items: center; gap: 4px;
+    font-weight: 600;
+  }
+  .mc-status::before {
+    content: ""; width: 6px; height: 6px; background: var(--accent);
+    border-radius: 50%;
+  }
+  .mc-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 8px;
+    align-items: stretch;
+  }
+  .mc-map {
+    aspect-ratio: 1;
+    background:
+      linear-gradient(to right, var(--rule-soft) 1px, transparent 1px) 0 0 / 20px 20px,
+      linear-gradient(to bottom, var(--rule-soft) 1px, transparent 1px) 0 0 / 20px 20px,
+      var(--paper-2);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--rule-soft);
+  }
+  .mc-pin {
+    position: absolute;
+    top: 48%; left: 55%;
+    width: 11px; height: 11px;
+    background: var(--brand);
+    border-radius: 50%;
+    border: 3px solid var(--paper);
+    box-shadow: 0 0 0 1px var(--brand);
+    z-index: 2;
+    transform: translate(-50%, -50%);
+  }
+  .mc-radius {
+    position: absolute;
+    top: 48%; left: 55%;
+    width: 70px; height: 70px;
+    border: 1px dashed var(--brand);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.55;
+  }
+  .mc-coords {
+    position: absolute;
+    bottom: 4px; left: 4px;
+    font-family: var(--font-mono);
+    font-size: 7px;
+    color: var(--ink-2);
+    background: rgba(236, 230, 214, 0.9);
+    padding: 2px 5px;
+    letter-spacing: 0.02em;
+  }
+  .mc-tiles {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    gap: 5px;
+  }
+  .mc-tile {
+    padding: 5px 8px;
+    border: 1px solid var(--rule-soft);
+    display: flex; justify-content: space-between; align-items: center;
+    background: var(--paper-2);
+  }
+  .mc-tile.alert {
+    border-color: var(--accent);
+    background: var(--accent-tint);
+  }
+  .mc-k {
+    font-family: var(--font-mono);
+    font-size: 7px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .mc-v {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---- Homestay booking widget ---- */
+
+  .hs-mock {
+    --brand: var(--accent);
+    width: 100%;
+    max-width: 300px;
+    background: var(--paper);
+    border: 1px solid var(--rule-soft);
+  }
+  .hs-image {
+    aspect-ratio: 16 / 9;
+    background:
+      linear-gradient(180deg, #5D8272 0%, #4A6B5D 40%, #7A9E8E 100%),
+      var(--paper);
+    position: relative;
+    overflow: hidden;
+  }
+  .hs-image::after {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 40%;
+    background:
+      linear-gradient(180deg, transparent, rgba(31, 27, 20, 0.35));
+  }
+  .hs-image::before {
+    content: "";
+    position: absolute;
+    top: 30%; left: 20%; right: 20%; bottom: 15%;
+    background:
+      linear-gradient(180deg, #8B6644 0%, #6B4E32 55%, #4A3520 55%, #3D2C1A 100%);
+    clip-path: polygon(0 55%, 50% 0, 100% 55%, 100% 100%, 0 100%);
+    opacity: 0.85;
+  }
+  .hs-tag {
+    position: absolute;
+    bottom: 8px; left: 8px;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 7px;
+    z-index: 3;
+  }
+  .hs-body {
+    padding: 12px;
+  }
+  .hs-name {
+    font-family: var(--font-display);
+    font-size: 15px;
+    line-height: 1.2;
+    margin-bottom: 3px;
+    letter-spacing: -0.005em;
+  }
+  .hs-meta {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .hs-dates {
+    display: grid; grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--rule-soft);
+    margin-bottom: 8px;
+  }
+  .hs-date {
+    padding: 6px 8px;
+  }
+  .hs-date + .hs-date {
+    border-left: 1px solid var(--rule-soft);
+  }
+  .hs-date-k {
+    font-family: var(--font-mono);
+    font-size: 7px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .hs-date-v {
+    font-family: var(--font-display);
+    font-size: 12px;
+    color: var(--ink);
+    margin-top: 2px;
+  }
+  .hs-total {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 8px 0;
+    border-top: 1px solid var(--rule-soft);
+    border-bottom: 1px solid var(--rule-soft);
+    margin-bottom: 10px;
+    font-variant-numeric: tabular-nums;
+  }
+  .hs-total-k {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .hs-price {
+    font-family: var(--font-display);
+    font-size: 20px;
+    color: var(--brand);
+    letter-spacing: -0.01em;
+  }
+  .hs-price .cur {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    margin-right: 3px;
+    vertical-align: 0.3em;
+  }
+  .hs-reserve {
+    width: 100%;
+    background: var(--ink);
+    color: var(--paper);
+    border: 0;
+    padding: 8px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    cursor: default;
+  }
+
+  /* ---------- About & contact ---------- */
+
+  .about {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding-block: clamp(2.5rem, 5vw, 4rem);
+    border-top: 1px solid var(--rule);
+    margin-top: clamp(3rem, 5vw, 4.5rem);
+  }
+  @media (min-width: 800px) {
+    .about { grid-template-columns: 1fr 1fr; gap: 4rem; }
+  }
+
+  .about-col h3 {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 1.25rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .about .entry { padding-block: 0.85rem; border-top: 1px solid var(--rule-soft); }
+  .about .entry:first-of-type { border-top: 0; padding-top: 0; }
+  .about .entry-head { display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; }
+  .about .entry h4 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.05rem;
+    margin: 0;
+    text-wrap: balance;
+    line-height: 1.25;
+  }
+  .about .entry .yr {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .about .entry .org { font-size: 0.88rem; color: var(--ink-2); margin-top: 0.15rem; }
+  .about .entry p { font-family: var(--font-body); font-size: 0.9rem; line-height: 1.5; margin: 0.35rem 0 0; color: var(--ink-2); }
+  .about .entry .honors {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    margin-top: 0.35rem;
+  }
+
+  .toolkit {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 0.6rem 1rem;
+    margin-top: 0.5rem;
+  }
+  .toolkit dt {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-top: 0.15rem;
+    align-self: start;
+  }
+  .toolkit dd {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .activity-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+  }
+  .activity-list li {
+    padding: 0.5rem 0;
+    border-top: 1px solid var(--rule-soft);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.75rem;
+    align-items: baseline;
+    font-size: 0.88rem;
+    color: var(--ink);
+  }
+  .activity-list li:first-child { border-top: 0; }
+  .activity-list .yr {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+
+  /* ---------- Contact block ---------- */
+
+  .contact {
+    padding: clamp(2.5rem, 5vw, 4rem) 0 1rem;
+    border-top: 1px solid var(--rule);
+  }
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: end;
+  }
+  @media (min-width: 800px) {
+    .contact-inner { grid-template-columns: 1.5fr 1fr; gap: 3rem; }
+  }
+  .contact h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 1rem;
+    max-width: 20ch;
+    text-wrap: balance;
+  }
+  .contact h2 em { font-style: italic; color: var(--accent); }
+  .contact p {
+    font-family: var(--font-display);
+    font-size: 1.08rem;
+    line-height: 1.55;
+    margin: 0;
+    max-width: 30rem;
+    color: var(--ink);
+  }
+  .contact-side {
+    display: grid;
+    gap: 1rem;
+  }
+  .contact-side a {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    padding: 0.6rem 0;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    color: var(--ink);
+  }
+  .contact-side a:last-child { border-bottom: 1px solid var(--rule); }
+  .contact-side a .k {
+    font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+  }
+  .contact-side a:hover { color: var(--accent); }
+  .contact-side a:hover .k { color: var(--accent); }
+
+  .colophon {
+    margin-top: 2.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    a { transition: none; }
+  }
+</style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header" id="header">
-        <div class="container">
-            <div class="header-content">
-                <a href="#" class="logo">Haidah<span>Athirah</span></a>
-                
-<nav class="nav-menu" id="navMenu">
-    <a href="#profile" class="nav-link">Profile</a>
-    <a href="#education" class="nav-link">Education</a>
-    <a href="#work" class="nav-link">Work</a>
-    <a href="#projects" class="nav-link">Projects</a>
-    <a href="#certifications" class="nav-link">Certifications</a> <!-- Added this line -->
-    <a href="#contact" class="nav-link">Contact</a>
-</nav>
-                
-                <button class="mobile-menu-btn" id="mobileMenuBtn">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
-        </div>
-    </header>
 
-    <!-- PROFILE SECTION -->
-    <section class="profile-section" id="profile">
-        <div class="container">
-            <div class="profile-content">
-                <div class="profile-text">
-                    <span class="badge">Computer Science Graduate</span>
-                    <h1>Haidah <span>Athirah</span></h1>
-                    <p>A passionate Netcentric Computing graduate with hands-on experience in mobile and web development. Seeking opportunities to apply technical skills in innovative projects.</p>
-                    <div class="btn-group">
-                        <a href="#projects" class="btn btn-primary">
-                            <i class="fas fa-briefcase"></i> View Projects
-                        </a>
-                        <a href="#contact" class="btn btn-secondary">
-                            <i class="fas fa-envelope"></i> Contact Me
-                        </a>
-                    </div>
-                </div>
-                <div class="profile-image">
-                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1061&q=80" alt="Haidah Athirah">
-                </div>
-            </div>
-        </div>
-    </section>
+<main class="page">
 
-    <!-- EDUCATION SECTION -->
-    <section class="main-section" id="education">
-        <div class="container">
-            <div class="section-title">
-                <h2><i class="fas fa-graduation-cap"></i> Education</h2>
-                <p>My academic journey and qualifications</p>
-            </div>
-            
-            <div class="horizontal-scroll-section">
-                <div class="scroll-container" id="educationScroll">
-                                       <!-- Degree -->
-                    <div class="scroll-card">
-                        <div class="card-image">
-                            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="University">
-                        </div>
-                        <div class="card-content">
-                            <h3>Bachelor of Computer Science (Hons.)</h3>
-                            <span class="card-date">2022 – 2026</span>
-                            <p><strong>Universiti Teknologi MARA (UiTM), Shah Alam</strong><br>
-                            Netcentric Computing | CGPA: 3.28<br>
-                            <em>Dean's List Award (Semester 4, 5 & 6)</em><br>
-                            Specialization in web and mobile development</p>
-                            <div class="card-tags">
-                            </div>
-                        </div>
-                    </div>
-    
-                    <!-- Diploma/Matriculation -->
-                    <div class="scroll-card">
-                        <div class="card-image">
-                            <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Matriculation">
-                        </div>
-                        <div class="card-content">
-                            <h3>Physical Science (Module 2)</h3>
-                            <span class="card-date">2020 – 2022</span>
-                            <p><strong>Kolej Matrikulasi Selangor (KMS)</strong><br>
-                            CGPA: 3.57<br>
-                            <em>MUET Band 4</em><br>
-                            Physics, Chemistry, and Computer Science</p>
-                            <div class="card-tags">
-                            </div>
-                        </div>
-                    </div>
-                     <!-- School -->
-                    <div class="scroll-card">
-                        <div class="card-image">
-                            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="School">
-                        </div>
-                        <div class="card-content">
-                            <h3>Secondary School</h3>
-                            <span class="card-date">2015 - 2019</span>
-                            <p><strong>Sekolah Menengah Kebangsaan Lembah Keramat</strong><br>                            2A, 3A-, 1B+, 1B, 1C+, 1D<br>Elective Subject : Chemistry, Physics, Additional Mathematics</p>
-                            <div class="card-tags">
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-                <button class="scroll-arrow left" onclick="scrollLeft('educationScroll')">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="scroll-arrow right" onclick="scrollRight('educationScroll')">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-        </div>
-    </section>
+  <header class="topnav">
+    <span class="brand">H. A. Hamzah &nbsp;·&nbsp; Portfolio</span>
+    <nav>
+      <a href="#work">Work</a>
+      <a href="#academic">Academic</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <span class="status">Open to roles</span>
+  </header>
 
-    <!-- WORK EXPERIENCE SECTION -->
-    <section class="main-section" id="work" style="background: #f8f9fa;">
-        <div class="container">
-            <div class="section-title">
-                <h2><i class="fas fa-briefcase"></i> Work Experience</h2>
-                <p>Professional journey and roles</p>
-            </div>
-            
-            <div class="horizontal-scroll-section">
-                <div class="scroll-container" id="workScroll">
-                                       <!-- IT Operations -->
-                    <div class="scroll-card">
-                        <div class="card-image">
-                            <img src="images/iftar.jpg">
-                        </div>
-                        <div class="card-content">
-                            <h3>IT Operations - Marketing System</h3>
-                            <span class="card-date">5/1/2026 - Present</span>
-                            <p><strong>SK Rich Trading Sdn Bhd</strong><br>
-                            • Developing marketing system to increase sales<br>
-                            • Implementing customer engagement features<br>
-                            • Optimizing system performance<br>
-                            • Integrating analytics and reporting tools</p>
-                            <div class="card-tags">
-                                <span class="tag">Full-time</span>
-                                <span class="tag">Marketing System</span>
-                                <span class="tag">Development</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Internship -->
-                    <div class="scroll-card">
-                        <div class="card-image">
-                            <img src="images/bb.jpg">
-                        </div>
-                        <div class="card-content">
-                            <h3>IT Department Intern</h3>
-                            <span class="card-date">12/9/2025 - 13/12/2025</span>
-                            <p><strong>SK Rich Trading Sdn Bhd</strong><br>
-                            • Developed and optimized internal systems<br>
-                            • Assisted in database management<br>
-                            • Created system documentation<br>
-                            • Supported IT operations and troubleshooting</p>
-                            <div class="card-tags">
-                                <span class="tag">Internship</span>
-                                <span class="tag">IT Support</span>
-                                <span class="tag">Database</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-                <button class="scroll-arrow left" onclick="scrollLeft('workScroll')">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="scroll-arrow right" onclick="scrollRight('workScroll')">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-        </div>
-    </section>
 
-    <!-- WORK PROJECTS SECTION -->
-    <section class="main-section" id="projects">
-        <div class="container">
-            <div class="section-title">
-                <h2><i class="fas fa-laptop-code"></i> Work Projects</h2>
-                <p>Professional projects developed during work</p>
-            </div>
-            
-            <div class="horizontal-scroll-section">
-                <div class="scroll-container" id="workProjectsScroll">
-                    <!-- Valoobuy -->
-                    <div class="scroll-card">
-                        <div class="card-image">
-                            <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80" alt="Valoobuy">
-                        </div>
-                        <div class="card-content">
-                            <h3>VALOOBUY Contractor Hub</h3>
-                            <span class="card-date">2025 - Present</span>
-                            <p>E-commerce platform for registered contractors with custom pricing and affiliate sales system.</p>
-                            <p><strong>Features:</strong><br>
-                            • Contractor registration & verification<br>
-                            • Custom pricing based on volume<br>
-                            • Affiliate sales tracking<br>
-                            • Order management system<br>
-                            • Billplz Payment Integration<br>
-                            • Generated thousands of ringgit in revenue<br></p>
-                            <div class="card-tags">
-                                <span class="tag">PHP</span>
-                                <span class="tag">Google App Script</span>
-                                <span class="tag">Boost.Space</span>
-                                <span class="tag">Google Sheet</span>
-                                <span class="tag">Canva</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Sales Page -->
-                    <div class="scroll-card">
-                        <div class="card-image">
-                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1115&q=80" alt="Sales Page">
-                        </div>
-                        <div class="card-content">
-                            <h3>Sales & Landing Pages</h3>
-                            <span class="card-date">2025 - Present</span>
-                            <p>Multiple sales and landing pages for marketing campaigns and product promotions.</p>
-                            <p><strong>Features:</strong><br>
-                            • Social media paid advertisement purpose<br>
-                            • Integration with Boost.space for direct communication with customer<br>
-                            • Integration with Google App Script and Google Sheet for stock syncing and handle order<br>
-                            • Design the product and design sales page through Canva<br>
-                            <div class="card-tags">
-                                <span class="tag">HTML/CSS/Javascript/PHP</span>
-                                <span class="tag">Google App Script</span>
-                                <span class="tag">Google Sheet</span>
-                                <span class="tag">Boost.space</span>
-                                <span class="tag">Canva</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="scroll-arrow left" onclick="scrollLeft('workProjectsScroll')">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="scroll-arrow right" onclick="scrollRight('workProjectsScroll')">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- UNIVERSITY PROJECTS SECTION -->
-    <section class="main-section" id="university-projects" style="background: #f8f9fa;">
-        <div class="container">
-            <div class="section-title">
-                <h2><i class="fas fa-university"></i> University Projects</h2>
-                <p>Academic projects and coursework</p>
-            </div>
-            
-            <div class="horizontal-scroll-section">
-                <div class="scroll-container" id="uniProjectsScroll">
-                                        <!-- Dental Health Tracker -->
-                    <div class="scroll-card">
-                        <div class="card-image">
-                            <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Dental Health">
-                        </div>
-                        <div class="card-content">
-                            <h3>Dental Health Tracker</h3>
-                            <span class="card-date">2024</span>
-                            <p>Mobile application using reminders and gamification to engage parents in children's dental health.</p>
-                            <p><strong>Features:</strong><br>
-                            • Brushing reminders<br>
-                            • Achievement badges<br>
-                            • Progress tracking<br>
-                            • Educational content<br>
-                            • Parent dashboard</p>
-                            <div class="card-tags">
-                                <span class="tag">Flutter</span>
-                                <span class="tag">Firebase</span>
-                                <span class="tag">Mobile App</span>
-                                <span class="tag">Healthcare</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Task Management -->
-                    <div class="scroll-card">
-                        <div class="card-image">
-                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Task Management">
-                        </div>
-                        <div class="card-content">
-                            <h3>Task Management System</h3>
-                            <span class="card-date">2024</span>
-                            <p>Backend development for a comprehensive task management system with web and mobile integration.</p>
-                            <p><strong>Features:</strong><br>
-                            • User authentication & authorization<br>
-                            • Task creation & assignment<br>
-                            • Progress tracking<br>
-                            • Notification system<br>
-                            • API for mobile app</p>
-                            <div class="card-tags">
-                                <span class="tag">Laravel</span>
-                                <span class="tag">API</span>
-                                <span class="tag">Backend</span>
-                                <span class="tag">MySQL</span>
-                            </div>
-                        </div>
-                    </div>
-                
-                    
-                    <!-- Missing Child Detector -->
-                    <div class="scroll-card">
-                        <div class="card-image">
-                            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="IoT Device">
-                        </div>
-                        <div class="card-content">
-                            <h3>Missing Child Detector (IoT)</h3>
-                            <span class="card-date">2023</span>
-                            <p>IoT solution using GPS and GSM technologies for child safety with real-time tracking capabilities.</p>
-                            <p><strong>Features:</strong><br>
-                            • GPS location tracking<br>
-                            • GSM communication<br>
-                            • Panic button<br>
-                            • Real-time alerts<br>
-                            • Mobile app integration</p>
-                            <div class="card-tags">
-                                <span class="tag">IoT</span>
-                                <span class="tag">Arduino</span>
-                                <span class="tag">GPS</span>
-                                <span class="tag">GSM</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="scroll-arrow left" onclick="scrollLeft('uniProjectsScroll')">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="scroll-arrow right" onclick="scrollRight('uniProjectsScroll')">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-        </div>
-    </section>
-<!-- CERTIFICATION SECTION -->
-<section class="main-section" id="certifications" style="background: #f8f9fa;">
-    <div class="container">
-        <div class="section-title">
-            <h2><i class="fas fa-certificate"></i> Certifications</h2>
-            <p>Professional certifications and training</p>
-        </div>
-        
-        <div class="horizontal-scroll-section">
-            <div class="scroll-container" id="certificationsScroll">
-                <!-- Google Analytics Certification -->
-                <div class="scroll-card">
-                    <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Google Analytics">
-                    </div>
-                    <div class="card-content">
-                        <h3>Google Analytics Certification</h3>
-                        <span class="card-date">2025</span>
-                        <p><strong>Google Skillshop</strong><br>
-                        • Advanced data analysis and reporting<br>
-                        • Conversion tracking implementation<br>
-                        • E-commerce analytics<br>
-                        • User behavior analysis<br>
-                        • Campaign performance measurement</p>
-                        <div class="card-tags">
-                            <span class="tag">Google Analytics</span>
-                            <span class="tag">Data Analysis</span>
-                            <span class="tag">Digital Marketing</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Google Ads Certification -->
-                <div class="scroll-card">
-                    <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1115&q=80" alt="Google Ads">
-                    </div>
-                    <div class="card-content">
-                        <h3>Google Ads Certification</h3>
-                        <span class="card-date">2025</span>
-                        <p><strong>Google Skillshop</strong><br>
-                        • Search Advertising<br>
-                        • Display Advertising<br>
-                        • Video Advertising<br>
-                        • Shopping Advertising<br>
-                        • App Advertising<br>
-                        • Measurement and optimization</p>
-                        <div class="card-tags">
-                            <span class="tag">Google Ads</span>
-                            <span class="tag">PPC</span>
-                            <span class="tag">Digital Advertising</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Flutter Development -->
-                <div class="scroll-card">
-                    <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Flutter Development">
-                    </div>
-                    <div class="card-content">
-                        <h3>Flutter Development</h3>
-                        <span class="card-date">2024</span>
-                        <p><strong>Udemy</strong><br>
-                        • Cross-platform mobile development<br>
-                        • Dart programming language<br>
-                        • State management (Provider, Bloc)<br>
-                        • Firebase integration<br>
-                        • REST API integration<br>
-                        • UI/UX design for mobile</p>
-                        <div class="card-tags">
-                            <span class="tag">Flutter</span>
-                            <span class="tag">Mobile Development</span>
-                            <span class="tag">Dart</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Laravel Framework -->
-                <div class="scroll-card">
-                    <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Laravel">
-                    </div>
-                    <div class="card-content">
-                        <h3>Laravel Framework</h3>
-                        <span class="card-date">2024</span>
-                        <p><strong>Codecademy</strong><br>
-                        • MVC architecture<br>
-                        • Eloquent ORM<br>
-                        • RESTful API development<br>
-                        • Authentication & Authorization<br>
-                        • Database migrations<br>
-                        • Testing with PHPUnit</p>
-                        <div class="card-tags">
-                            <span class="tag">Laravel</span>
-                            <span class="tag">PHP</span>
-                            <span class="tag">Backend Development</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- UI/UX Design -->
-                <div class="scroll-card">
-                    <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="UI/UX Design">
-                    </div>
-                    <div class="card-content">
-                        <h3>UI/UX Design Fundamentals</h3>
-                        <span class="card-date">2023</span>
-                        <p><strong>Coursera</strong><br>
-                        • User research methods<br>
-                        • Wireframing & prototyping<br>
-                        • Interaction design principles<br>
-                        • Visual design fundamentals<br>
-                        • Usability testing<br>
-                        • Design systems</p>
-                        <div class="card-tags">
-                            <span class="tag">UI/UX</span>
-                            <span class="tag">Figma</span>
-                            <span class="tag">Design Thinking</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button class="scroll-arrow left" onclick="scrollLeft('certificationsScroll')">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="scroll-arrow right" onclick="scrollRight('certificationsScroll')">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-        </div>
+  <section class="hero">
+    <div>
+      <div class="hero-eyebrow">Portfolio &nbsp;·&nbsp; MMXXVI</div>
+      <h1 class="hero-title">I build systems that businesses <em>actually run.</em></h1>
     </div>
-</section>
-    <!-- CONTACT SECTION -->
-    <section class="main-section" id="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2><i class="fas fa-envelope"></i> Contact</h2>
-                <p>Let's connect and discuss opportunities</p>
-            </div>
-            
-            <div class="contact-form">
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" name="subject" class="form-control" placeholder="What is this regarding?" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" class="form-control" placeholder="Your message here..." required></textarea>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">
-                        <i class="fas fa-paper-plane"></i> Send Message
-                    </button>
-                </form>
-            </div>
-            
-            <div style="text-align: center; margin-top: 40px;">
-                <div class="social-links" style="justify-content: center;">
-                    <a href="https://www.linkedin.com/in/haidah-athirah-a90526305/" class="social-link" target="_blank">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a href="https://www.instagram.com/haidahatrh_" class="social-link" target="_blank">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" class="social-link">
-                        <i class="fab fa-github"></i>
-                    </a>
-                </div>
-                <p style="margin-top: 20px; color: var(--text-secondary);">
-                    <i class="fas fa-envelope"></i> haidahatrh@gmail.com<br>
-                    <i class="fas fa-phone"></i> (+60) 19-215 2972
-                </p>
-            </div>
+    <div class="hero-lower">
+      <p class="hero-lead">Computer Science (Hons.) graduate from UiTM Shah Alam. For the past three years I've been the developer behind <strong>three internal systems</strong> in daily use at a Malaysian building-materials retailer &mdash; a multi-branch cashier suite, a B2B contractor storefront, and a cross-branch order desk.</p>
+
+      <dl class="hero-meta">
+        <div class="row"><span class="k">Based</span><span class="v">Ampang, Selangor</span></div>
+        <div class="row"><span class="k">Focus</span><span class="v">Mobile &amp; web</span></div>
+        <div class="row"><span class="k">Email</span><span class="v"><a href="mailto:haidahatrh@gmail.com">haidahatrh@gmail.com</a></span></div>
+        <div class="row"><span class="k">LinkedIn</span><span class="v"><a href="https://linkedin.com/in/haidah-athirah-a90526305" target="_blank" rel="noopener">/haidah-athirah</a></span></div>
+      </dl>
+    </div>
+  </section>
+
+
+  <div class="work-section-head" id="work">
+    <span class="eyebrow">Selected Work &nbsp;·&nbsp; In Production</span>
+    <p>Three internal systems shipped for SK Rich Trading Sdn. Bhd. between 2023 and today. All are in daily use across the retail group's Malaysian branches.</p>
+  </div>
+
+
+  <!-- ================== Case Study 01 — POS ================== -->
+  <article class="case" id="case-01">
+    <div class="case-marker"><b>Case study № 01</b> Retail cashier suite &nbsp;·&nbsp; 2023 &ndash; present &nbsp;·&nbsp; Live, internal, multi-branch</div>
+
+    <h2 class="case-title">A cashier suite built to survive an <em>eight-hour retail shift.</em></h2>
+
+    <div class="mock-frame">
+      <div class="receipt" aria-hidden="true">
+        <h4>VALOOBUY POS</h4>
+        <div class="subhead">WHKP &mdash; Kuala Lumpur</div>
+        <div class="r-meta"><span>Cashier: A. HAMZAH</span><span>02 / 10 / 26</span></div>
+        <div class="r-meta"><span>Terminal 3</span><span>14 : 32</span></div>
+        <div class="r-meta"><span>Bill #WHKP-002417</span><span>Walk-in</span></div>
+        <hr>
+        <div class="r-item">
+          <div class="name">SPC FLOORING 4MM</div>
+          <div class="line"><span>&nbsp;&nbsp;15 pcs &times; 28.50</span><span>427.50</span></div>
         </div>
+        <div class="r-item">
+          <div class="name">PVC PANEL 12MM WHITE</div>
+          <div class="line"><span>&nbsp;&nbsp;&nbsp;3 pcs &times; 42.00</span><span>126.00</span></div>
+        </div>
+        <div class="r-item">
+          <div class="name">FLUTED PANEL OAK</div>
+          <div class="line"><span>&nbsp;&nbsp;&nbsp;8 pcs &times; 65.00</span><span>520.00</span></div>
+        </div>
+        <hr>
+        <div class="r-line"><span>SUBTOTAL</span><span>1,073.50</span></div>
+        <div class="r-line"><span>SST 6%</span><span>&nbsp;&nbsp;&nbsp;64.41</span></div>
+        <hr>
+        <div class="r-line r-total"><span>TOTAL</span><span><b>RM&nbsp;1,137.91</b></span></div>
+        <hr>
+        <div class="r-line"><span>CASH TENDERED</span><span>1,200.00</span></div>
+        <div class="r-line"><span>CHANGE</span><span>&nbsp;&nbsp;&nbsp;62.09</span></div>
+        <hr>
+        <div class="r-foot">Held bills: 2 &nbsp;·&nbsp; Voucher: PROMO10<br>Training mode: OFF</div>
+        <div class="r-barcode">
+          <span class="w"></span><span class="g"></span><span></span><span class="g"></span>
+          <span class="w"></span><span class="g"></span><span></span><span></span><span class="g"></span>
+          <span class="w"></span><span class="g"></span><span></span><span class="g"></span>
+          <span></span><span class="g"></span><span class="w"></span><span></span><span class="g"></span>
+          <span></span><span class="g"></span><span class="w"></span><span class="g"></span>
+          <span></span><span class="g"></span><span class="w"></span><span class="g"></span>
+          <span></span><span class="g"></span><span class="w"></span><span class="g"></span>
+          <span></span><span class="g"></span><span></span>
+        </div>
+        <div class="r-foot">Thank you &mdash; V-HUB</div>
+      </div>
+    </div>
+
+    <div class="case-copy">
+      <div>
+        <p>A full point-of-sale system for a chain of building-materials outlets, covering both walk-in retail and credit-managed contractor purchases. It's designed around the daily rhythm of a Malaysian branch &mdash; morning cashier declaration, held bills across the day, closing variance at night.</p>
+        <p>Under a single admin hub sit seven modules covering the whole floor: <b>POS</b> for sales, <b>RA</b> for order tickets and the panel calculator, <b>CMF</b> for cashier &amp; cash flow, <b>IFS</b> for pickup fulfilment, <b>SCD</b> for stock cards, <b>BSM</b> for cross-branch monitoring, and <b>Admin</b> for the back-office. A parallel <b>Training Mode</b> with its own database tables lets new cashiers rehearse against realistic data without touching production.</p>
+      </div>
+      <dl class="case-side">
+        <dt>Client</dt>
+        <dd>SK Rich Trading Sdn. Bhd.</dd>
+        <dt>Role</dt>
+        <dd>Lead developer, IT operations</dd>
+        <dt>Stack</dt>
+        <dd>
+          <div class="tags">
+            <span class="tag">PHP</span>
+            <span class="tag">Supabase</span>
+            <span class="tag">Tailwind</span>
+            <span class="tag">Google Apps Script</span>
+            <span class="tag">Vanilla JS</span>
+          </div>
+        </dd>
+        <dt>Integrations</dt>
+        <dd>QZ Tray (thermal print &amp; cash drawer), Alaya ERP, Google Sheets</dd>
+        <dt>Branches</dt>
+        <dd>WHKP, STPK, SA15, IPOH, MSAI, SNWG, SKEM, KUTN &mdash; eight sites, Malaysia-wide.</dd>
+      </dl>
+    </div>
+
+    <section class="modules">
+      <h3 class="modules-head">The system, module by module</h3>
+      <div class="modules-grid">
+
+        <!-- Module: CMF -->
+        <article class="module">
+          <div class="module-mock">
+            <div class="cmf-mock" aria-hidden="true">
+              <div class="cmf-head">
+                <b>DAILY CLOSING</b>
+                <div class="cmf-sub">WHKP &middot; 02.10.26 &middot; A. Hamzah</div>
+              </div>
+              <table class="cmf-table">
+                <thead>
+                  <tr>
+                    <th>Method</th>
+                    <th>System</th>
+                    <th>Actual</th>
+                    <th>Var.</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Cash</td>
+                    <td>2,450.00</td>
+                    <td>2,438.00</td>
+                    <td class="cmf-neg">-12.00</td>
+                  </tr>
+                  <tr>
+                    <td>Card</td>
+                    <td>1,890.00</td>
+                    <td>1,890.00</td>
+                    <td>0.00</td>
+                  </tr>
+                  <tr>
+                    <td>E-wallet</td>
+                    <td>450.00</td>
+                    <td>450.00</td>
+                    <td>0.00</td>
+                  </tr>
+                  <tr class="cmf-total">
+                    <td>TOTAL</td>
+                    <td>4,790.00</td>
+                    <td>4,778.00</td>
+                    <td class="cmf-neg">-12.00</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="module-body">
+            <span class="m-tag">CMF &middot; Cashier Management Flow</span>
+            <h4>Daily closing, variance-checked to the sen</h4>
+            <p>Monthly cashier declaration form. Daily closing statement with variance calculated against system totals per payment type &mdash; cash, card, e-wallet. A cash-statement ledger and deposit tracking linked to bank-in receipts, so every ringgit is accounted for at end-of-shift.</p>
+          </div>
+        </article>
+
+        <!-- Module: Stock -->
+        <article class="module">
+          <div class="module-mock">
+            <div class="sc-mock" aria-hidden="true">
+              <div class="sc-head">
+                <div class="sc-sku">SKU 4028 &middot; WHKP</div>
+                <div class="sc-name">Fluted Panel &mdash; Oak</div>
+              </div>
+              <table class="sc-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Doc</th>
+                    <th>In</th>
+                    <th>Out</th>
+                    <th>Bal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>01/10</td>
+                    <td>OPN</td>
+                    <td class="sc-in">200</td>
+                    <td>&mdash;</td>
+                    <td>200</td>
+                  </tr>
+                  <tr>
+                    <td>02/10</td>
+                    <td>#2417</td>
+                    <td>&mdash;</td>
+                    <td class="sc-out">15</td>
+                    <td>185</td>
+                  </tr>
+                  <tr>
+                    <td>02/10</td>
+                    <td>#2418</td>
+                    <td>&mdash;</td>
+                    <td class="sc-out">8</td>
+                    <td>177</td>
+                  </tr>
+                  <tr>
+                    <td>02/10</td>
+                    <td>&rarr;STPK</td>
+                    <td>&mdash;</td>
+                    <td class="sc-out">20</td>
+                    <td>157</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="sc-footer">
+                <span class="k">Balance</span>
+                <span class="v">157 pcs</span>
+              </div>
+            </div>
+          </div>
+          <div class="module-body">
+            <span class="m-tag">IFS &middot; SCD &middot; BSM</span>
+            <h4>Inventory across every branch, live</h4>
+            <p>IFS pickup fulfilment tracks customer orders from raise to hand-over. SCD stock cards log every in, out, transfer, and stock-take. BSM lets branches request stock from one another and monitor group-wide levels. Balance updates flow through to the POS in real time, so cashiers never sell what isn't there.</p>
+          </div>
+        </article>
+
+        <!-- Module: Admin hub -->
+        <article class="module">
+          <div class="module-mock">
+            <div class="hub-mock" aria-hidden="true">
+              <div class="hub-head">
+                <span>V-Hub</span>
+                <span class="role">Admin</span>
+              </div>
+              <div class="hub-tiles">
+                <div class="hub-tile active"><span class="hub-abbr">POS</span><span class="hub-name">Sales</span></div>
+                <div class="hub-tile"><span class="hub-abbr">RA</span><span class="hub-name">Tickets</span></div>
+                <div class="hub-tile"><span class="hub-abbr">CMF</span><span class="hub-name">Cash</span></div>
+                <div class="hub-tile"><span class="hub-abbr">IFS</span><span class="hub-name">Fulfil</span></div>
+                <div class="hub-tile"><span class="hub-abbr">SCD</span><span class="hub-name">Stock</span></div>
+                <div class="hub-tile"><span class="hub-abbr">BSM</span><span class="hub-name">Branch</span></div>
+                <div class="hub-tile"><span class="hub-abbr">Adm</span><span class="hub-name">Admin</span></div>
+                <div class="hub-tile"><span class="hub-abbr">Rpt</span><span class="hub-name">Reports</span></div>
+                <div class="hub-tile"><span class="hub-abbr">Trn</span><span class="hub-name">Training</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="module-body">
+            <span class="m-tag">Admin &middot; RA &middot; Training</span>
+            <h4>65 admin endpoints under one roof</h4>
+            <p>Users, roles, and per-cashier permission flags. Contractors, packages, promotions, price levels, preorder campaigns, lucky-draw entries, voucher generation. Cash-drawer trigger, terminal monitor, sync-health. Sales, performance, insight, and survey reports. Alongside it, RA order tickets (floor staff issue a QR ticket the cashier loads) and a panel-quantity calculator for fluted / PVC / SPC waste-optimised piece counts.</p>
+          </div>
+        </article>
+
+        <!-- Module: Hardware & integrations -->
+        <article class="module text-only">
+          <div class="module-mock"></div>
+          <div class="module-body">
+            <span class="m-tag">Hardware &middot; Integrations</span>
+            <h4>What the cashier terminal talks to</h4>
+            <p>A QZ Tray WebSocket bridge on <code>localhost:8182</code> talks to the Windows Print Spooler for the <b>ZY901 thermal printer</b> and triggers the <b>MK410 cash drawer</b> over RJ11. Alaya ERP sync via <code>alaya_api.php</code> keeps inventory and accounting in step. A Google Apps Script deployed as a Sheets web app is the resilient fallback when Supabase is unreachable. A heartbeat and midnight re-auth quietly keep the session alive through a full retail shift &mdash; no sign-out mid-transaction.</p>
+          </div>
+        </article>
+
+      </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-logo">Haidah<span>Athirah</span></div>
-            
-<div class="footer-links">
-    <a href="#profile" class="footer-link">Profile</a>
-    <a href="#education" class="footer-link">Education</a>
-    <a href="#work" class="footer-link">Work</a>
-    <a href="#projects" class="footer-link">Projects</a>
-    <a href="#certifications" class="footer-link">Certifications</a> <!-- Added this line -->
-    <a href="#contact" class="footer-link">Contact</a>
-</div>
-            
-            <div class="footer-social">
-                <a href="https://www.linkedin.com/in/haidah-athirah-a90526305/"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://www.instagram.com/haidahatrh_"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
-            </div>
-            
-            <div class="copyright">
-                &copy; 2025 Haidah Athirah. All Rights Reserved.
-            </div>
-        </div>
-    </footer>
+    <div class="stats" role="list">
+      <span role="listitem"><b>261</b> PHP files</span>
+      <span role="listitem"><b>65</b> API endpoints</span>
+      <span role="listitem"><b>14</b> modules</span>
+      <span role="listitem"><b>8</b> branches</span>
+      <span role="listitem">Malay &amp; English</span>
+    </div>
+  </article>
 
-    <script>
-        // Mobile Menu Toggle
-        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
-            document.getElementById('navMenu').classList.toggle('active');
-        });
-        
-        // Header Scroll Effect
-        window.addEventListener('scroll', function() {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-        
-        // Smooth Scrolling for Navigation Links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    document.getElementById('navMenu').classList.remove('active');
-                }
-            });
-        });
-        
-        // HORIZONTAL SCROLL FUNCTIONS
-        function scrollLeft(containerId) {
-            const container = document.getElementById(containerId);
-            container.scrollBy({
-                left: -400,
-                behavior: 'smooth'
-            });
-        }
-        
-        function scrollRight(containerId) {
-            const container = document.getElementById(containerId);
-            container.scrollBy({
-                left: 400,
-                behavior: 'smooth'
-            });
-        }
-        
-        // CONTACT FORM HANDLER
-        document.getElementById('contactForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzhsrTx2SU5LHNZ1akDGmY89Y3tFeBy-MuuPpbDLfuBVDuu2riWGSp4BwfGf-l8OcYp/exec';
-            
-            const formData = {
-                name: document.getElementById('name').value.trim(),
-                email: document.getElementById('email').value.trim(),
-                subject: document.getElementById('subject').value.trim(),
-                message: document.getElementById('message').value.trim()
-            };
-            
-            // Validation
-            if (!formData.name || !formData.email || !formData.subject || !formData.message) {
-                showNotification('Please fill in all fields.', 'error');
-                return;
-            }
-            
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(formData.email)) {
-                showNotification('Please enter a valid email address.', 'error');
-                return;
-            }
-            
-            // Show loading
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-            submitBtn.disabled = true;
-            
-            try {
-                await fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(formData)
-                });
-                
-                showNotification(
-                    `Thank you, ${formData.name}! Your message has been received. I'll get back to you soon.`,
-                    'success'
-                );
-                
-                this.reset();
-                
-            } catch (error) {
-                console.error('Submission failed:', error);
-                
-                // Fallback to mailto
-                showNotification('Using email fallback...', 'info');
-                
-                setTimeout(() => {
-                    const mailtoLink = `mailto:haidahatrh@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`From: ${formData.name} (${formData.email})\n\n${formData.message}`)}`;
-                    window.location.href = mailtoLink;
-                }, 1000);
-                
-            } finally {
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            }
-        });
-        
-        // Notification function
-        function showNotification(message, type = 'info') {
-            const existing = document.querySelector('.custom-notification');
-            if (existing) existing.remove();
-            
-            const notification = document.createElement('div');
-            notification.className = 'custom-notification';
-            
-            const colors = {
-                success: { bg: '#10B981', icon: 'fa-check-circle' },
-                error: { bg: '#EF4444', icon: 'fa-exclamation-circle' },
-                info: { bg: '#3B82F6', icon: 'fa-info-circle' }
-            };
-            
-            const color = colors[type] || colors.info;
-            
-            notification.innerHTML = `
-                <div style="
-                    position: fixed;
-                    top: 20px;
-                    right: 20px;
-                    padding: 16px 24px;
-                    background: ${color.bg};
-                    color: white;
-                    border-radius: 8px;
-                    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-                    z-index: 10000;
-                    display: flex;
-                    align-items: center;
-                    gap: 12px;
-                    max-width: 400px;
-                    animation: slideIn 0.3s ease;
-                ">
-                    <i class="fas ${color.icon}" style="font-size: 20px;"></i>
-                    <div style="flex: 1; font-size: 14px; line-height: 1.5;">${message}</div>
-                    <button onclick="this.parentElement.parentElement.remove()" 
-                            style="background: none; border: none; color: white; cursor: pointer; font-size: 18px;">
-                        ×
-                    </button>
+
+  <!-- ================== Case Study 02 — STOREFRONT ================== -->
+  <article class="case" id="case-02">
+    <div class="case-marker"><b>Case study № 02</b> B2B contractor storefront &nbsp;·&nbsp; 2023 &ndash; present &nbsp;·&nbsp; Live at <a href="https://contractor.skrichgroup.com" target="_blank" rel="noopener">contractor.skrichgroup.com</a></div>
+
+    <h2 class="case-title">A storefront where every buyer <em>sees their own price.</em></h2>
+
+    <div class="mock-frame">
+      <div class="store-mock" aria-hidden="true">
+        <div class="store-toolbar">
+          <span><b>Panels &amp; Flooring</b> &nbsp;·&nbsp; 24 items</span>
+          <span class="badge">Contractor logged in</span>
+        </div>
+        <div class="product-grid">
+          <div class="product-card featured">
+            <div class="product-image oak"><span class="sku">SKU 4028</span></div>
+            <h3 class="product-name">Fluted Panel &mdash; Oak <span class="variant">2440 &times; 122 mm</span></h3>
+            <div class="price-block">
+              <span class="price-list">RM 82.00</span>
+              <span class="price-contractor"><span class="cur">RM</span>65<span style="font-size:0.6em">.00</span></span>
+            </div>
+            <div class="product-foot">
+              <span><span class="stock-dot"></span>In stock &mdash; WHKP</span>
+              <button class="add-btn" type="button">Add &rarr;</button>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-image grey"><span class="sku">SKU 8811</span></div>
+            <h3 class="product-name">SPC Flooring 4mm <span class="variant">Ash Grey &mdash; box of 12</span></h3>
+            <div class="price-block">
+              <span class="price-list">RM 35.00</span>
+              <span class="price-contractor"><span class="cur">RM</span>28<span style="font-size:0.6em">.50</span></span>
+            </div>
+            <div class="product-foot">
+              <span><span class="stock-dot"></span>In stock &mdash; STPK</span>
+              <button class="add-btn" type="button">Add &rarr;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-copy">
+      <div>
+        <p>A public storefront for approved contractors: any visitor can browse the catalogue, but pricing, cart, and checkout only unlock after manual approval. Once logged in, every contractor sees <em>their own</em> negotiated price list, resolved at render time against an <code>email &times; SKU</code> lookup.</p>
+        <p>Checkout offers pickup at any of eight branch warehouses across Peninsular Malaysia. Completed orders are posted downstream to the Alaya ERP for inventory and accounting, and every invoice, quotation, and delivery order comes out as a PDF.</p>
+      </div>
+      <dl class="case-side">
+        <dt>Client</dt>
+        <dd>SK Rich Trading Sdn. Bhd.</dd>
+        <dt>Live URL</dt>
+        <dd><a href="https://contractor.skrichgroup.com" target="_blank" rel="noopener">contractor.skrichgroup.com</a></dd>
+        <dt>Stack</dt>
+        <dd>
+          <div class="tags">
+            <span class="tag">PHP</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">Dompdf</span>
+            <span class="tag">Google Sheets</span>
+          </div>
+        </dd>
+        <dt>Payments</dt>
+        <dd>Billplz (FPX gateway) &nbsp;·&nbsp; Alaya ERP</dd>
+      </dl>
+    </div>
+
+    <section class="modules">
+      <h3 class="modules-head">The system, module by module</h3>
+      <div class="modules-grid">
+
+        <!-- Module: Approval workflow -->
+        <article class="module">
+          <div class="module-mock">
+            <div class="appr-mock" aria-hidden="true">
+              <div class="appr-head">Contractor registration</div>
+              <div class="appr-stepper">
+                <div class="appr-step">
+                  <div class="appr-dot done"></div>
+                  <div class="appr-lbl">Sign up</div>
                 </div>
-            `;
-            
-            document.body.appendChild(notification);
-            
-            // Add animation style
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes slideIn {
-                    from { transform: translateX(100%); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
-                }
-            `;
-            if (!document.querySelector('#notification-style')) {
-                style.id = 'notification-style';
-                document.head.appendChild(style);
-            }
-            
-            setTimeout(() => notification.remove(), 5000);
-        }
-        
-        // Touch/swipe support for horizontal scroll containers
-        document.querySelectorAll('.scroll-container').forEach(container => {
-            let isDown = false;
-            let startX;
-            let scrollLeft;
-            
-            container.addEventListener('mousedown', (e) => {
-                isDown = true;
-                container.classList.add('active');
-                startX = e.pageX - container.offsetLeft;
-                scrollLeft = container.scrollLeft;
-            });
-            
-            container.addEventListener('mouseleave', () => {
-                isDown = false;
-                container.classList.remove('active');
-            });
-            
-            container.addEventListener('mouseup', () => {
-                isDown = false;
-                container.classList.remove('active');
-            });
-            
-            container.addEventListener('mousemove', (e) => {
-                if (!isDown) return;
-                e.preventDefault();
-                const x = e.pageX - container.offsetLeft;
-                const walk = (x - startX) * 2;
-                container.scrollLeft = scrollLeft - walk;
-            });
-        });
-    </script>
+                <div class="appr-step">
+                  <div class="appr-dot done"></div>
+                  <div class="appr-lbl">Docs</div>
+                </div>
+                <div class="appr-step">
+                  <div class="appr-dot active"></div>
+                  <div class="appr-lbl current">Review</div>
+                </div>
+                <div class="appr-step">
+                  <div class="appr-dot"></div>
+                  <div class="appr-lbl">Live</div>
+                </div>
+              </div>
+              <div class="appr-status">
+                <b>Pending admin approval.</b><br>
+                Submitted 2h ago. Pricing &amp; cart will unlock once reviewed.
+              </div>
+            </div>
+          </div>
+          <div class="module-body">
+            <span class="m-tag">Approval workflow</span>
+            <h4>Sign up &rarr; docs &rarr; review &rarr; live</h4>
+            <p>Multi-step signup with document upload, then an admin holding page. Guest browsing stays open the whole time to keep the funnel warm &mdash; but pricing, cart, and checkout only unlock once a contractor is approved. The gate lives at the auth block in <code>test-connection.php</code>.</p>
+          </div>
+        </article>
+
+        <!-- Module: Custom pricing -->
+        <article class="module text-only">
+          <div class="module-mock"></div>
+          <div class="module-body">
+            <span class="m-tag">Custom pricing engine</span>
+            <h4>Every contractor sees their own price</h4>
+            <p>A CSV lookup of <code>email &times; SKU</code> overrides list price at render time in <code>customprice.php</code> and <code>getprice.php</code>. No schema changes needed to onboard a new client with a bespoke price list &mdash; drop new rows into the sheet and reload. Contractor tiers, one-off discounts, and negotiated project rates all use the same mechanism.</p>
+          </div>
+        </article>
+
+        <!-- Module: Payments & ERP -->
+        <article class="module text-only">
+          <div class="module-mock"></div>
+          <div class="module-body">
+            <span class="m-tag">Payments &amp; ERP sync</span>
+            <h4>Billplz FPX &rarr; Alaya ERP</h4>
+            <p>Billplz hosted redirect with server-to-server callback (<code>billplz_callback.php</code>) and a pending-order file store to survive dropped requests. A separate training-mode toggle points Billplz at sandbox for safe end-to-end testing. Every successful order posts to <code>api.irsbizsuite.com.my</code> with branch-to-warehouse/bin mapping, so accounting and inventory update without manual entry.</p>
+          </div>
+        </article>
+
+        <!-- Module: PDFs & affiliate -->
+        <article class="module text-only">
+          <div class="module-mock"></div>
+          <div class="module-body">
+            <span class="m-tag">Documents &amp; affiliate</span>
+            <h4>PDFs, referrals, and preorders</h4>
+            <p>Dompdf-generated <b>invoices, quotations, and delivery orders</b>, each keyed to order metadata. Sales-page traffic is captured through <code>?ref=</code> and <code>?stid=</code> URL params, tracked on a dedicated affiliate dashboard, and attributed to the salesperson who brought the contractor in. A separate <b>preorder flow</b> covers items not in immediate stock &mdash; own form, own payment path, own tracking screen.</p>
+          </div>
+        </article>
+
+        <!-- Module: In-branch POS mode -->
+        <article class="module text-only">
+          <div class="module-mock"></div>
+          <div class="module-body">
+            <span class="m-tag">Staff POS mode</span>
+            <h4>Cashier-style ordering for in-branch staff</h4>
+            <p>Sales staff at any of the eight branches log into <code>staff_login.php</code> and place orders through <code>pos.php</code> using the same catalogue as the storefront &mdash; branch selector at the top, contractor pricing applied at checkout, receipt printed at the counter.</p>
+          </div>
+        </article>
+
+        <!-- Module: Multi-branch pickup -->
+        <article class="module text-only">
+          <div class="module-mock"></div>
+          <div class="module-body">
+            <span class="m-tag">Multi-branch fulfilment</span>
+            <h4>Pick up where the stock actually is</h4>
+            <p>Eight warehouses across Peninsular Malaysia &mdash; <b>WHKP, STPK, SA15, IPOH, MSAI, SNWG, SKEM, KUTN</b> &mdash; each with its own real-time stock read. Contractors choose their pickup branch at checkout and the fulfilment stub is created against the right warehouse in Alaya.</p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <div class="stats">
+      <span><b>8</b> branch warehouses</span>
+      <span><b>2</b> payment integrations</span>
+      <span>Per-account pricing</span>
+      <span>PDF invoicing</span>
+      <span>Affiliate tracking</span>
+    </div>
+  </article>
+
+
+  <!-- ================== Case Study 03 — ADMIN ================== -->
+  <article class="case" id="case-03">
+    <div class="case-marker"><b>Case study № 03</b> Cross-branch order desk &nbsp;·&nbsp; 2024 &ndash; present &nbsp;·&nbsp; Live, internal</div>
+
+    <h2 class="case-title">One dashboard for every order, <em>every branch.</em></h2>
+
+    <div class="mock-frame">
+      <div class="admin-mock" aria-hidden="true">
+        <div class="admin-head">
+          <h4>IFS Order Monitor</h4>
+          <span class="action">Export CSV &darr;</span>
+        </div>
+        <div class="admin-chips">
+          <span class="chip active">All &nbsp;· 2,417</span>
+          <span class="chip">Pickup</span>
+          <span class="chip">Sameday</span>
+          <span class="chip">Later</span>
+          <span class="chip">Inter-branch</span>
+          <span class="chip">Courier</span>
+          <span class="chip">Preorder</span>
+        </div>
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Order</th>
+              <th>Customer</th>
+              <th>Branch</th>
+              <th>Type</th>
+              <th>Status</th>
+              <th class="amt">Amount (RM)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="order-id">WHKP-002417</td>
+              <td>Amirul Firdaus</td>
+              <td class="branch">WHKP</td>
+              <td>Sameday</td>
+              <td><span class="pill ready">Ready</span></td>
+              <td class="amt">1,137.91</td>
+            </tr>
+            <tr>
+              <td class="order-id">STPK-004891</td>
+              <td>Contractor Zul</td>
+              <td class="branch">STPK</td>
+              <td>Courier</td>
+              <td><span class="pill pack">Packing</span></td>
+              <td class="amt">4,283.00</td>
+            </tr>
+            <tr>
+              <td class="order-id">SNWG-001203</td>
+              <td>Amirul Trade Sdn. Bhd.</td>
+              <td class="branch">SNWG</td>
+              <td>Pickup</td>
+              <td><span class="pill pending">Pending</span></td>
+              <td class="amt">&nbsp;&nbsp;892.50</td>
+            </tr>
+            <tr>
+              <td class="order-id">KUTN-000734</td>
+              <td>M. Yusof</td>
+              <td class="branch">KUTN</td>
+              <td>Inter-B.</td>
+              <td><span class="pill done">Delivered</span></td>
+              <td class="amt">2,150.00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="case-copy">
+      <div>
+        <p>The back-office control panel that ties the retail group together &mdash; a single Supabase-backed dashboard spanning order oversight, contractor-customer tracking, and team-sales reporting across every branch.</p>
+        <p>The IFS Order Monitor merges four separate order tables (POS, contractor POS, SPS, IFS) into one filterable view, with seven fulfilment types and courier-and-tracking capture for the delivery workflow.</p>
+      </div>
+      <dl class="case-side">
+        <dt>Client</dt>
+        <dd>SK Rich Trading Sdn. Bhd.</dd>
+        <dt>Role</dt>
+        <dd>Developer</dd>
+        <dt>Stack</dt>
+        <dd>
+          <div class="tags">
+            <span class="tag">PHP</span>
+            <span class="tag">Supabase</span>
+            <span class="tag">PostgREST</span>
+            <span class="tag">bcrypt</span>
+          </div>
+        </dd>
+        <dt>Auth</dt>
+        <dd>Bcrypt admin login, activity logging, first-run password rotation, role-based feature gating.</dd>
+      </dl>
+    </div>
+
+    <section class="modules">
+      <h3 class="modules-head">The system, module by module</h3>
+      <div class="modules-grid">
+
+        <!-- Module: Contractor Hub -->
+        <article class="module">
+          <div class="module-mock">
+            <div class="ch-mock" aria-hidden="true">
+              <div class="ch-head">
+                <span>Contractor Hub</span>
+                <span class="live">Live sync</span>
+              </div>
+              <ul class="ch-list">
+                <li class="ch-item">
+                  <span>Amirul Trading Sdn. Bhd.</span>
+                  <span class="ch-phone">017-2xx xxxx</span>
+                  <span class="ch-pill">Not reg.</span>
+                </li>
+                <li class="ch-item">
+                  <span>Sinar Kayu Enterprise</span>
+                  <span class="ch-phone">012-9xx xxxx</span>
+                  <span class="ch-pill">Not reg.</span>
+                </li>
+                <li class="ch-item">
+                  <span>BJ Construction</span>
+                  <span class="ch-phone">011-4xx xxxx</span>
+                  <span class="ch-pill">Not reg.</span>
+                </li>
+                <li class="ch-item">
+                  <span>Pembinaan Aman</span>
+                  <span class="ch-phone">019-8xx xxxx</span>
+                  <span class="ch-pill">Not reg.</span>
+                </li>
+              </ul>
+              <div class="ch-more">&plus; 47 more &middot; Sync 5m ago</div>
+            </div>
+          </div>
+          <div class="module-body">
+            <span class="m-tag">Contractor Hub report</span>
+            <h4>Which customers still aren't registered?</h4>
+            <p>Ingests a live Google Sheets CSV from the sales team, filters rows whose status is <code>NOT REGISTERED</code>, and renders a paginated view plus a print-ready PDF. Sales pick up the list at the start of the week and work it &mdash; converting the storefront's unregistered walk-ups into approved contractor accounts.</p>
+          </div>
+        </article>
+
+        <!-- Module: VBTS Team Sales -->
+        <article class="module">
+          <div class="module-mock">
+            <div class="ts-mock" aria-hidden="true">
+              <div class="ts-head">
+                <span>VBTS &middot; Team Sales</span>
+                <span class="period">This month</span>
+              </div>
+              <div class="ts-total">Total<b>RM&nbsp;50,790</b></div>
+              <div class="ts-rows">
+                <div class="ts-row">
+                  <span class="ts-name">S. Aisha</span>
+                  <span class="ts-bar"><span class="ts-fill" style="width: 100%"></span></span>
+                  <span class="ts-amt">18,540</span>
+                </div>
+                <div class="ts-row">
+                  <span class="ts-name">A. Hamzah</span>
+                  <span class="ts-bar"><span class="ts-fill" style="width: 77%"></span></span>
+                  <span class="ts-amt">14,230</span>
+                </div>
+                <div class="ts-row">
+                  <span class="ts-name">M. Ridzuan</span>
+                  <span class="ts-bar"><span class="ts-fill" style="width: 64%"></span></span>
+                  <span class="ts-amt">11,800</span>
+                </div>
+                <div class="ts-row">
+                  <span class="ts-name">Z. Firdaus</span>
+                  <span class="ts-bar"><span class="ts-fill" style="width: 34%"></span></span>
+                  <span class="ts-amt">&nbsp;6,220</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="module-body">
+            <span class="m-tag">VBTS Team Sales</span>
+            <h4>Who sold what, when</h4>
+            <p>Merges <code>backup_pos_orders</code> and <code>contractor_pos_orders</code> for the VBTS branch, with today / week / month / year filters and a per-salesperson breakdown. Points at what the team should keep doing and what needs pushing &mdash; without waiting for month-end reports.</p>
+          </div>
+        </article>
+
+        <!-- Module: Delivery & export -->
+        <article class="module text-only">
+          <div class="module-mock"></div>
+          <div class="module-body">
+            <span class="m-tag">Delivery workflow</span>
+            <h4>From order to doorstep, without another tab</h4>
+            <p>Attach courier and tracking numbers inline against any order. Print delivery notes straight from the table. Filter by branch, fulfilment type, or salesperson. Export the current view as CSV for finance, client reports, or spreadsheet analysis. Only VBTS and admin roles unlock the courier workflow &mdash; per-role gating keeps floor staff on the paths they need.</p>
+          </div>
+        </article>
+
+        <!-- Module: Auth & audit -->
+        <article class="module text-only">
+          <div class="module-mock"></div>
+          <div class="module-body">
+            <span class="m-tag">Auth &amp; audit</span>
+            <h4>Bcrypt login, activity log, role gates</h4>
+            <p>Bcrypt admin auth against the <code>admin_users</code> Supabase table with <code>password_verify</code>. Legacy seed hashes auto-upgrade on first use, and the default seed forces a password rotation on first login. Every sign-in and mutation is logged through <code>Supabase::logActivity</code> for audit &mdash; useful when someone asks who changed what, and when.</p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <div class="stats">
+      <span><b>4</b> order tables merged</span>
+      <span><b>7</b> fulfilment types</span>
+      <span>Multi-role auth</span>
+      <span>PDF reporting</span>
+    </div>
+  </article>
+
+
+  <!-- ================== Academic ================== -->
+  <div class="work-section-head" id="academic">
+    <span class="eyebrow">Selected Work &nbsp;·&nbsp; University</span>
+    <p>Course and final-year projects completed at UiTM Shah Alam between 2023 and 2025, individually and in small teams.</p>
+  </div>
+
+  <div class="uni-grid">
+
+    <!-- Dental Health Tracker -->
+    <article class="uni-case">
+      <div class="uni-mock">
+        <div class="phone-mock" aria-hidden="true">
+          <div class="phone-screen">
+            <div class="dt-header">
+              <span class="dt-logo">DentTrack</span>
+              <span>&equiv;</span>
+            </div>
+            <div class="dt-profile">
+              <div class="dt-avatar">A</div>
+              <div>
+                <div class="dt-name">Aisha, 6y</div>
+                <div class="dt-streak">12-day streak</div>
+              </div>
+            </div>
+            <div class="dt-reminder">
+              <span class="dt-label">Tonight &middot; 8:00 PM</span>
+              <span class="dt-task">Brush teeth</span>
+              <button class="dt-cta" type="button">Mark done &rarr;</button>
+            </div>
+            <div class="dt-week">
+              <span class="dt-day done">M</span>
+              <span class="dt-day done">T</span>
+              <span class="dt-day done">W</span>
+              <span class="dt-day done">T</span>
+              <span class="dt-day today">F</span>
+              <span class="dt-day">S</span>
+              <span class="dt-day">S</span>
+            </div>
+            <div class="dt-badges">
+              <span class="dt-badge earned">&#9733;</span>
+              <span class="dt-badge earned">&#9733;</span>
+              <span class="dt-badge earned">&#9733;</span>
+              <span class="dt-badge">&#9734;</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uni-body">
+        <span class="u-kind">Final Year &nbsp;·&nbsp; Individual</span>
+        <h3>Dental Health Tracker</h3>
+        <p>Mobile app engaging parents in their children's dental care through scheduled reminders, daily streaks, and gamified rewards. Push notifications keep the routine on track and unlockable badges sustain engagement.</p>
+        <div class="u-tags">
+          <span class="tag">Flutter</span>
+          <span class="tag">Firebase</span>
+          <span class="tag">Android Studio</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Task Management System -->
+    <article class="uni-case">
+      <div class="uni-mock">
+        <div class="tm-board" aria-hidden="true">
+          <div class="tm-head">
+            <span>TaskFlow &nbsp;/ api v1</span>
+            <span class="tm-ping">200 OK &middot; 47ms</span>
+          </div>
+          <div class="tm-cols">
+            <div class="tm-col">
+              <div class="tm-col-head"><b>To do</b> &middot; 4</div>
+              <div class="tm-card">
+                <div class="tm-lbl">frontend</div>
+                <div class="tm-title">Design login screen</div>
+                <div class="tm-meta">Fri</div>
+              </div>
+              <div class="tm-card">
+                <div class="tm-lbl">devops</div>
+                <div class="tm-title">Set up CI pipeline</div>
+                <div class="tm-meta">2h</div>
+              </div>
+            </div>
+            <div class="tm-col">
+              <div class="tm-col-head"><b>In progress</b> &middot; 2</div>
+              <div class="tm-card highlight">
+                <div class="tm-lbl backend">backend</div>
+                <div class="tm-title">Auth middleware<br>POST /api/login</div>
+                <div class="tm-meta"><b>High</b> &middot; HA</div>
+              </div>
+            </div>
+            <div class="tm-col">
+              <div class="tm-col-head"><b>Done</b> &middot; 12</div>
+              <div class="tm-card done">
+                <div class="tm-lbl">backend</div>
+                <div class="tm-title">User routes</div>
+              </div>
+              <div class="tm-card done">
+                <div class="tm-lbl">db</div>
+                <div class="tm-title">Schema migration</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uni-body">
+        <span class="u-kind">Backend Development</span>
+        <h3>Task Management System</h3>
+        <p>Backend developer on a task-management platform serving both web and mobile clients through a shared RESTful API. Focused on clean route design, tokenised auth, and testable service layers.</p>
+        <div class="u-tags">
+          <span class="tag">Laravel</span>
+          <span class="tag">Flutter</span>
+          <span class="tag">REST API</span>
+          <span class="tag">VMware</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Missing Child Detector -->
+    <article class="uni-case">
+      <div class="uni-mock">
+        <div class="mc-mock" aria-hidden="true">
+          <div class="mc-head">
+            <span>GuardTrack &nbsp;/ device A7</span>
+            <span class="mc-status">Online</span>
+          </div>
+          <div class="mc-grid">
+            <div class="mc-map">
+              <div class="mc-radius"></div>
+              <div class="mc-pin"></div>
+              <div class="mc-coords">3.1391&deg;N &middot; 101.6869&deg;E</div>
+            </div>
+            <div class="mc-tiles">
+              <div class="mc-tile">
+                <span class="mc-k">Battery</span>
+                <span class="mc-v">87%</span>
+              </div>
+              <div class="mc-tile">
+                <span class="mc-k">Signal</span>
+                <span class="mc-v">4G</span>
+              </div>
+              <div class="mc-tile">
+                <span class="mc-k">Last ping</span>
+                <span class="mc-v">14s</span>
+              </div>
+              <div class="mc-tile alert">
+                <span class="mc-k">Safe zone</span>
+                <span class="mc-v">Inside</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uni-body">
+        <span class="u-kind">IoT &nbsp;·&nbsp; Team project</span>
+        <h3>Missing Child Detector</h3>
+        <p>GPS- and GSM-enabled hardware device for child safety, wired to a parent-facing mobile dashboard over Blynk. Live location, geofence alerts, and telemetry from the microcontroller in one view.</p>
+        <div class="u-tags">
+          <span class="tag">Arduino</span>
+          <span class="tag">GPS / GSM</span>
+          <span class="tag">Blynk</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Homestay Booking -->
+    <article class="uni-case">
+      <div class="uni-mock">
+        <div class="hs-mock" aria-hidden="true">
+          <div class="hs-image">
+            <span class="hs-tag">3 nights &middot; 2 guests</span>
+          </div>
+          <div class="hs-body">
+            <div class="hs-name">Villa Kampung Melayu</div>
+            <div class="hs-meta">Janda Baik, Pahang &middot; &#9733; 4.8</div>
+            <div class="hs-dates">
+              <div class="hs-date">
+                <div class="hs-date-k">Check-in</div>
+                <div class="hs-date-v">Fri, 6 Dec</div>
+              </div>
+              <div class="hs-date">
+                <div class="hs-date-k">Check-out</div>
+                <div class="hs-date-v">Mon, 9 Dec</div>
+              </div>
+            </div>
+            <div class="hs-total">
+              <span class="hs-total-k">Total &middot; 3 nights</span>
+              <span class="hs-price"><span class="cur">RM</span>420</span>
+            </div>
+            <button class="hs-reserve" type="button">Reserve &rarr;</button>
+          </div>
+        </div>
+      </div>
+      <div class="uni-body">
+        <span class="u-kind">Database Coursework</span>
+        <h3>Homestay Booking System</h3>
+        <p>Web-based booking platform for short-stay accommodation with calendar-based availability, guest management, and a secure payment flow. Focused on relational schema and clean query design.</p>
+        <div class="u-tags">
+          <span class="tag">PHP</span>
+          <span class="tag">SQL</span>
+          <span class="tag">XAMPP</span>
+        </div>
+      </div>
+    </article>
+
+  </div>
+
+
+  <!-- ================== About ================== -->
+  <section class="about" id="about">
+    <div class="about-col">
+      <h3>Education</h3>
+      <div class="entry">
+        <div class="entry-head">
+          <h4>Bachelor of Computer Science (Hons.)<br>Netcentric Computing</h4>
+          <span class="yr">2021 &ndash; 2025</span>
+        </div>
+        <div class="org">Universiti Teknologi MARA (UiTM), Shah Alam</div>
+        <div class="honors">CGPA 3.33 &nbsp;·&nbsp; Dean's List &mdash; Sem 4, 5, 6, 7</div>
+      </div>
+      <div class="entry">
+        <div class="entry-head">
+          <h4>Physical Science, Module 2</h4>
+          <span class="yr">2020 &ndash; 2021</span>
+        </div>
+        <div class="org">Kolej Matrikulasi Selangor</div>
+        <div class="honors">CGPA 3.57 &nbsp;·&nbsp; MUET Band 4</div>
+      </div>
+
+      <h3 style="margin-top:2rem">Experience</h3>
+      <div class="entry">
+        <div class="entry-head">
+          <h4>IT Operations &mdash; Marketing Systems</h4>
+          <span class="yr">2022 &ndash; present</span>
+        </div>
+        <div class="org">SK Rich Trading Sdn. Bhd.</div>
+        <p>Developed and shipped internal systems across cashier operations, B2B commerce, and back-office reporting. Ran paid sales-page campaigns across social platforms.</p>
+      </div>
+      <div class="entry">
+        <div class="entry-head">
+          <h4>Degree Internship</h4>
+          <span class="yr">Sep &ndash; Dec 2025</span>
+        </div>
+        <div class="org">SK Rich Trading Sdn. Bhd.</div>
+      </div>
+    </div>
+
+    <div class="about-col">
+      <h3>Toolkit</h3>
+      <dl class="toolkit">
+        <dt>Mobile</dt><dd>Flutter &amp; Dart, Android Studio, Firebase</dd>
+        <dt>Web</dt><dd>PHP, Laravel, vanilla JS, Tailwind, HTML &amp; CSS</dd>
+        <dt>Data</dt><dd>MySQL, SQL, Supabase (PostgREST), Microsoft Access</dd>
+        <dt>Ops</dt><dd>Plesk, XAMPP, VMware, Google Apps Script, Boost.Space</dd>
+        <dt>Hardware</dt><dd>Arduino, thermal printers via QZ Tray, GSM / GPS modules</dd>
+        <dt>Languages</dt><dd>Malay (native), English (fluent)</dd>
+      </dl>
+
+      <h3 style="margin-top:2.5rem">Activities</h3>
+      <ul class="activity-list">
+        <li><span>iHACK Competition &mdash; organiser team</span><span class="yr">2024</span></li>
+        <li><span>Kursus Pengurusan Organisasi &mdash; leadership programme</span><span class="yr">2024</span></li>
+        <li><span>SOKI II &amp; MyDigital Maker Fair &mdash; volunteer</span><span class="yr">2024</span></li>
+        <li><span>SULAM@BUDIMAN &mdash; cybersecurity-awareness event</span><span class="yr">2023</span></li>
+        <li><span>Girls in CTF &mdash; crypto &amp; web-vuln tracks</span><span class="yr">2023</span></li>
+      </ul>
+    </div>
+  </section>
+
+
+  <!-- ================== Contact ================== -->
+  <section class="contact" id="contact">
+    <div class="contact-inner">
+      <div>
+        <h2>Let's build something <em>together.</em></h2>
+        <p>I'm looking for a mobile or web engineering role where I can keep shipping to real users. If you're hiring, I'd love to hear from you.</p>
+      </div>
+      <div class="contact-side">
+        <a href="mailto:haidahatrh@gmail.com"><span class="k">Email</span><span>haidahatrh@gmail.com &rarr;</span></a>
+        <a href="https://linkedin.com/in/haidah-athirah-a90526305" target="_blank" rel="noopener"><span class="k">LinkedIn</span><span>/haidah-athirah &rarr;</span></a>
+        <a href="tel:+60192152972"><span class="k">Phone</span><span>+60 19-215 2972 &rarr;</span></a>
+      </div>
+    </div>
+
+    <div class="colophon">
+      <span>Set in Georgia &amp; Segoe UI &nbsp;·&nbsp; Ampang &nbsp;·&nbsp; MMXXVI</span>
+      <span>Haidah Athirah Hamzah</span>
+    </div>
+  </section>
+
+</main>
+
 </body>
 </html>
