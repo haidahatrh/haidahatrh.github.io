@@ -83,15 +83,16 @@
     .slide .card h1 { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; background: linear-gradient(135deg, #ff88aa, #ffcce0); background-clip: text; -webkit-background-clip: text; color: transparent; text-align: center; margin-bottom: 20px; animation: titleGlow 2s ease-in-out infinite; }
     .slide .card p { font-size: 0.97rem; line-height: 1.75; color: #e0dce8; margin-bottom: 1rem; font-weight: 400; opacity: 0; animation: fadeSlideUp 0.5s ease-out forwards; }
 
-    /* Password lock styles - PIN boxes */
+    /* Password lock styles - PIN boxes - NO WHITE FILL */
     .lock-overlay {
-      background: rgba(10, 10, 26, 0.92);
+      background: rgba(10, 10, 26, 0.95);
       backdrop-filter: blur(8px);
       border-radius: 28px;
       padding: 30px 24px;
       margin: 10px 0;
       border: 1px solid rgba(255, 150, 180, 0.2);
       text-align: center;
+      width: 100%;
     }
     .lock-overlay .lock-icon { font-size: 3rem; margin-bottom: 10px; }
     .lock-overlay h2 { color: #ffcce0; font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 8px; }
@@ -107,8 +108,8 @@
     .pin-box {
       width: 44px;
       height: 56px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 2px solid rgba(255, 150, 180, 0.25);
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 150, 180, 0.2);
       border-radius: 12px;
       display: flex;
       align-items: center;
@@ -117,7 +118,7 @@
       font-weight: 600;
       color: #fff;
       font-family: 'Poppins', sans-serif;
-      transition: border-color 0.3s, transform 0.15s;
+      transition: border-color 0.3s, transform 0.15s, background 0.3s;
       cursor: pointer;
       user-select: none;
     }
@@ -128,11 +129,11 @@
     }
     .pin-box.filled {
       border-color: #ff88aa;
-      background: rgba(255, 136, 170, 0.12);
+      background: rgba(255, 136, 170, 0.1);
     }
     .pin-box.active {
       border-color: #ff88aa;
-      box-shadow: 0 0 20px rgba(255, 136, 170, 0.2);
+      box-shadow: 0 0 20px rgba(255, 136, 170, 0.15);
       transform: scale(1.05);
     }
     .pin-box.error {
@@ -141,7 +142,7 @@
     }
     .pin-box.correct {
       border-color: #66ff88;
-      background: rgba(102, 255, 136, 0.12);
+      background: rgba(102, 255, 136, 0.08);
     }
     .pin-box.hidden-input {
       position: absolute;
@@ -173,9 +174,9 @@
     .lock-overlay .hint-box {
       margin-top: 14px;
       padding: 12px 16px;
-      background: rgba(255, 136, 170, 0.08);
+      background: rgba(255, 136, 170, 0.06);
       border-radius: 16px;
-      border: 1px dashed rgba(255, 150, 180, 0.25);
+      border: 1px dashed rgba(255, 150, 180, 0.2);
       min-height: 50px;
       display: flex;
       align-items: center;
@@ -725,7 +726,7 @@
     grabCursor: true,
     speed: 500,
     effect: 'slide',
-    initialSlide: 0 // Ensure it starts on the first slide (Cover)
+    initialSlide: 0
   });
 
   const prevBtn = document.getElementById('prevBtn');
@@ -753,7 +754,7 @@
   const PASSWORD = '000000';
   const HINTS = [
     'muahhh duluuu 💋',
-    'babyy cayanggg',
+    'naqib manja sayaaa',
     'technology',
     'blue 💙',
     'call 📞'
@@ -767,14 +768,14 @@
   
   const wrongMessages = [
     '💔 Awak dah tak sayang saya ke? hmmm',
-    '😢 Kenapa susah sangat nak faham?',
-    '💔 Hati saya sakit tau...',
-    '🥺 Awak tak ingat saya ke?',
+    '😢 Kenapa susah sangat nak teka?',
+    '💔 Mak aiiiii salahhh lagiii ...',
+    '🥺 Awak tak ingat pasal kita dah keee?',
     '😭 Saya rasa awak dah lupa saya...',
-    '💔 Cuba lagi... untuk saya?',
+    '💔 Cuba lagi... pleeasshhhh?',
     '🥹 Awak tak rindu saya ke?',
-    '😤 Dah la tu... cuba lagi!',
-    '💔 Saya menangis ni...',
+    '😤 Dah la tu... ishhhh try again!',
+    '💔 Saya bagi last chance ni sayangg',
     '😔 Awak memang tak sayang saya dah...'
   ];
 
@@ -822,35 +823,29 @@
     }
   }
 
-  // Click on pin box focuses the hidden input
   pinBoxes.forEach(box => {
     box.addEventListener('click', focusHiddenInput);
     box.addEventListener('touchstart', focusHiddenInput);
   });
 
-  // Handle input from hidden field
   hiddenInput.addEventListener('input', function(e) {
     if (isUnlocked || lives <= 0) return;
     
     const value = this.value;
-    // Only allow digits
     const digits = value.replace(/\D/g, '').slice(0, 6);
     this.value = digits;
     
-    // Fill pin array
     for (let i = 0; i < 6; i++) {
       pin[i] = digits[i] || '';
     }
     currentIndex = Math.min(digits.length, 5);
     updatePinDisplay();
     
-    // Auto-submit when 6 digits entered
     if (digits.length === 6) {
       checkPin();
     }
   });
 
-  // Handle backspace/delete key
   hiddenInput.addEventListener('keydown', function(e) {
     if (isUnlocked || lives <= 0) return;
     
@@ -865,7 +860,6 @@
     }
   });
 
-  // Focus hidden input when clicking on the lock overlay
   document.getElementById('lockOverlay').addEventListener('click', function(e) {
     if (e.target.tagName === 'BUTTON' || e.target.closest('.btn-group') || e.target.closest('.clear-btn')) {
       return;
@@ -879,7 +873,6 @@
     const entered = pin.join('');
     
     if (entered === PASSWORD) {
-      // UNLOCKED!
       isUnlocked = true;
       const overlay = document.getElementById('lockOverlay');
       const content = document.getElementById('finalContent');
@@ -891,7 +884,6 @@
         setTimeout(createHeart, i * 200);
       }
     } else {
-      // WRONG PASSWORD
       lives--;
       updateLivesDisplay();
       
@@ -968,7 +960,6 @@
     focusHiddenInput();
   }
 
-  // Initial setup
   updatePinDisplay();
   updateLivesDisplay();
 </script>
