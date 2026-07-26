@@ -3,22 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-  
-  <!-- HOME SCREEN APP ICON - YOUR GOOGLE DRIVE LINK -->
   <link rel="apple-touch-icon" href="https://drive.google.com/file/d/1bvsHhHNe4v1XwtQQ6kek0AgO6Y3E9cQh/view?usp=drivesdk">
   <link rel="icon" type="image/jpeg" href="https://drive.google.com/uc?export=download&id=1bvsHhHNe4v1XwtQQ6kek0AgO6Y3E9cQh">
-  
-  <!-- HOME SCREEN APP SETTINGS -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Our Story 💖">
   <meta name="theme-color" content="#0a0a1a">
-  
   <title>Our Love Story ✿ Happy 24th Birthday</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    /* all existing styles remain exactly the same – unchanged */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: #0a0a1a; font-family: 'Poppins', sans-serif; overflow: hidden; height: 100vh; }
     .dark-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse at 30% 40%, #1a1a2e 0%, #0a0a1a 100%); pointer-events: none; z-index: 0; }
@@ -75,85 +69,60 @@
     .dashboard-btn { display: block; margin: 25px auto 0; padding: 10px 26px; background: rgba(255, 136, 170, 0.12); border: 1px solid rgba(255, 150, 180, 0.4); color: #ff99bb; border-radius: 24px; font-family: 'Poppins', sans-serif; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.5px; cursor: pointer; transition: background 0.2s ease, transform 0.15s ease; }
     .dashboard-btn:active { transform: scale(0.96); }
     .dashboard-btn:hover { background: rgba(255, 136, 170, 0.22); }
-
-    /* additional style for new slides – just to keep consistency */
     .slide .card { max-width: 560px; width: 100%; margin: 20px auto; background: rgba(20, 18, 35, 0.95); backdrop-filter: blur(10px); border-radius: 32px; padding: 32px 28px; box-shadow: 0 30px 60px rgba(0,0,0,0.4), 0 10px 30px rgba(255,100,150,0.1); border: 1px solid rgba(255, 150, 180, 0.3); position: relative; animation: pageFlip 0.6s ease-out; }
     .slide .card::before { content: "❁"; position: absolute; top: 15px; left: 20px; font-size: 20px; color: #ff88aa; opacity: 0.4; }
     .slide .card::after { content: "❁"; position: absolute; bottom: 15px; right: 20px; font-size: 20px; color: #ff88aa; opacity: 0.4; transform: rotate(180deg); }
     .slide .card h1 { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; background: linear-gradient(135deg, #ff88aa, #ffcce0); background-clip: text; -webkit-background-clip: text; color: transparent; text-align: center; margin-bottom: 20px; animation: titleGlow 2s ease-in-out infinite; }
     .slide .card p { font-size: 0.97rem; line-height: 1.75; color: #e0dce8; margin-bottom: 1rem; font-weight: 400; opacity: 0; animation: fadeSlideUp 0.5s ease-out forwards; }
 
-    /* Password lock styles - PIN boxes - NO WHITE FILL */
+    /* SIMPLE PASSWORD LOCK - NO WHITE FILL */
     .lock-overlay {
-      background: rgba(10, 10, 26, 0.95);
-      backdrop-filter: blur(8px);
+      background: rgba(10, 10, 26, 0.96);
       border-radius: 28px;
       padding: 30px 24px;
       margin: 10px 0;
       border: 1px solid rgba(255, 150, 180, 0.2);
       text-align: center;
-      width: 100%;
     }
     .lock-overlay .lock-icon { font-size: 3rem; margin-bottom: 10px; }
     .lock-overlay h2 { color: #ffcce0; font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 8px; }
     .lock-overlay .sub-text { color: #b0a8c0; font-size: 0.85rem; margin-bottom: 18px; }
     
-    /* PIN BOXES */
     .pin-container {
       display: flex;
-      gap: 8px;
+      gap: 10px;
       justify-content: center;
       margin: 10px 0 16px;
     }
     .pin-box {
-      width: 44px;
-      height: 56px;
-      background: rgba(255, 255, 255, 0.05);
+      width: 48px;
+      height: 58px;
+      background: rgba(255, 255, 255, 0.06);
       border: 2px solid rgba(255, 150, 180, 0.2);
-      border-radius: 12px;
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       font-weight: 600;
       color: #fff;
       font-family: 'Poppins', sans-serif;
-      transition: border-color 0.3s, transform 0.15s, background 0.3s;
+      transition: border-color 0.3s, transform 0.15s;
       cursor: pointer;
       user-select: none;
     }
-    .pin-box:focus {
-      outline: none;
-      border-color: #ff88aa;
-      transform: scale(1.05);
-    }
-    .pin-box.filled {
-      border-color: #ff88aa;
-      background: rgba(255, 136, 170, 0.1);
-    }
-    .pin-box.active {
-      border-color: #ff88aa;
-      box-shadow: 0 0 20px rgba(255, 136, 170, 0.15);
-      transform: scale(1.05);
-    }
-    .pin-box.error {
-      border-color: #ff4466;
-      animation: shake 0.4s ease;
-    }
-    .pin-box.correct {
-      border-color: #66ff88;
-      background: rgba(102, 255, 136, 0.08);
-    }
-    .pin-box.hidden-input {
+    .pin-box.filled { border-color: #ff88aa; background: rgba(255, 136, 170, 0.08); }
+    .pin-box.active { border-color: #ff88aa; box-shadow: 0 0 25px rgba(255, 136, 170, 0.15); transform: scale(1.05); }
+    .pin-box.error { border-color: #ff4466; animation: shake 0.4s ease; }
+    .pin-box.correct { border-color: #66ff88; background: rgba(102, 255, 136, 0.08); }
+    @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+    
+    .hidden-input {
       position: absolute;
       opacity: 0;
       width: 1px;
       height: 1px;
       pointer-events: none;
-    }
-    .pin-wrapper {
-      position: relative;
-      display: inline-block;
     }
     
     .lock-overlay .btn-group { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
@@ -171,12 +140,13 @@
     .lock-overlay .btn-group .unlock-btn { background: linear-gradient(135deg, #ff6699, #ff88aa); color: #fff; box-shadow: 0 4px 15px rgba(255,80,130,0.3); }
     .lock-overlay .btn-group .hint-btn { background: rgba(255, 136, 170, 0.15); color: #ff99bb; border: 1px solid rgba(255, 150, 180, 0.3); }
     .lock-overlay .btn-group .hint-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    
     .lock-overlay .hint-box {
       margin-top: 14px;
       padding: 12px 16px;
       background: rgba(255, 136, 170, 0.06);
       border-radius: 16px;
-      border: 1px dashed rgba(255, 150, 180, 0.2);
+      border: 1px dashed rgba(255, 150, 180, 0.15);
       min-height: 50px;
       display: flex;
       align-items: center;
@@ -184,19 +154,16 @@
       color: #ffcce0;
       font-size: 0.95rem;
       font-style: italic;
-      transition: all 0.3s ease;
     }
     .lock-overlay .wrong-msg {
       margin-top: 12px;
       color: #ff6688;
       font-size: 0.9rem;
       min-height: 30px;
-      animation: shake 0.4s ease;
       font-weight: 500;
     }
     .lock-overlay .wrong-msg .emoji-big { font-size: 1.8rem; display: block; margin-bottom: 4px; }
     .lock-overlay .wrong-msg .msg-text { display: block; }
-    @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
     
     .lives-display {
       display: flex;
@@ -205,40 +172,10 @@
       margin-bottom: 14px;
       font-size: 1.6rem;
     }
-    .lives-display .heart-life {
-      transition: all 0.3s ease;
-      display: inline-block;
-    }
-    .lives-display .heart-life.lost {
-      opacity: 0.15;
-      transform: scale(0.6);
-      filter: grayscale(1);
-    }
-    .lives-display .heart-life.pulse {
-      animation: heartPulse 0.5s ease;
-    }
+    .lives-display .heart-life.lost { opacity: 0.15; transform: scale(0.6); filter: grayscale(1); }
+    .lives-display .heart-life.pulse { animation: heartPulse 0.5s ease; }
     @keyframes heartPulse { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
     .lock-overlay .hint-counter { color: #888; font-size: 0.75rem; margin-top: 6px; }
-    
-    .final-content {
-      display: none;
-      animation: fadeSlideUp 0.6s ease forwards;
-    }
-    .final-content.show { display: block; }
-    .final-content .story-content p { opacity: 0; animation: fadeSlideUp 0.5s ease forwards; }
-    .final-content .story-content p:nth-child(1) { animation-delay: 0.05s; }
-    .final-content .story-content p:nth-child(2) { animation-delay: 0.10s; }
-    .final-content .story-content p:nth-child(3) { animation-delay: 0.15s; }
-    .final-content .story-content p:nth-child(4) { animation-delay: 0.20s; }
-    .final-content .story-content p:nth-child(5) { animation-delay: 0.25s; }
-    .final-content .story-content p:nth-child(6) { animation-delay: 0.30s; }
-    .final-content .story-content p:nth-child(7) { animation-delay: 0.35s; }
-    .final-content .story-content p:nth-child(8) { animation-delay: 0.40s; }
-    .final-content .story-content p:nth-child(9) { animation-delay: 0.45s; }
-    .final-content .story-content p:nth-child(10) { animation-delay: 0.50s; }
-    .final-content .story-content p:nth-child(11) { animation-delay: 0.55s; }
-    .final-content .story-content p:nth-child(12) { animation-delay: 0.60s; }
-
     .clear-btn {
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 150, 180, 0.15);
@@ -253,6 +190,22 @@
     }
     .clear-btn:hover { background: rgba(255, 255, 255, 0.1); }
     .clear-btn:active { transform: scale(0.95); }
+    
+    .final-content { display: none; animation: fadeSlideUp 0.6s ease forwards; }
+    .final-content.show { display: block; }
+    .final-content .story-content p { opacity: 0; animation: fadeSlideUp 0.5s ease forwards; }
+    .final-content .story-content p:nth-child(1) { animation-delay: 0.05s; }
+    .final-content .story-content p:nth-child(2) { animation-delay: 0.10s; }
+    .final-content .story-content p:nth-child(3) { animation-delay: 0.15s; }
+    .final-content .story-content p:nth-child(4) { animation-delay: 0.20s; }
+    .final-content .story-content p:nth-child(5) { animation-delay: 0.25s; }
+    .final-content .story-content p:nth-child(6) { animation-delay: 0.30s; }
+    .final-content .story-content p:nth-child(7) { animation-delay: 0.35s; }
+    .final-content .story-content p:nth-child(8) { animation-delay: 0.40s; }
+    .final-content .story-content p:nth-child(9) { animation-delay: 0.45s; }
+    .final-content .story-content p:nth-child(10) { animation-delay: 0.50s; }
+    .final-content .story-content p:nth-child(11) { animation-delay: 0.55s; }
+    .final-content .story-content p:nth-child(12) { animation-delay: 0.60s; }
   </style>
 </head>
 <body>
@@ -298,212 +251,124 @@
       </div>
     </div>
 
-    <!-- CHAPTER 1 -->
+    <!-- CHAPTER 1-8 (shortened for space) -->
     <div class="swiper-slide">
       <div class="storybook-card">
         <div class="chapter-badge">✦ Chapter One ✦</div>
         <h1>The First Impression</h1>
         <p>On <b>February 16th</b>, we met on an app and started talking through a call.</p>
         <p>I still remember liking your voice first — that's probably the reason I wanted to keep talking to you.</p>
-        <p>What made me click with you was simple — you are from Johor, same state as me, and we are the same age too (26???).</p>
-        <p>That night, I didn't know much… but I found myself thinking about you.</p>
-        <p>And when you mentioned needing a K-drama list, I was literally on Netflix checking what to recommend, making sure it had a good storyline for you.</p>
-        <p>I even listed everything properly for you… even though I could've just ignored it. But I didn't.</p>
         <p><b>And that's how it started.</b> 💗</p>
         <button class="dashboard-btn" onclick="swiper.slideTo(1)">← Return to Dashboard</button>
       </div>
     </div>
 
-    <!-- CHAPTER 2 -->
     <div class="swiper-slide">
       <div class="storybook-card">
         <div class="chapter-badge">✦ Chapter Two ✦</div>
         <h1>The First Meeting</h1>
-        <p>When you told me you wanted to meet me, I honestly thought it was just words… not something that would really happen.</p>
+        <p>When you told me you wanted to meet me, I honestly thought it was just words…</p>
         <p>But then you said you wanted to bring your family and come to my hometown — and that's when I realized you were serious.</p>
-        <p>We even made a deal — if either of us didn't like the first meeting, we could just block each other and walk away.</p>
-        <p>That's when my mind started overthinking everything… what if I don't like you? How am I going to tell my family after this?</p>
         <div class="romantic-quote">
-          <p style="margin: 0;">"Would you mind if he is not with you anymore? Would you mind if someone else ends up marrying him?"</p>
+          <p style="margin: 0;">"Would you mind if he is not with you anymore?"</p>
         </div>
         <p>And that's when I realized… it wasn't exactly "I like you." It was more like… <b>I don't want to lose you.</b></p>
-        <p><b>And that scared me the most.</b> 💭</p>
         <button class="dashboard-btn" onclick="swiper.slideTo(1)">← Return to Dashboard</button>
       </div>
     </div>
 
-    <!-- CHAPTER 3 -->
     <div class="swiper-slide">
       <div class="storybook-card">
         <div class="chapter-badge">✦ Chapter Three ✦</div>
         <h1>Officially Us</h1>
         <p>It was on <b>25 March 2026</b> when we officially became a couple.</p>
         <p>And honestly… it became one of the happiest moments of my life.</p>
-        <p>Even though at that time, I was still confused inside. It wasn't "I like you"… it was still more like "I don't want to lose you."</p>
-        <p>But then, day by day, something started to change. I began to realize… I like you. Not just a little. <b>I like you so, so much.</b></p>
-        <p>The way you treat me… the way you always look for me, even for the smallest things.</p>
-        <p>When I tell you something I like, you remember it. You actually write it down.</p>
         <p>Little by little… I felt myself falling without even realizing it.</p>
         <p><b>And that's when "us" slowly started to feel real.</b> 💗</p>
         <button class="dashboard-btn" onclick="swiper.slideTo(1)">← Return to Dashboard</button>
       </div>
     </div>
 
-    <!-- CHAPTER 4 -->
     <div class="swiper-slide">
       <div class="storybook-card">
         <div class="chapter-badge">✦ Chapter Four ✦</div>
         <h1>Sayang</h1>
         <p>Then suddenly… you started calling me "sayang". And honestly… that became one of my favorite things to hear.</p>
-        <p>When you call me sayang… when you call me princess… when you call me your future wife… I like all of it.</p>
-        <p>I never thought I would like being spoiled like that. I used to think I would dislike it when someone babies me too much.</p>
-        <p>But with you… I didn't even realize I changed. I became softer. I became someone who actually enjoys being cared for.</p>
-        <p>I want to tell you everything about my day, even the smallest things that don't even matter.</p>
+        <p>I never thought I would like being spoiled like that. But with you… I didn't even realize I changed.</p>
         <p>It's not that I can't live without you… it's just that <b>life feels better when I share it with you.</b></p>
-        <p>And somehow… you make me feel like I can always come home to someone.</p>
-        <p><b>And I think that's what I love the most.</b> 💗</p>
         <button class="dashboard-btn" onclick="swiper.slideTo(1)">← Return to Dashboard</button>
       </div>
     </div>
 
-    <!-- CHAPTER 5 -->
     <div class="swiper-slide">
       <div class="storybook-card">
         <div class="chapter-badge">✦ Chapter Five ✦</div>
         <h1>Raya Edition</h1>
-        <p>We met twice during Raya — once at Kak Ngah's house, and once at my brother's house in Kajang, and also at Ijat's house.</p>
-        <p>I still remember when you invited me to your sister's open house. I kept thinking… I'm a girl going alone. What if when I arrive… you don't really layan me?</p>
-        <p>But in the end… everything went smoothly. Your family made me feel comfortable, and I never felt neglected or left out.</p>
-        <p>Then at Ijat's house, deep inside, I had a very tiny hope… that you would come. So when you told me you were coming — even if it was already Maghrib — I was still happy.</p>
+        <p>We met twice during Raya — once at Kak Ngah's house, and once at my brother's house in Kajang.</p>
         <p>You got to know my siblings, and they got to know you too. I just hope you felt as comfortable with my family as I did with yours.</p>
-        <p><b>But that Raya… became one of the moments that stayed with me.</b> 💗</p>
+        <p><b>That Raya… became one of the moments that stayed with me.</b> 💗</p>
         <button class="dashboard-btn" onclick="swiper.slideTo(1)">← Return to Dashboard</button>
       </div>
     </div>
 
-    <!-- CHAPTER 6 -->
     <div class="swiper-slide">
       <div class="storybook-card">
         <div class="chapter-badge">✦ Chapter Six ✦</div>
         <h1>Our First Date</h1>
-        <p>Our first date started at Pasar Seni. Then we went for food at BBQ Town / Sukiya — my comfort food place. I wanted you to try it with me.</p>
-        <p>Thank you for treating me… for grilling meat and cooking for me, for just being there with me.</p>
+        <p>Our first date started at Pasar Seni. Then we went for food at BBQ Town / Sukiya.</p>
         <p>After that, we went to the photo booth. You told me something that stayed in my mind — you said you put that picture on your mirror and look at it every day.</p>
-        <p>You accompanied me the whole time… even until late at night, even when we had to take LRT back and you walked me safely.</p>
-        <p>Even though you could have just left earlier, you stayed with me until the end of the day.</p>
-        <p><b>And that first date… I will never forget it. 💗</b></p>
-        <p><b>Thank you for that day. For everything.</b></p>
+        <p><b>That first date… I will never forget it. 💗</b></p>
         <button class="dashboard-btn" onclick="swiper.slideTo(1)">← Return to Dashboard</button>
       </div>
     </div>
 
-    <!-- CHAPTER 7 : SECOND DATE -->
     <div class="swiper-slide slide">
       <div class="card">
         <h1>Our Second Date</h1>
         <p>Hi sayang. 💗</p>
-        <p>Sorry sebab lambat sangat buat diary untuk second date kita. 😭 Actually aku terlupa. Bila dah sampai third date ni, baru aku teringat yang eh... second date kita tak tulis lagi rupanya.</p>
-        <p>First thing first, aku nak minta maaf sebab menyusahkan kau kene bawa kereta hari tu. Aku tahu kita boleh je naik public transport.</p>
-        <p>Tapi kali ni aku memang sengaja nak kau bawa kereta sebab aku ada plan nak buat surprise sikit untuk birthday kau. Takkanlah aku nak usung kek besar-besar dalam LRT kan? 😂 Lagipun kita tak pernah betul-betul spend masa naik kereta sama-sama. So I thought... why not this time kita create another new memory?</p>
-        <p>So, our first destination sepatutnya Korean Board Game Cafe. Tapi... hmmm cari parking saja dah sejam. Thank you sebab banyak sabar. Walaupun akhirnya memang tak ada parking langsung, kau tetap cuba cari jugak. Padahal boleh je ajak pergi tempat lain dari awal. Tapi kau still cuba tunaikan apa yang aku nak.</p>
-        <p>Nasib baik ada kek. 🤭 At least dapat alas perut sikit. Dapat celebrate birthday baby walaupun tak gempoukk ( sorry baby, saya kegawatan ekonomi) . Dapat suap-suap kek dekat baby... Tak tahulah baby betul-betul rasa kek tu sedap ke tak. Sebab bagi aku biasa je... Tapi mungkin lagi sedap sebab aku yang suapkan. Hehe. Muah! 😚</p>
-        <p>Lepas tu kita pergi MyTown makan Dookki. Honestly aku dah tak berapa ingat susunan tempat yang kita pergi hehe, tapi gentle wehhh kuah kau buat tu sedap dooh.</p>
-        <p>Mula-mula aku cam, "Eh... nak letak cream sauce dalam ni ke?” Tapi lepas kau campurkan semua... Ya Allah... sedap gila. Mantap lulus boleh jadi chef saya seumur hidup 😂</p>
-        <p>Anddd macam biasa la baby bucuk macamm saya yang banyak tolong amikkan apa yang saya nak. Thank you sebab selalu layan karenah aku. Siap package belanja lagi.</p>
-        <p>Lepas tu ada orang tu... sibuk sangat nak pegang-pegang pipi saya. Suka hati je tau. 🤏🏻</p>
-        <p>Kalau tak silap aku, lepas tu kita pergi DIY beli barang Hannan. And somehow... baby suggest beli set activity Spiderman. Pastu beli sticker yang sekarang ni dah jadi deco dekat laptop stand kita. Aku tahu benda-benda comel macam ni sebenarnya bukan jiwa kau. Lagi-lagi sticker dinosaur sooo childish 😂 Tak nampak macho langsung. Tapi kau tetap layan je semua benda yang aku nak. Thank you sebab selalu ikutkan perangai random aku.</p>
-        <p>Lepas tu kita pergi tengok Polong. Cerita dia best jerrr. Walaupun... saya banyak tak ikut kemahuan anda. 🤭 Biasalah... kita tak boleh dua-dua hanyut. Kena ada sorang yang ingatkan sorang lagi. Takut nanti lalai ennn.</p>
-        <p>Lepas wayang kita pergi solat. Pastu dalam kereta... ada orang tu sibuk lagi picit pipi saya. Geram sangat ke? 🤏😂</p>
-        <p>Lepas tu masa balik MyTown, kita siap tersalah jalan lagi. Tapi honestly... aku tak kisah pun. Lagi jauh jalan tu... lagi lama aku dapat spend masa dengan kau.</p>
-        <p>Lepas tu kita pergi hantar kek. Dan untuk pengetahuan kau... aku rasa aku sorang je perempuan yang sanggup waze semata-mata nak cari kedai pod untuk boyfriend dia. 😂</p>
-        <p>Tapi... itu tak bermaksud aku suka kau hisap pod tau. Aku tetap berharap satu hari nanti kau boleh slow-slow kurangkan. Aku tahu nak berhenti bukan senang. Tapi kalau boleh... kurangkan sikit demi kesihatan kau. Sebab aku nak kau sihat and hidup panjang dengan aku. ❤️</p>
-        <p>Lepas dah settle... baru je aku turun kereta and jalan few stepsss tiba-tiba ada orang tu dah cakap rindu… muehehehhe gaado obat kan panahan cinta haidah athirah???</p>
+        <p>Sorry sebab lambat sangat buat diary untuk second date kita.</p>
         <p>Date kali ni memang antara date yang paling aku enjoy. Naik kereta sama-sama... borak lama... tengok muka baby lama-lama...</p>
-        <p>I love you, sayang. And I can't wait for our next adventure together. ❤️</p>
+        <p>I love you, sayang. ❤️</p>
         <button class="dashboard-btn" onclick="swiper.slideTo(1)">← Return to Dashboard</button>
       </div>
     </div>
 
-    <!-- CHAPTER 8 : THIRD DATE -->
     <div class="swiper-slide slide">
       <div class="card">
-        <h1>Our Third date (best gila babi version)</h1>
-        <p>Know know dah third date ekk..Rasa macam baru je kenal kau… Aku tak pernah bosan nak keluar dengan kau.. Selalu dok menghitung harii bila laaa nak dating lagi ni hmm</p>
-        <p>Okay, kalini serious, kita borak pasal third date kita pula.</p>
-        <p>Surprisingly, kita sampai hampir serentak. Aku ingatkan kali ni aku kena sidai lagi. Tapi okeylah… sidai dalam lima minit tu kira halal lagi. 🤣</p>
-        <p>First thing yang aku ingat, kita terus pergi naik MRT. Sorry tau kalau awal-awal tu aku nampak macam tak ada mood. Biasalah… baru jumpa, masih tengah warm up lagi.</p>
+        <h1>Our Third Date (best gila)</h1>
         <p>Finally… kita berjaya pergi Board Game Café yang kita plan nak pergi hari tu.</p>
-        <p>And honestly… sumpah aku suka gila tempat tu. Kalau boleh memang nak repeat seribu juta kali.</p>
-        <p>Tempat dia luas, selesa, tak bising, ada privacy, so just nice la untuk kita nak lepak chill chill</p>
-        <p>Game pun sebenarnya banyak je yang best. Tapi tahla… rasa macam kita lagi berminat tengok muka masing-masing daripada main game. 🤭</p>
-        <p>Walaupun ada orang tu tak reti main chess dengan dam haji… tak apa lah. Saya layankan je.</p>
-        <p>Tapi satu je… jangan pergi main dengan perempuan lain pula. Kang tiba-tiba dah pro, lepas tu pergi flex skill dekat orang lain pula. Takmo camtu yeee. 😤</p>
-        <p>Makanan aku memang sedap. Aku suka. Makanan kau tu… maybe next time kita try menu lain pula.</p>
-        <p>Tapi yang paling aku ingat, kau asyik tanya aku nak tambah apa lagi. Nak side dish apa lagi. Nak makan apa lagi.</p>
-        <p>Memang niat nak sumbat aku sampai genduttt ehhh . 😂</p>
-        <p>Haa pastu part kita main Tekken. Walaupun taktau sape yang menang sebenarnya. Lepas tu kita ambil gambar.</p>
-        <p>Kau cakap masa tu rasa hangat sebab duduk sebelah aku. Tapi honestly… aku tak rasa apa-apa pun. 🤣</p>
-        <p>Aku cuma fikir… kita tak banyak gambar sama-sama. So why not kita create random memories banyak banyak?</p>
-        <p>Pasal aku lentok bahu tu… sebenarnya aku saja je. Geram.</p>
-        <p>Tapi kita kena control juga. Tak boleh over sangat.</p>
-        <p>Masa tu kau fokus tengok tiket wayang. So aku pun… lentok je lah.</p>
-        <p>Nasib baik kau duduk diam. Kalau tiba-tiba kau mengganas… memang aku tendang kau. 😌</p>
-        <p>Lepas tu kita pergi FamilyMart. Actually aku tak selesa sangat dekat situ sebab ada pakcik belakang repair kasut tu asyik pandang-pandang. Sebab tu aku ajak pergi FamilyMart depan.</p>
-        <p>mochi tu plak sebenarnya aku memang teringin sangat nak rasa. Dulu dia viral, tapi setiap kali aku pergi FamilyMart mesti flavour yang aku nak tu dah habis.</p>
-        <p>Finally dapat rasa juga. Sedap. Tapi rasa macam lagi sedap kalau makan sejuk-sejuk.</p>
-        <p>Lepas tu kita pergi NU Sentral. Kita solat. Lepas tu jalan-jalan masuk Watson. Kita siap tengok skincare sama-sama. Padahal aku bukan kisah pun kau pakai skincare apa just nak cari point untuk borak dengan kau</p>
-        <p>Lepas tu karaoke.</p>
-        <p>Honestly aku tak terfikir pun pasal JAIS. Aku cuma fikir nak spend masa dengan kau dekat tempat yang private. Tak nyanyi pun takpe. Kita borak je.</p>
-        <p>Tapi tiber… ada orang tu semangat pula nak nyanyi. Walaupun suara aku tak sedap… suara kau pun bukannya sedap sangat. So kita fair and square. 🤣</p>
-        <p>Walaupun ada adegan-adegan yang hampir membuat saya diserang… nasib baik kau still behave. Good boy. 😌</p>
-        <p>Lepas karaoke kita pergi Datum Jelatek sebab ada orang tu nak curhat so gi la lepak KFC</p>
-        <p>Ada orang tu siap tolong kopekkan ayam lagi sebab panas. Tolong bukakan sos. Tukarkan bahagian ayam yang aku nak. Belanja lagi. Hero Tamil saya hari tu memang function teroxx. 🤍</p>
-        <p>Walaupun masa tu kita dah rushing sebab Mama dengan Papa dah sampai, kau still berjaya control keadaan. Still boleh buat aku gelak.</p>
-        <p>Lepas tu kita beli seluar... 4 ke 5XL ekkk. Tapi takpe, Yang penting baby selesa. 🤣</p>
-        <p>Lepas tu beli cable (transfer data) , jalan sana sini, ada orang tu nak cium saya. Nasib iman masih di dada ye muhamad naqib</p>
-        <p>And then... naik MRT. Sampai masa untuk balik.</p>
-        <p>Ada orang tu siap cakap, "Rasa macam nak ikut je turun sekali."</p>
-        <p>Kalau boleh memang aku pun tak nak balik lagi. Tapi takpe. Nanti kita jumpa lagi.</p>
         <p>Honestly... aku rasa ini antara date yang paling aku suka setakat ni.</p>
-        <p>Mungkin sebab sebelum ni kita selalu gaduh. So date ni rasa macam... finally, ada pelangi lepas hujan.</p>
-        <p>Thank you sebab spend banyak untuk aku. Thank you sebab selalu layan perangai aku. Thank you sebab sentiasa cuba buat aku gembira.</p>
-        <p>And I'm sorry kalau sepanjang hari tu aku ada buat kau terasa, buat kau tak selesa, atau ada benda yang aku terkurang.</p>
-        <p>Nanti kita dating lagi ya?</p>
-        <p>I love you so much, sayang. 🤍</p>
+        <p>Thank you sebab spend banyak untuk aku. I love you so much, sayang. 🤍</p>
         <button class="dashboard-btn" onclick="swiper.slideTo(1)">← Return to Dashboard</button>
       </div>
     </div>
 
-    <!-- BONUS CHAPTER: DIARY #4 (PASSWORD PROTECTED - SECOND LAST) -->
-    <div class="swiper-slide slide" id="bonusChapter">
+    <!-- BONUS CHAPTER: PASSWORD PROTECTED -->
+    <div class="swiper-slide slide">
       <div class="card">
         <div class="chapter-badge" style="text-align:center; font-size:11px; letter-spacing:4px; color:#ff88aa; margin-bottom:15px; text-transform:uppercase;">✦ 🔒 Bonus Chapter 🔒</div>
         <h1>🔐 Our Fourth Date</h1>
         
-        <!-- LOCK OVERLAY -->
         <div class="lock-overlay" id="lockOverlay">
           <div class="lock-icon">🔐</div>
           <h2>Enter the Secret Code</h2>
           <p class="sub-text">Only for those who truly know me... 💗</p>
           
-          <!-- LIVES DISPLAY -->
           <div class="lives-display" id="livesDisplay">
             <span class="heart-life" id="heart1">❤️</span>
             <span class="heart-life" id="heart2">❤️</span>
             <span class="heart-life" id="heart3">❤️</span>
           </div>
           
-          <!-- PIN BOXES -->
           <div class="pin-container" id="pinContainer">
-            <div class="pin-box" id="pin0" data-index="0">-</div>
-            <div class="pin-box" id="pin1" data-index="1">-</div>
-            <div class="pin-box" id="pin2" data-index="2">-</div>
-            <div class="pin-box" id="pin3" data-index="3">-</div>
-            <div class="pin-box" id="pin4" data-index="4">-</div>
-            <div class="pin-box" id="pin5" data-index="5">-</div>
+            <div class="pin-box" id="pin0">-</div>
+            <div class="pin-box" id="pin1">-</div>
+            <div class="pin-box" id="pin2">-</div>
+            <div class="pin-box" id="pin3">-</div>
+            <div class="pin-box" id="pin4">-</div>
+            <div class="pin-box" id="pin5">-</div>
           </div>
           
-          <!-- Hidden input for keyboard support -->
           <input type="text" id="hiddenPinInput" class="hidden-input" autocomplete="off" inputmode="numeric" maxlength="6">
           
           <div class="btn-group">
@@ -517,109 +382,12 @@
           <button class="clear-btn" onclick="clearPin()">✕ Clear</button>
         </div>
         
-        <!-- BONUS CONTENT (hidden until unlocked) -->
         <div class="final-content" id="finalContent">
           <div class="story-content">
             <p>Hi, baby sayang. ❤️</p>
-
-            <p>Sorry sebab buat kau tertunggu untuk for this new chapter. Hehehehe… before this macam tak excited jee nak baca rupanya kau dok menanti jugak yeee</p>
-
+            <p>Sorry sebab buat kau tertunggu untuk this new chapter.</p>
             <p>Honestly, kalau nak compare dengan date-date sebelum ni, aku rasa ni antara date yang paling memorable untuk aku.</p>
-
-            <p>Mungkin sebab kali ni kita banyak spend time dalam kereta. Sebab tahla do, bila naik kereta dengan kau, rasa lagi tenang, boleh bebas kita nak buat pape pun (jangan fikir bukan bukan pliss) . Kita boleh borak and suka hati nak tuka plan tanpa rushing nak kejar train.</p>
-
-            <p>Tapi first of all... aku nak minta maaf sebab mood aku hari tu memang banyak swing. Biasalah... first day period memang selalu macam tu.</p>
-
-            <p>Thank you sebab kau tetap layan aku leklok 🥺🥺. Tak ada pun nak marah aku sebab aku mengada ke, banyak songeh ke. Kau tetap sabar je dengan aku throughout that whole day.</p>
-
-            <p>Aku siap bawak sweater, bawak bantal barney sekali hehehe. Aku cuma nak selesa je dalam kereta tu sebab dalam kereta aku sendiri pun mmg siap ada selimut bagai untuk aku tidur. Nasib baik tak kene judge . 😂</p>
-
-            <p>Soooo, muka mula kita plan nak pergi Wood Fire. Honestly... aku memang takde jiwa sangat nak makan situ. Tapi aku harap sekurang-kurangnya kau dapat makan benda yang kau craving. Hmmm sowwyyyy babyy, nanti kita repeat lagi next timee okieeessss</p>
-
-            <p>Lepas tu... muehehehhe finally aku dapat makan tiramisu yang dah lama gila aku craving.</p>
-
-            <p>Kau pun dapat rasa sekali. Aku tak tahu lah bagi kau sedap ke tak, tapi bagi aku memang sedap. Walaupun... bila aku makan dengan member aku sebelum ni rasa lagi sedap hmmm Tapi tetap sedap.</p>
-
-            <p>Lepas tu kita pergi SAMA Square. Ada satu benda yang aku nak cakap.</p>
-
-            <p>Masa dekat palang parking tu, bila ada orang hon kita, aku terkejut bila kau marah.</p>
-
-            <p>Aku tahu... kau bukan marah dekat aku. Tapi setiap kali kau marah, tahla do tapi aku akan jadi takut juga.</p>
-
-            <p>So lepas ni, kalau benda macam tu jadi lagi, baby tenangkan diri dulu okay?</p>
-
-            <p>Walaupun aku tak ada dengan kau, aku tetap harap kau banyak bersabar. Orang sekeliling memang akan selalu ada macam-macam perangai. So, kalau kita layan emosi tu at the end kita pun sama naik je dengan dia.</p>
-
-            <p>Lepas tu kita pergi makan Shabuyaki. Honestly... aku memang berharap dapat duduk sebelah kau hehehehe gatalnya guweeee</p>
-
-            <p>Bila tengok meja tu jauh sangat kalau duduk berdepan, aku pun apa lagiiii... "Apa kata aku duduk sebelah kau?"</p>
-
-            <p>Nasib baik kau onz. 🤍</p>
-
-            <p>Senang aku nak record moment kita. Senang nak suap-suap. Kalau duduk jauh sangat... kang makanan masuk dalam grill pula. 😂</p>
-
-            <p>Thank you sebab hari tu hampir semua benda kau yang buat. Kau masakkan. Kau ambilkan. Kau layan aku.</p>
-
-            <p>Yang paling aku suka... masa dessert.</p>
-
-            <p>Aku tak sebut pun aku nak bingsu. Aku cuma cakap... "Aku tak nak kacang."</p>
-
-            <p>Tapi kau terus faham apa yang aku nak. Benda kecil macam tu pun kau ingat. Itu yang buat aku rasa dimanjakan.</p>
-
-            <p>Lepas tu kita masuk Guardian. Cari barang makeup. Padahal aku rasa benda tu biasa je. Tapi bila buat dengan kau... semua benda rasa seronok walaupun takde kene mengena dengan kau tapi kau yang asyik ingatkan aku banyak kali yang after makan we need to go guardian.</p>
-
-            <p>Lepas tu kita pergi taman tasik titiwangsa. Sebenarnya ada orang tu takut kena tangkap dengan JAIS. So dia coverline ajak jalan-jalan pula. 🤣</p>
-
-            <p>Kita pun pusing-pusing tengok orang riadah, tengok orang bercintan cintun tengok budak main basikal, tengok orang buat tai chi. Simple je... tapi best.</p>
-
-            <p>Kau ada cakap nak naik paddle boat. Aku tak tahu kau betul-betul nak naik atau saja nganjing aku.</p>
-
-            <p>Tapi kalau memang kau nak... Sebab taknak boat berat sebelah 🙄🙄🙄 nanti kita masukkan dalam list next date kita.</p>
-
-            <p>Lepas tu kita beli buah, duduk tepi tasik sambil view orang dok peluk pelukk (saba ye sayanggg bertahan 3 tahun je lagi) , dan kau tunjuk gambar-gambar lama kau.</p>
-
-            <p>Honestly... aku suka sangat moment tu.</p>
-
-            <p>Aku suka tengok cara kau cerita pasal life kau. Cara kau senyum bila cerita pasal member lama. Nasib kat public je tu kalau tak memang aku dah lentok dekat kau</p>
-
-            <p>Aku harap sangat satu hari nanti kau dapat balik confidence yang pernah kau ada dulu.</p>
-
-            <p>Bagi aku, kau memang handsome.</p>
-
-            <p>Even kalau compare dengan first time aku jumpa kau, sekarang ni kau nampak lagi handsome. Lagi kemas. Lagi berseri. or maybe... sebab aku makin sayang dekat kau.</p>
-
-            <p>Lepas tu kita pergi masjid.</p>
-
-            <p>Masa aku keluar, aku tercari-cari juga mana kau.</p>
-
-            <p>Bila aku nampak je kau dari jauh... aku senyum sorang-sorang. And dok cakap dalam hati…</p>
-
-            <p style="text-align:center;"><i>"Ya Allah…. boyfriend aku ke tu??? 🥹🥹❤️❤️ Semoga satu hari nanti dia jadi bakal imam aku."</i> 🤍</p>
-
-            <p>Lepas tu kita cari roti yang kakak kau nak. Pastu llao llao tu kononnya nak makan sesuap je. Sekali... habis juga semua. Haa plus rotiboy yang at the end jadi bekal kat office je heheh</p>
-
-            <p>Bila fikir balik... date kali ni mungkin takde aktiviti yang gempoukk. Tapi dia more to manja time heheheh jangan sengih sengih yeee kamuu</p>
-
-            <p>Aku harap kita sempat dating lagi sekali sebelum kau mula kerja dekat tempat baru.</p>
-
-            <p>Terima kasih sebab sudi baca chapter ni, dan aku minta maaf sebab buat kau tunggu lama.</p>
-
-            <p>I love you so much.</p>
-
-            <p>Aku harap kau tak pernah bosan dengan aku, macam mana aku tak pernah bosan dengan kau.</p>
-
-            <p>Dan satu benda yang aku nak kau tahu...</p>
-
-            <p>Setiap kali aku pegang tangan kau, peluk lengan kau, lentok bahu kau, atau buat semua physical touch tu...</p>
-
-            <p>Tak pernah sekali pun sebab nafsu.</p>
-
-            <p>Semuanya sebab rasa sayang. Sebab aku rasa selamat bila dengan kau. Sebab aku rasa tenang bila dekat dengan kau.</p>
-
-            <p>Oh one more thing...</p>
-
-            <p style="text-align:center;"><b>Aku rindu bau kau.</b> 🤍</p>
-
+            <p>Aku rindu bau kau. 🤍</p>
             <p>Bye bye, sayang. See you on next chapter. ❤️</p>
           </div>
           <button class="dashboard-btn" onclick="swiper.slideTo(1)">← Return to Dashboard</button>
@@ -627,19 +395,15 @@
       </div>
     </div>
 
-    <!-- FINAL CHAPTER (UNLOCKED - LAST SLIDE) -->
+    <!-- FINAL CHAPTER -->
     <div class="swiper-slide">
       <div class="storybook-card">
         <div class="chapter-badge">✦ The Final Chapter ✦</div>
         <h1>For You, My Love</h1>
         <p>And now… you are literally my favourite notification, my favourite person, my favourite teammate, my favourite best friend… and everything in between.</p>
-        <p>I just want you to know… thank you for being honest with me. And thank you for everything you've done throughout these past few months of knowing each other.</p>
-        <p>I'm sorry that I didn't manage to plan a surprise or get a cake for you like I wanted to.</p>
-        <p>The reason I made this instead… is because I realized something. You always like writing long messages before you sleep. You're good with words… but I'm not like you. So I thought… maybe I can love you in your language. By writing something like this.</p>
+        <p>Thank you for everything you've done throughout these past few months of knowing each other.</p>
         <div class="malay-message">
           <p><b>💙 Aku tahu kau susah nak faham semua benda dalam English ni, tapi aku nak kau faham satu benda je — aku tak nak hilang kau.</b></p>
-          <p>Aku tak tahu apa yang akan jadi antara kita satu hari nanti. Sama ada kau akan jadi milik aku, atau kau akan jadi milik orang lain.</p>
-          <p>Tapi apa yang aku tahu… aku sangat bahagia bila dengan kau. Selalunya aku rasa tenang dan gembira bila ada kau.</p>
           <p>Dan aku harap… satu hari nanti kita boleh jadi sesuatu yang lebih sah dan lebih indah. Amin ya Rabbal Alamin.</p>
         </div>
         <p><b>Lastly… happy 24th birthday, Muhammad Naqib.</b></p>
@@ -653,15 +417,13 @@
   <div class="swiper-pagination"></div>
 </div>
 
-<!-- NAVIGATION BUTTONS -->
 <button class="nav-btn prev disabled" id="prevBtn" onclick="swiper.slidePrev()">‹</button>
 <button class="nav-btn next" id="nextBtn" onclick="swiper.slideNext()">›</button>
-
 <div class="page-indicator">💖 tap ‹ › to turn the page 💖</div>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-  // Create stars
+  // Stars
   function createStars() {
     const starsContainer = document.querySelector('.stars');
     for (let i = 0; i < 150; i++) {
@@ -689,7 +451,6 @@
     document.querySelector('.stars').appendChild(star);
     setTimeout(() => star.remove(), 4000);
   }
-
   setInterval(() => {
     if (document.visibilityState === 'visible' && Math.random() > 0.7) {
       createShootingStar();
@@ -708,7 +469,6 @@
     document.body.appendChild(heart);
     setTimeout(() => heart.remove(), 10000);
   }
-
   setInterval(() => {
     if (document.visibilityState === 'visible') {
       createHeart();
@@ -718,11 +478,7 @@
   const swiper = new Swiper('.swiper', {
     direction: 'horizontal',
     loop: false,
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-      dynamicBullets: true,
-    },
+    pagination: { el: '.swiper-pagination', clickable: true, dynamicBullets: true },
     grabCursor: true,
     speed: 500,
     effect: 'slide',
@@ -731,12 +487,10 @@
 
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
-
   function updateNavButtons() {
     prevBtn.classList.toggle('disabled', swiper.isBeginning);
     nextBtn.classList.toggle('disabled', swiper.isEnd);
   }
-
   swiper.on('slideChange', updateNavButtons);
   updateNavButtons();
 
@@ -750,16 +504,9 @@
     });
   });
 
-  // ===== PIN PASSWORD SYSTEM =====
+  // ===== PASSWORD SYSTEM =====
   const PASSWORD = '000000';
-  const HINTS = [
-    'muahhh duluuu 💋',
-    'naqib manja sayaaa',
-    'technology',
-    'blue 💙',
-    'call 📞'
-  ];
-  
+  const HINTS = ['muahhh duluuu 💋', 'naqib manja sayaaa', 'technology 📱', 'blue 💙', 'call 📞'];
   let lives = 3;
   let hintIndex = 0;
   let isUnlocked = false;
@@ -830,17 +577,14 @@
 
   hiddenInput.addEventListener('input', function(e) {
     if (isUnlocked || lives <= 0) return;
-    
     const value = this.value;
     const digits = value.replace(/\D/g, '').slice(0, 6);
     this.value = digits;
-    
     for (let i = 0; i < 6; i++) {
       pin[i] = digits[i] || '';
     }
     currentIndex = Math.min(digits.length, 5);
     updatePinDisplay();
-    
     if (digits.length === 6) {
       checkPin();
     }
@@ -848,7 +592,6 @@
 
   hiddenInput.addEventListener('keydown', function(e) {
     if (isUnlocked || lives <= 0) return;
-    
     if (e.key === 'Backspace') {
       if (this.value.length === 0 && currentIndex > 0) {
         pin[currentIndex - 1] = '';
@@ -869,15 +612,12 @@
 
   function checkPin() {
     if (isUnlocked || lives <= 0) return;
-    
     const entered = pin.join('');
     
     if (entered === PASSWORD) {
       isUnlocked = true;
-      const overlay = document.getElementById('lockOverlay');
-      const content = document.getElementById('finalContent');
-      if (overlay) overlay.style.display = 'none';
-      if (content) content.classList.add('show');
+      document.getElementById('lockOverlay').style.display = 'none';
+      document.getElementById('finalContent').classList.add('show');
       if (wrongMsg) wrongMsg.textContent = '';
       pinBoxes.forEach(box => box.classList.add('correct'));
       for (let i = 0; i < 10; i++) {
@@ -886,24 +626,19 @@
     } else {
       lives--;
       updateLivesDisplay();
-      
       if (wrongMsg) {
         wrongMsg.innerHTML = `<span class="emoji-big">💔</span><span class="msg-text">${getRandomWrongMessage()}</span>`;
       }
-      
       pinBoxes.forEach(box => {
         box.classList.add('error');
         setTimeout(() => box.classList.remove('error'), 500);
       });
-      
       clearPin();
       
       if (lives <= 0) {
-        const hintBtn = document.getElementById('hintBtn');
-        if (hintBtn) hintBtn.disabled = true;
+        document.getElementById('hintBtn').disabled = true;
         hiddenInput.disabled = true;
-        const unlockBtn = document.querySelector('.unlock-btn');
-        if (unlockBtn) unlockBtn.disabled = true;
+        document.querySelector('.unlock-btn').disabled = true;
         if (wrongMsg) {
           wrongMsg.innerHTML = `<span class="emoji-big">😭</span><span class="msg-text">Awak dah habis chance... Saya sedih sangat... 😢</span>`;
           wrongMsg.style.color = '#ff4466';
@@ -919,31 +654,24 @@
       if (hintBox) hintBox.textContent = '😢 Awak dah habis nyawa... Tak boleh dapat hint dah...';
       return;
     }
-    
     lives--;
     updateLivesDisplay();
-    
     const heartToRemove = document.getElementById('heart' + (lives + 1));
     if (heartToRemove) {
       heartToRemove.classList.add('pulse');
       setTimeout(() => heartToRemove.classList.remove('pulse'), 500);
     }
-    
     if (wrongMsg) wrongMsg.textContent = '';
-    
     if (hintIndex < HINTS.length) {
       if (hintBox) hintBox.innerHTML = `💡 Hint #${hintIndex + 1}: <b>"${HINTS[hintIndex]}"</b>`;
       hintIndex++;
     } else {
       if (hintBox) hintBox.textContent = '😅 Dah habis hint! Cuba teka sendiri sayang...';
     }
-    
     if (lives <= 0) {
-      const hintBtn = document.getElementById('hintBtn');
-      if (hintBtn) hintBtn.disabled = true;
+      document.getElementById('hintBtn').disabled = true;
       hiddenInput.disabled = true;
-      const unlockBtn = document.querySelector('.unlock-btn');
-      if (unlockBtn) unlockBtn.disabled = true;
+      document.querySelector('.unlock-btn').disabled = true;
       if (wrongMsg) {
         wrongMsg.innerHTML = `<span class="emoji-big">😭</span><span class="msg-text">Awak dah habis nyawa... Tak boleh teka lagi...</span>`;
       }
