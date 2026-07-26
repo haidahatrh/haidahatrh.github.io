@@ -82,6 +82,123 @@
     .slide .card::after { content: "❁"; position: absolute; bottom: 15px; right: 20px; font-size: 20px; color: #ff88aa; opacity: 0.4; transform: rotate(180deg); }
     .slide .card h1 { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; background: linear-gradient(135deg, #ff88aa, #ffcce0); background-clip: text; -webkit-background-clip: text; color: transparent; text-align: center; margin-bottom: 20px; animation: titleGlow 2s ease-in-out infinite; }
     .slide .card p { font-size: 0.97rem; line-height: 1.75; color: #e0dce8; margin-bottom: 1rem; font-weight: 400; opacity: 0; animation: fadeSlideUp 0.5s ease-out forwards; }
+
+    /* Password lock styles */
+    .lock-overlay {
+      background: rgba(10, 10, 26, 0.92);
+      backdrop-filter: blur(8px);
+      border-radius: 28px;
+      padding: 30px 24px;
+      margin: 10px 0;
+      border: 1px solid rgba(255, 150, 180, 0.2);
+      text-align: center;
+    }
+    .lock-overlay .lock-icon { font-size: 3rem; margin-bottom: 10px; }
+    .lock-overlay h2 { color: #ffcce0; font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 8px; }
+    .lock-overlay .sub-text { color: #b0a8c0; font-size: 0.85rem; margin-bottom: 18px; }
+    .lock-overlay input {
+      width: 100%;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 150, 180, 0.25);
+      border-radius: 16px;
+      color: #fff;
+      font-size: 1.1rem;
+      text-align: center;
+      letter-spacing: 6px;
+      outline: none;
+      transition: border-color 0.3s;
+      font-family: 'Poppins', sans-serif;
+    }
+    .lock-overlay input:focus { border-color: #ff88aa; }
+    .lock-overlay input::placeholder { letter-spacing: 2px; font-size: 0.85rem; color: #666; }
+    .lock-overlay .btn-group { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+    .lock-overlay .btn-group button {
+      padding: 10px 24px;
+      border: none;
+      border-radius: 20px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: transform 0.15s ease, opacity 0.2s;
+    }
+    .lock-overlay .btn-group button:active { transform: scale(0.95); }
+    .lock-overlay .btn-group .unlock-btn { background: linear-gradient(135deg, #ff6699, #ff88aa); color: #fff; box-shadow: 0 4px 15px rgba(255,80,130,0.3); }
+    .lock-overlay .btn-group .hint-btn { background: rgba(255, 136, 170, 0.15); color: #ff99bb; border: 1px solid rgba(255, 150, 180, 0.3); }
+    .lock-overlay .btn-group .hint-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .lock-overlay .hint-box {
+      margin-top: 14px;
+      padding: 12px 16px;
+      background: rgba(255, 136, 170, 0.08);
+      border-radius: 16px;
+      border: 1px dashed rgba(255, 150, 180, 0.25);
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffcce0;
+      font-size: 0.95rem;
+      font-style: italic;
+      transition: all 0.3s ease;
+    }
+    .lock-overlay .error-msg {
+      margin-top: 12px;
+      color: #ff6688;
+      font-size: 0.85rem;
+      min-height: 24px;
+      animation: shake 0.4s ease;
+    }
+    @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+    .lives-display {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      font-size: 1.6rem;
+    }
+    .lives-display .heart-life {
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+    .lives-display .heart-life.lost {
+      opacity: 0.15;
+      transform: scale(0.6);
+      filter: grayscale(1);
+    }
+    .lives-display .heart-life.pulse {
+      animation: heartPulse 0.5s ease;
+    }
+    @keyframes heartPulse { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
+    .lock-overlay .hint-counter { color: #888; font-size: 0.75rem; margin-top: 6px; }
+    .lock-overlay .wrong-msg {
+      margin-top: 12px;
+      color: #ff6688;
+      font-size: 0.9rem;
+      min-height: 30px;
+      animation: shake 0.4s ease;
+      font-weight: 500;
+    }
+    .lock-overlay .wrong-msg .emoji-big { font-size: 1.8rem; display: block; margin-bottom: 4px; }
+    .lock-overlay .wrong-msg .msg-text { display: block; }
+    .final-content {
+      display: none;
+      animation: fadeSlideUp 0.6s ease forwards;
+    }
+    .final-content.show { display: block; }
+    .final-content .story-content p { opacity: 0; animation: fadeSlideUp 0.5s ease forwards; }
+    .final-content .story-content p:nth-child(1) { animation-delay: 0.05s; }
+    .final-content .story-content p:nth-child(2) { animation-delay: 0.10s; }
+    .final-content .story-content p:nth-child(3) { animation-delay: 0.15s; }
+    .final-content .story-content p:nth-child(4) { animation-delay: 0.20s; }
+    .final-content .story-content p:nth-child(5) { animation-delay: 0.25s; }
+    .final-content .story-content p:nth-child(6) { animation-delay: 0.30s; }
+    .final-content .story-content p:nth-child(7) { animation-delay: 0.35s; }
+    .final-content .story-content p:nth-child(8) { animation-delay: 0.40s; }
+    .final-content .story-content p:nth-child(9) { animation-delay: 0.45s; }
+    .final-content .story-content p:nth-child(10) { animation-delay: 0.50s; }
+    .final-content .story-content p:nth-child(11) { animation-delay: 0.55s; }
+    .final-content .story-content p:nth-child(12) { animation-delay: 0.60s; }
   </style>
 </head>
 <body>
@@ -121,8 +238,8 @@
           <button class="chapter-item" onclick="swiper.slideTo(7)"><span class="chapter-num">6</span><span class="chapter-text"><span class="chapter-label">Chapter Six</span><span class="chapter-title">Our First Date</span></span></button>
           <button class="chapter-item" onclick="swiper.slideTo(8)"><span class="chapter-num">7</span><span class="chapter-text"><span class="chapter-label">Chapter Seven</span><span class="chapter-title">Our Second Date</span></span></button>
           <button class="chapter-item" onclick="swiper.slideTo(9)"><span class="chapter-num">8</span><span class="chapter-text"><span class="chapter-label">Chapter Eight</span><span class="chapter-title">Our Third Date (best gila)</span></span></button>
-          <button class="chapter-item" onclick="swiper.slideTo(10)"><span class="chapter-num">9</span><span class="chapter-text"><span class="chapter-label">Bonus Chapter</span><span class="chapter-title">Our Forth Date</span></span></button>
-          <button class="chapter-item" onclick="swiper.slideTo(11)"><span class="chapter-num">10</span><span class="chapter-text"><span class="chapter-label">Final Chapter</span><span class="chapter-title">For You, My Love</span></span></button>
+          <button class="chapter-item" onclick="swiper.slideTo(10)"><span class="chapter-num">9</span><span class="chapter-text"><span class="chapter-label">Bonus Chapter</span><span class="chapter-title">Our Fourth Date</span></span></button>
+          <button class="chapter-item" onclick="swiper.slideTo(11)"><span class="chapter-num">10</span><span class="chapter-text"><span class="chapter-label">Final Chapter</span><span class="chapter-title">For You, My Love 🔒</span></span></button>
         </div>
       </div>
     </div>
@@ -415,25 +532,63 @@
       </div>
     </div>
 
-    <!-- FINAL CHAPTER (original) -->
+    <!-- FINAL CHAPTER (PASSWORD PROTECTED) -->
     <div class="swiper-slide">
-      <div class="storybook-card">
+      <div class="storybook-card" id="finalChapterCard">
         <div class="chapter-badge">✦ The Final Chapter ✦</div>
-        <h1>For You, My Love</h1>
-        <p>And now… you are literally my favourite notification, my favourite person, my favourite teammate, my favourite best friend… and everything in between.</p>
-        <p>I just want you to know… thank you for being honest with me. And thank you for everything you've done throughout these past few months of knowing each other.</p>
-        <p>I'm sorry that I didn't manage to plan a surprise or get a cake for you like I wanted to.</p>
-        <p>The reason I made this instead… is because I realized something. You always like writing long messages before you sleep. You're good with words… but I'm not like you. So I thought… maybe I can love you in your language. By writing something like this.</p>
-        <div class="malay-message">
-          <p><b>💙 Aku tahu kau susah nak faham semua benda dalam English ni, tapi aku nak kau faham satu benda je — aku tak nak hilang kau.</b></p>
-          <p>Aku tak tahu apa yang akan jadi antara kita satu hari nanti. Sama ada kau akan jadi milik aku, atau kau akan jadi milik orang lain.</p>
-          <p>Tapi apa yang aku tahu… aku sangat bahagia bila dengan kau. Selalunya aku rasa tenang dan gembira bila ada kau.</p>
-          <p>Dan aku harap… satu hari nanti kita boleh jadi sesuatu yang lebih sah dan lebih indah. Amin ya Rabbal Alamin.</p>
+        <h1>🔒 For You, My Love</h1>
+        
+        <!-- LOCK OVERLAY -->
+        <div class="lock-overlay" id="lockOverlay">
+          <div class="lock-icon">🔐</div>
+          <h2>Enter the Secret Code</h2>
+          <p class="sub-text">Only for those who truly know me... 💗</p>
+          
+          <!-- LIVES DISPLAY -->
+          <div class="lives-display" id="livesDisplay">
+            <span class="heart-life" id="heart1">❤️</span>
+            <span class="heart-life" id="heart2">❤️</span>
+            <span class="heart-life" id="heart3">❤️</span>
+          </div>
+          
+          <input type="password" id="passwordInput" placeholder="• • • • • •" maxlength="6" autocomplete="off">
+          
+          <div class="btn-group">
+            <button class="unlock-btn" onclick="checkPassword()">🔓 Unlock</button>
+            <button class="hint-btn" id="hintBtn" onclick="giveHint()">💡 Hint</button>
+          </div>
+          
+          <div class="hint-box" id="hintBox">💭 Click "Hint" for a clue...</div>
+          <div class="wrong-msg" id="wrongMsg"></div>
+          <div class="hint-counter" id="hintCounter">💡 Hints remaining: 3</div>
         </div>
-        <p><b>Lastly… happy 24th birthday, Muhammad Naqib.</b></p>
-        <p style="font-size: 1.2rem; text-align: center; margin-top: 20px;"><b>I love you so much. Good night, sayang.</b> 💖🌙</p>
-        <p style="text-align: center; margin-top: 20px;">∞ Yours forever ∞</p>
-        <button class="dashboard-btn" onclick="swiper.slideTo(1)">← Return to Dashboard</button>
+        
+        <!-- FINAL CONTENT (hidden until unlocked) -->
+        <div class="final-content" id="finalContent">
+          <div class="story-content">
+            <p>And now… you are literally my favourite notification, my favourite person, my favourite teammate, my favourite best friend… and everything in between. 💗</p>
+            
+            <p>I just want you to know… thank you for being honest with me. And thank you for everything you've done throughout these past few months of knowing each other.</p>
+            
+            <p>I'm sorry that I didn't manage to plan a surprise or get a cake for you like I wanted to.</p>
+            
+            <p>The reason I made this instead… is because I realized something. You always like writing long messages before you sleep. You're good with words… but I'm not like you. So I thought… maybe I can love you in your language. By writing something like this.</p>
+            
+            <div class="malay-message">
+              <p><b>💙 Aku tahu kau susah nak faham semua benda dalam English ni, tapi aku nak kau faham satu benda je — aku tak nak hilang kau.</b></p>
+              <p>Aku tak tahu apa yang akan jadi antara kita satu hari nanti. Sama ada kau akan jadi milik aku, atau kau akan jadi milik orang lain.</p>
+              <p>Tapi apa yang aku tahu… aku sangat bahagia bila dengan kau. Selalunya aku rasa tenang dan gembira bila ada kau.</p>
+              <p>Dan aku harap… satu hari nanti kita boleh jadi sesuatu yang lebih sah dan lebih indah. Amin ya Rabbal Alamin.</p>
+            </div>
+            
+            <p><b>Lastly… happy 24th birthday, Muhammad Naqib.</b></p>
+            
+            <p style="font-size: 1.2rem; text-align: center; margin-top: 20px;"><b>I love you so much. Good night, sayang.</b> 💖🌙</p>
+            
+            <p style="text-align: center; margin-top: 20px;">∞ Yours forever ∞</p>
+          </div>
+          <button class="dashboard-btn" onclick="swiper.slideTo(1)">← Return to Dashboard</button>
+        </div>
       </div>
     </div>
 
@@ -536,6 +691,148 @@
       p.style.animationDelay = (index * 0.05) + 's';
     });
   });
+
+  // ===== PASSWORD LOCK SYSTEM =====
+  const PASSWORD = '000000';
+  const HINTS = [
+    'muahh duluu 💋',
+    'baby 👶',
+    'technology 📱',
+    'blue 💙',
+    'call 📞'
+  ];
+  
+  let lives = 3;
+  let hintIndex = 0;
+  let isUnlocked = false;
+  const wrongMessages = [
+    '💔 Awak dah tak sayang saya ke? hmmm',
+    '😢 Kenapa susah sangat nak faham?',
+    '💔 Hati saya sakit tau...',
+    '🥺 Awak tak ingat saya ke?',
+    '😭 Saya rasa awak dah lupa saya...',
+    '💔 Cuba lagi... untuk saya?',
+    '🥹 Awak tak rindu saya ke?',
+    '😤 Dah la tu... cuba lagi!',
+    '💔 Saya menangis ni...',
+    '😔 Awak memang tak sayang saya dah...'
+  ];
+
+  function updateLivesDisplay() {
+    for (let i = 1; i <= 3; i++) {
+      const heart = document.getElementById('heart' + i);
+      if (i <= lives) {
+        heart.classList.remove('lost');
+        heart.textContent = '❤️';
+      } else {
+        heart.classList.add('lost');
+        heart.textContent = '🖤';
+      }
+    }
+    // Update hint counter
+    document.getElementById('hintCounter').textContent = '💡 Hints remaining: ' + lives;
+    // Update hint button
+    document.getElementById('hintBtn').disabled = (lives <= 0 || isUnlocked);
+  }
+
+  function getRandomWrongMessage() {
+    return wrongMessages[Math.floor(Math.random() * wrongMessages.length)];
+  }
+
+  function checkPassword() {
+    if (isUnlocked) return;
+    
+    const input = document.getElementById('passwordInput');
+    const wrongMsg = document.getElementById('wrongMsg');
+    const value = input.value.trim();
+    
+    if (value === PASSWORD) {
+      // UNLOCKED!
+      isUnlocked = true;
+      document.getElementById('lockOverlay').style.display = 'none';
+      document.getElementById('finalContent').classList.add('show');
+      wrongMsg.textContent = '';
+      // Create celebration hearts
+      for (let i = 0; i < 10; i++) {
+        setTimeout(createHeart, i * 200);
+      }
+    } else {
+      // WRONG PASSWORD
+      lives--;
+      updateLivesDisplay();
+      
+      // Show random wrong message
+      wrongMsg.innerHTML = `<span class="emoji-big">💔</span><span class="msg-text">${getRandomWrongMessage()}</span>`;
+      
+      // Shake the input
+      input.style.borderColor = '#ff4466';
+      setTimeout(() => { input.style.borderColor = ''; }, 500);
+      
+      input.value = '';
+      input.focus();
+      
+      if (lives <= 0) {
+        // GAME OVER - lock everything
+        document.getElementById('hintBtn').disabled = true;
+        document.getElementById('passwordInput').disabled = true;
+        document.querySelector('.unlock-btn').disabled = true;
+        wrongMsg.innerHTML = `<span class="emoji-big">😭</span><span class="msg-text">Awak dah habis chance... Saya sedih sangat... 😢</span>`;
+        wrongMsg.style.color = '#ff4466';
+      }
+    }
+  }
+
+  function giveHint() {
+    if (isUnlocked) return;
+    if (lives <= 0) {
+      document.getElementById('hintBox').textContent = '😢 Awak dah habis nyawa... Tak boleh dapat hint dah...';
+      return;
+    }
+    
+    // Cost 1 life for hint
+    lives--;
+    updateLivesDisplay();
+    
+    // Animate heart loss
+    const heartToRemove = document.getElementById('heart' + (lives + 1));
+    if (heartToRemove) {
+      heartToRemove.classList.add('pulse');
+      setTimeout(() => heartToRemove.classList.remove('pulse'), 500);
+    }
+    
+    const hintBox = document.getElementById('hintBox');
+    const wrongMsg = document.getElementById('wrongMsg');
+    wrongMsg.textContent = '';
+    
+    // Show hint based on index
+    if (hintIndex < HINTS.length) {
+      hintBox.innerHTML = `💡 Hint #${hintIndex + 1}: <b>"${HINTS[hintIndex]}"</b>`;
+      hintIndex++;
+    } else {
+      hintBox.textContent = '😅 Dah habis hint! Cuba teka sendiri sayang...';
+    }
+    
+    // If lives 0, disable hint
+    if (lives <= 0) {
+      document.getElementById('hintBtn').disabled = true;
+      if (!document.getElementById('passwordInput').disabled) {
+        // Still allow password attempts if lives 0? No, lock it.
+        document.getElementById('passwordInput').disabled = true;
+        document.querySelector('.unlock-btn').disabled = true;
+        document.getElementById('wrongMsg').innerHTML = `<span class="emoji-big">😭</span><span class="msg-text">Awak dah habis nyawa... Tak boleh teka lagi...</span>`;
+      }
+    }
+  }
+
+  // Allow Enter key to submit
+  document.getElementById('passwordInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      checkPassword();
+    }
+  });
+
+  // Initial lives display
+  updateLivesDisplay();
 </script>
 </body>
 </html>
