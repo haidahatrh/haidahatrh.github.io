@@ -83,7 +83,7 @@
     .slide .card h1 { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; background: linear-gradient(135deg, #ff88aa, #ffcce0); background-clip: text; -webkit-background-clip: text; color: transparent; text-align: center; margin-bottom: 20px; animation: titleGlow 2s ease-in-out infinite; }
     .slide .card p { font-size: 0.97rem; line-height: 1.75; color: #e0dce8; margin-bottom: 1rem; font-weight: 400; opacity: 0; animation: fadeSlideUp 0.5s ease-out forwards; }
 
-    /* Password lock styles */
+    /* Password lock styles - PIN boxes */
     .lock-overlay {
       background: rgba(10, 10, 26, 0.92);
       backdrop-filter: blur(8px);
@@ -96,22 +96,65 @@
     .lock-overlay .lock-icon { font-size: 3rem; margin-bottom: 10px; }
     .lock-overlay h2 { color: #ffcce0; font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 8px; }
     .lock-overlay .sub-text { color: #b0a8c0; font-size: 0.85rem; margin-bottom: 18px; }
-    .lock-overlay input {
-      width: 100%;
-      padding: 14px 16px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 150, 180, 0.25);
-      border-radius: 16px;
-      color: #fff;
-      font-size: 1.1rem;
-      text-align: center;
-      letter-spacing: 6px;
-      outline: none;
-      transition: border-color 0.3s;
-      font-family: 'Poppins', sans-serif;
+    
+    /* PIN BOXES */
+    .pin-container {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin: 10px 0 16px;
     }
-    .lock-overlay input:focus { border-color: #ff88aa; }
-    .lock-overlay input::placeholder { letter-spacing: 2px; font-size: 0.85rem; color: #666; }
+    .pin-box {
+      width: 44px;
+      height: 56px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 2px solid rgba(255, 150, 180, 0.25);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      transition: border-color 0.3s, transform 0.15s;
+      cursor: pointer;
+      user-select: none;
+    }
+    .pin-box:focus {
+      outline: none;
+      border-color: #ff88aa;
+      transform: scale(1.05);
+    }
+    .pin-box.filled {
+      border-color: #ff88aa;
+      background: rgba(255, 136, 170, 0.12);
+    }
+    .pin-box.active {
+      border-color: #ff88aa;
+      box-shadow: 0 0 20px rgba(255, 136, 170, 0.2);
+      transform: scale(1.05);
+    }
+    .pin-box.error {
+      border-color: #ff4466;
+      animation: shake 0.4s ease;
+    }
+    .pin-box.correct {
+      border-color: #66ff88;
+      background: rgba(102, 255, 136, 0.12);
+    }
+    .pin-box.hidden-input {
+      position: absolute;
+      opacity: 0;
+      width: 1px;
+      height: 1px;
+      pointer-events: none;
+    }
+    .pin-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+    
     .lock-overlay .btn-group { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
     .lock-overlay .btn-group button {
       padding: 10px 24px;
@@ -145,11 +188,15 @@
     .lock-overlay .wrong-msg {
       margin-top: 12px;
       color: #ff6688;
-      font-size: 0.85rem;
-      min-height: 24px;
+      font-size: 0.9rem;
+      min-height: 30px;
       animation: shake 0.4s ease;
+      font-weight: 500;
     }
+    .lock-overlay .wrong-msg .emoji-big { font-size: 1.8rem; display: block; margin-bottom: 4px; }
+    .lock-overlay .wrong-msg .msg-text { display: block; }
     @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+    
     .lives-display {
       display: flex;
       justify-content: center;
@@ -171,16 +218,7 @@
     }
     @keyframes heartPulse { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
     .lock-overlay .hint-counter { color: #888; font-size: 0.75rem; margin-top: 6px; }
-    .lock-overlay .wrong-msg {
-      margin-top: 12px;
-      color: #ff6688;
-      font-size: 0.9rem;
-      min-height: 30px;
-      animation: shake 0.4s ease;
-      font-weight: 500;
-    }
-    .lock-overlay .wrong-msg .emoji-big { font-size: 1.8rem; display: block; margin-bottom: 4px; }
-    .lock-overlay .wrong-msg .msg-text { display: block; }
+    
     .final-content {
       display: none;
       animation: fadeSlideUp 0.6s ease forwards;
@@ -199,6 +237,21 @@
     .final-content .story-content p:nth-child(10) { animation-delay: 0.50s; }
     .final-content .story-content p:nth-child(11) { animation-delay: 0.55s; }
     .final-content .story-content p:nth-child(12) { animation-delay: 0.60s; }
+
+    .clear-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 150, 180, 0.15);
+      color: #888;
+      padding: 6px 16px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      transition: background 0.2s;
+      margin-top: 4px;
+    }
+    .clear-btn:hover { background: rgba(255, 255, 255, 0.1); }
+    .clear-btn:active { transform: scale(0.95); }
   </style>
 </head>
 <body>
@@ -439,16 +492,28 @@
             <span class="heart-life" id="heart3">❤️</span>
           </div>
           
-          <input type="password" id="passwordInput" placeholder="• • • • • •" maxlength="6" autocomplete="off">
+          <!-- PIN BOXES -->
+          <div class="pin-container" id="pinContainer">
+            <div class="pin-box" id="pin0" data-index="0">-</div>
+            <div class="pin-box" id="pin1" data-index="1">-</div>
+            <div class="pin-box" id="pin2" data-index="2">-</div>
+            <div class="pin-box" id="pin3" data-index="3">-</div>
+            <div class="pin-box" id="pin4" data-index="4">-</div>
+            <div class="pin-box" id="pin5" data-index="5">-</div>
+          </div>
+          
+          <!-- Hidden input for keyboard support -->
+          <input type="text" id="hiddenPinInput" class="hidden-input" autocomplete="off" inputmode="numeric" maxlength="6">
           
           <div class="btn-group">
-            <button class="unlock-btn" onclick="checkPassword()">🔓 Unlock</button>
+            <button class="unlock-btn" onclick="checkPin()">🔓 Unlock</button>
             <button class="hint-btn" id="hintBtn" onclick="giveHint()">💡 Hint</button>
           </div>
           
           <div class="hint-box" id="hintBox">💭 Click "Hint" for a clue...</div>
           <div class="wrong-msg" id="wrongMsg"></div>
           <div class="hint-counter" id="hintCounter">💡 Hints remaining: 3</div>
+          <button class="clear-btn" onclick="clearPin()">✕ Clear</button>
         </div>
         
         <!-- BONUS CONTENT (hidden until unlocked) -->
@@ -683,10 +748,10 @@
     });
   });
 
-  // ===== PASSWORD LOCK SYSTEM (for Bonus Chapter - slide 10) =====
+  // ===== PIN PASSWORD SYSTEM =====
   const PASSWORD = '000000';
   const HINTS = [
-    'kiss me first 💋',
+    'muahh duluuu 💋',
     'baby 👶',
     'technology 📱',
     'blue 💙',
@@ -696,6 +761,9 @@
   let lives = 3;
   let hintIndex = 0;
   let isUnlocked = false;
+  let pin = ['', '', '', '', '', ''];
+  let currentIndex = 0;
+  
   const wrongMessages = [
     '💔 Awak dah tak sayang saya ke? hmmm',
     '😢 Kenapa susah sangat nak faham?',
@@ -708,6 +776,21 @@
     '💔 Saya menangis ni...',
     '😔 Awak memang tak sayang saya dah...'
   ];
+
+  const pinBoxes = document.querySelectorAll('.pin-box');
+  const hiddenInput = document.getElementById('hiddenPinInput');
+  const wrongMsg = document.getElementById('wrongMsg');
+  const hintBox = document.getElementById('hintBox');
+
+  function updatePinDisplay() {
+    pinBoxes.forEach((box, index) => {
+      const val = pin[index] || '';
+      box.textContent = val || '-';
+      box.classList.toggle('filled', val !== '');
+      box.classList.toggle('active', index === currentIndex && !isUnlocked);
+      box.classList.remove('error', 'correct');
+    });
+  }
 
   function updateLivesDisplay() {
     for (let i = 1; i <= 3; i++) {
@@ -722,10 +805,8 @@
         }
       }
     }
-    // Update hint counter
     const counter = document.getElementById('hintCounter');
     if (counter) counter.textContent = '💡 Hints remaining: ' + lives;
-    // Update hint button
     const hintBtn = document.getElementById('hintBtn');
     if (hintBtn) hintBtn.disabled = (lives <= 0 || isUnlocked);
   }
@@ -734,15 +815,72 @@
     return wrongMessages[Math.floor(Math.random() * wrongMessages.length)];
   }
 
-  function checkPassword() {
-    if (isUnlocked) return;
+  function focusHiddenInput() {
+    if (!isUnlocked && lives > 0) {
+      hiddenInput.focus();
+    }
+  }
+
+  // Click on pin box focuses the hidden input
+  pinBoxes.forEach(box => {
+    box.addEventListener('click', focusHiddenInput);
+    box.addEventListener('touchstart', focusHiddenInput);
+  });
+
+  // Handle input from hidden field
+  hiddenInput.addEventListener('input', function(e) {
+    if (isUnlocked || lives <= 0) return;
     
-    const input = document.getElementById('passwordInput');
-    const wrongMsg = document.getElementById('wrongMsg');
-    if (!input) return;
-    const value = input.value.trim();
+    const value = this.value;
+    // Only allow digits
+    const digits = value.replace(/\D/g, '').slice(0, 6);
+    this.value = digits;
     
-    if (value === PASSWORD) {
+    // Fill pin array
+    for (let i = 0; i < 6; i++) {
+      pin[i] = digits[i] || '';
+    }
+    currentIndex = Math.min(digits.length, 5);
+    updatePinDisplay();
+    
+    // Auto-submit when 6 digits entered
+    if (digits.length === 6) {
+      checkPin();
+    }
+  });
+
+  // Handle backspace/delete key
+  hiddenInput.addEventListener('keydown', function(e) {
+    if (isUnlocked || lives <= 0) return;
+    
+    if (e.key === 'Backspace') {
+      if (this.value.length === 0 && currentIndex > 0) {
+        pin[currentIndex - 1] = '';
+        currentIndex--;
+        updatePinDisplay();
+        // Prevent default to avoid weird behavior
+        e.preventDefault();
+        // Update the input value to match pin
+        this.value = pin.join('');
+      }
+    }
+  });
+
+  // Focus hidden input when clicking on the lock overlay
+  document.getElementById('lockOverlay').addEventListener('click', function(e) {
+    // Don't steal focus if clicking on buttons
+    if (e.target.tagName === 'BUTTON' || e.target.closest('.btn-group') || e.target.closest('.clear-btn')) {
+      return;
+    }
+    focusHiddenInput();
+  });
+
+  function checkPin() {
+    if (isUnlocked || lives <= 0) return;
+    
+    const entered = pin.join('');
+    
+    if (entered === PASSWORD) {
       // UNLOCKED!
       isUnlocked = true;
       const overlay = document.getElementById('lockOverlay');
@@ -750,6 +888,8 @@
       if (overlay) overlay.style.display = 'none';
       if (content) content.classList.add('show');
       if (wrongMsg) wrongMsg.textContent = '';
+      // Mark all boxes as correct
+      pinBoxes.forEach(box => box.classList.add('correct'));
       // Create celebration hearts
       for (let i = 0; i < 10; i++) {
         setTimeout(createHeart, i * 200);
@@ -764,24 +904,27 @@
         wrongMsg.innerHTML = `<span class="emoji-big">💔</span><span class="msg-text">${getRandomWrongMessage()}</span>`;
       }
       
-      // Shake the input
-      input.style.borderColor = '#ff4466';
-      setTimeout(() => { input.style.borderColor = ''; }, 500);
+      // Shake and error style
+      pinBoxes.forEach(box => {
+        box.classList.add('error');
+        setTimeout(() => box.classList.remove('error'), 500);
+      });
       
-      input.value = '';
-      input.focus();
+      // Clear pin
+      clearPin();
       
       if (lives <= 0) {
         // GAME OVER - lock everything
         const hintBtn = document.getElementById('hintBtn');
         if (hintBtn) hintBtn.disabled = true;
-        input.disabled = true;
+        hiddenInput.disabled = true;
         const unlockBtn = document.querySelector('.unlock-btn');
         if (unlockBtn) unlockBtn.disabled = true;
         if (wrongMsg) {
           wrongMsg.innerHTML = `<span class="emoji-big">😭</span><span class="msg-text">Awak dah habis chance... Saya sedih sangat... 😢</span>`;
           wrongMsg.style.color = '#ff4466';
         }
+        pinBoxes.forEach(box => box.style.opacity = '0.4');
       }
     }
   }
@@ -789,7 +932,6 @@
   function giveHint() {
     if (isUnlocked) return;
     if (lives <= 0) {
-      const hintBox = document.getElementById('hintBox');
       if (hintBox) hintBox.textContent = '😢 Awak dah habis nyawa... Tak boleh dapat hint dah...';
       return;
     }
@@ -805,8 +947,6 @@
       setTimeout(() => heartToRemove.classList.remove('pulse'), 500);
     }
     
-    const hintBox = document.getElementById('hintBox');
-    const wrongMsg = document.getElementById('wrongMsg');
     if (wrongMsg) wrongMsg.textContent = '';
     
     // Show hint based on index
@@ -821,31 +961,31 @@
     if (lives <= 0) {
       const hintBtn = document.getElementById('hintBtn');
       if (hintBtn) hintBtn.disabled = true;
-      const input = document.getElementById('passwordInput');
-      if (input && !input.disabled) {
-        input.disabled = true;
-        const unlockBtn = document.querySelector('.unlock-btn');
-        if (unlockBtn) unlockBtn.disabled = true;
-        const wrongMsg2 = document.getElementById('wrongMsg');
-        if (wrongMsg2) {
-          wrongMsg2.innerHTML = `<span class="emoji-big">😭</span><span class="msg-text">Awak dah habis nyawa... Tak boleh teka lagi...</span>`;
-        }
+      hiddenInput.disabled = true;
+      const unlockBtn = document.querySelector('.unlock-btn');
+      if (unlockBtn) unlockBtn.disabled = true;
+      if (wrongMsg) {
+        wrongMsg.innerHTML = `<span class="emoji-big">😭</span><span class="msg-text">Awak dah habis nyawa... Tak boleh teka lagi...</span>`;
       }
+      pinBoxes.forEach(box => box.style.opacity = '0.4');
     }
   }
 
-  // Allow Enter key to submit
-  const pwdInput = document.getElementById('passwordInput');
-  if (pwdInput) {
-    pwdInput.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') {
-        checkPassword();
-      }
-    });
+  function clearPin() {
+    pin = ['', '', '', '', '', ''];
+    currentIndex = 0;
+    hiddenInput.value = '';
+    updatePinDisplay();
+    if (wrongMsg) wrongMsg.textContent = '';
+    focusHiddenInput();
   }
 
-  // Initial lives display
+  // Initial setup
+  updatePinDisplay();
   updateLivesDisplay();
+  
+  // Focus the hidden input on page load after a small delay
+  setTimeout(focusHiddenInput, 500);
 </script>
 </body>
 </html>
