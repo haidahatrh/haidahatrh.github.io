@@ -75,7 +75,7 @@
     .slide .card h1 { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; background: linear-gradient(135deg, #ff88aa, #ffcce0); background-clip: text; -webkit-background-clip: text; color: transparent; text-align: center; margin-bottom: 20px; animation: titleGlow 2s ease-in-out infinite; }
     .slide .card p { font-size: 0.97rem; line-height: 1.75; color: #e0dce8; margin-bottom: 1rem; font-weight: 400; opacity: 0; animation: fadeSlideUp 0.5s ease-out forwards; }
 
-    /* SIMPLE PASSWORD LOCK - NO WHITE FILL */
+    /* PASSWORD LOCK - NO WHITE FILL */
     .lock-overlay {
       background: rgba(10, 10, 26, 0.96);
       border-radius: 28px;
@@ -116,6 +116,20 @@
     .pin-box.error { border-color: #ff4466; animation: shake 0.4s ease; }
     .pin-box.correct { border-color: #66ff88; background: rgba(102, 255, 136, 0.08); }
     @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+    
+    /* WRONG ANSWER ANIMATION - BUZZ EFFECT */
+    @keyframes wrongBuzz {
+      0% { transform: translateX(0) rotate(0deg); }
+      20% { transform: translateX(-10px) rotate(-2deg); }
+      40% { transform: translateX(10px) rotate(2deg); }
+      60% { transform: translateX(-6px) rotate(-1deg); }
+      80% { transform: translateX(6px) rotate(1deg); }
+      100% { transform: translateX(0) rotate(0deg); }
+    }
+    .lock-overlay.wrong {
+      animation: wrongBuzz 0.5s ease;
+      border-color: #ff4466 !important;
+    }
     
     .hidden-input {
       position: absolute;
@@ -168,9 +182,9 @@
     .lives-display {
       display: flex;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
       margin-bottom: 14px;
-      font-size: 1.6rem;
+      font-size: 1.4rem;
     }
     .lives-display .heart-life.lost { opacity: 0.15; transform: scale(0.6); filter: grayscale(1); }
     .lives-display .heart-life.pulse { animation: heartPulse 0.5s ease; }
@@ -251,7 +265,7 @@
       </div>
     </div>
 
-    <!-- CHAPTER 1-8 (shortened for space) -->
+    <!-- CHAPTER 1-8 (shortened) -->
     <div class="swiper-slide">
       <div class="storybook-card">
         <div class="chapter-badge">✦ Chapter One ✦</div>
@@ -354,10 +368,13 @@
           <h2>Enter the Secret Code</h2>
           <p class="sub-text">Only for those who truly know me... 💗</p>
           
+          <!-- LIVES DISPLAY - 5 LIVES FOR HINTS ONLY -->
           <div class="lives-display" id="livesDisplay">
             <span class="heart-life" id="heart1">❤️</span>
             <span class="heart-life" id="heart2">❤️</span>
             <span class="heart-life" id="heart3">❤️</span>
+            <span class="heart-life" id="heart4">❤️</span>
+            <span class="heart-life" id="heart5">❤️</span>
           </div>
           
           <div class="pin-container" id="pinContainer">
@@ -378,7 +395,7 @@
           
           <div class="hint-box" id="hintBox">💭 Click "Hint" for a clue...</div>
           <div class="wrong-msg" id="wrongMsg"></div>
-          <div class="hint-counter" id="hintCounter">💡 Hints remaining: 3</div>
+          <div class="hint-counter" id="hintCounter">💡 Hints remaining: 5</div>
           <button class="clear-btn" onclick="clearPin()">✕ Clear</button>
         </div>
         
@@ -507,11 +524,12 @@
   // ===== PASSWORD SYSTEM =====
   const PASSWORD = '000000';
   const HINTS = ['muahhh duluuu 💋', 'naqib manja sayaaa', 'technology 📱', 'blue 💙', 'call 📞'];
-  let lives = 3;
+  let lives = 5; // 5 LIVES FOR HINTS ONLY
   let hintIndex = 0;
   let isUnlocked = false;
   let pin = ['', '', '', '', '', ''];
   let currentIndex = 0;
+  let wrongAttempts = 0;
   
   const wrongMessages = [
     '💔 Awak dah tak sayang saya ke? hmmm',
@@ -530,6 +548,7 @@
   const hiddenInput = document.getElementById('hiddenPinInput');
   const wrongMsg = document.getElementById('wrongMsg');
   const hintBox = document.getElementById('hintBox');
+  const lockOverlay = document.getElementById('lockOverlay');
 
   function updatePinDisplay() {
     pinBoxes.forEach((box, index) => {
@@ -542,7 +561,7 @@
   }
 
   function updateLivesDisplay() {
-    for (let i = 1; i <= 3; i++) {
+    for (let i = 1; i <= 5; i++) {
       const heart = document.getElementById('heart' + i);
       if (heart) {
         if (i <= lives) {
@@ -576,7 +595,7 @@
   });
 
   hiddenInput.addEventListener('input', function(e) {
-    if (isUnlocked || lives <= 0) return;
+    if (isUnlocked) return;
     const value = this.value;
     const digits = value.replace(/\D/g, '').slice(0, 6);
     this.value = digits;
@@ -591,7 +610,7 @@
   });
 
   hiddenInput.addEventListener('keydown', function(e) {
-    if (isUnlocked || lives <= 0) return;
+    if (isUnlocked) return;
     if (e.key === 'Backspace') {
       if (this.value.length === 0 && currentIndex > 0) {
         pin[currentIndex - 1] = '';
@@ -610,11 +629,37 @@
     focusHiddenInput();
   });
 
+  // Play wrong sound effect using Web Audio API
+  function playWrongSound() {
+    try {
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+      oscillator.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+      
+      oscillator.frequency.value = 200;
+      oscillator.type = 'sawtooth';
+      gainNode.gain.value = 0.15;
+      
+      oscillator.start();
+      setTimeout(() => {
+        oscillator.frequency.value = 150;
+      }, 100);
+      setTimeout(() => {
+        oscillator.stop();
+      }, 300);
+    } catch(e) {
+      // Silently fail if audio not supported
+    }
+  }
+
   function checkPin() {
-    if (isUnlocked || lives <= 0) return;
+    if (isUnlocked) return;
     const entered = pin.join('');
     
     if (entered === PASSWORD) {
+      // UNLOCKED!
       isUnlocked = true;
       document.getElementById('lockOverlay').style.display = 'none';
       document.getElementById('finalContent').classList.add('show');
@@ -624,27 +669,26 @@
         setTimeout(createHeart, i * 200);
       }
     } else {
-      lives--;
-      updateLivesDisplay();
+      // WRONG PASSWORD - JUST SHOW MESSAGE + ANIMATION, NO LIVES DEDUCTED
+      playWrongSound();
+      
+      // Show random wrong message
       if (wrongMsg) {
         wrongMsg.innerHTML = `<span class="emoji-big">💔</span><span class="msg-text">${getRandomWrongMessage()}</span>`;
       }
+      
+      // Shake animation on the overlay
+      lockOverlay.classList.add('wrong');
+      setTimeout(() => lockOverlay.classList.remove('wrong'), 500);
+      
+      // Error animation on pin boxes
       pinBoxes.forEach(box => {
         box.classList.add('error');
         setTimeout(() => box.classList.remove('error'), 500);
       });
-      clearPin();
       
-      if (lives <= 0) {
-        document.getElementById('hintBtn').disabled = true;
-        hiddenInput.disabled = true;
-        document.querySelector('.unlock-btn').disabled = true;
-        if (wrongMsg) {
-          wrongMsg.innerHTML = `<span class="emoji-big">😭</span><span class="msg-text">Awak dah habis chance... Saya sedih sangat... 😢</span>`;
-          wrongMsg.style.color = '#ff4466';
-        }
-        pinBoxes.forEach(box => box.style.opacity = '0.4');
-      }
+      // Clear pin
+      clearPin();
     }
   }
 
@@ -654,28 +698,30 @@
       if (hintBox) hintBox.textContent = '😢 Awak dah habis nyawa... Tak boleh dapat hint dah...';
       return;
     }
+    
+    // DEDUCT 1 LIFE FOR HINT
     lives--;
     updateLivesDisplay();
+    
+    // Animate heart loss
     const heartToRemove = document.getElementById('heart' + (lives + 1));
     if (heartToRemove) {
       heartToRemove.classList.add('pulse');
       setTimeout(() => heartToRemove.classList.remove('pulse'), 500);
     }
+    
     if (wrongMsg) wrongMsg.textContent = '';
+    
+    // Show hint based on index
     if (hintIndex < HINTS.length) {
       if (hintBox) hintBox.innerHTML = `💡 Hint #${hintIndex + 1}: <b>"${HINTS[hintIndex]}"</b>`;
       hintIndex++;
     } else {
       if (hintBox) hintBox.textContent = '😅 Dah habis hint! Cuba teka sendiri sayang...';
     }
+    
     if (lives <= 0) {
       document.getElementById('hintBtn').disabled = true;
-      hiddenInput.disabled = true;
-      document.querySelector('.unlock-btn').disabled = true;
-      if (wrongMsg) {
-        wrongMsg.innerHTML = `<span class="emoji-big">😭</span><span class="msg-text">Awak dah habis nyawa... Tak boleh teka lagi...</span>`;
-      }
-      pinBoxes.forEach(box => box.style.opacity = '0.4');
     }
   }
 
