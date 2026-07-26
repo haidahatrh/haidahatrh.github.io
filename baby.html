@@ -725,6 +725,7 @@
     grabCursor: true,
     speed: 500,
     effect: 'slide',
+    initialSlide: 0 // Ensure it starts on the first slide (Cover)
   });
 
   const prevBtn = document.getElementById('prevBtn');
@@ -751,7 +752,7 @@
   // ===== PIN PASSWORD SYSTEM =====
   const PASSWORD = '000000';
   const HINTS = [
-    'muahh duluuu 💋',
+    'kiss me first 💋',
     'baby 👶',
     'technology 📱',
     'blue 💙',
@@ -858,9 +859,7 @@
         pin[currentIndex - 1] = '';
         currentIndex--;
         updatePinDisplay();
-        // Prevent default to avoid weird behavior
         e.preventDefault();
-        // Update the input value to match pin
         this.value = pin.join('');
       }
     }
@@ -868,7 +867,6 @@
 
   // Focus hidden input when clicking on the lock overlay
   document.getElementById('lockOverlay').addEventListener('click', function(e) {
-    // Don't steal focus if clicking on buttons
     if (e.target.tagName === 'BUTTON' || e.target.closest('.btn-group') || e.target.closest('.clear-btn')) {
       return;
     }
@@ -888,9 +886,7 @@
       if (overlay) overlay.style.display = 'none';
       if (content) content.classList.add('show');
       if (wrongMsg) wrongMsg.textContent = '';
-      // Mark all boxes as correct
       pinBoxes.forEach(box => box.classList.add('correct'));
-      // Create celebration hearts
       for (let i = 0; i < 10; i++) {
         setTimeout(createHeart, i * 200);
       }
@@ -899,22 +895,18 @@
       lives--;
       updateLivesDisplay();
       
-      // Show random wrong message
       if (wrongMsg) {
         wrongMsg.innerHTML = `<span class="emoji-big">💔</span><span class="msg-text">${getRandomWrongMessage()}</span>`;
       }
       
-      // Shake and error style
       pinBoxes.forEach(box => {
         box.classList.add('error');
         setTimeout(() => box.classList.remove('error'), 500);
       });
       
-      // Clear pin
       clearPin();
       
       if (lives <= 0) {
-        // GAME OVER - lock everything
         const hintBtn = document.getElementById('hintBtn');
         if (hintBtn) hintBtn.disabled = true;
         hiddenInput.disabled = true;
@@ -936,11 +928,9 @@
       return;
     }
     
-    // Cost 1 life for hint
     lives--;
     updateLivesDisplay();
     
-    // Animate heart loss
     const heartToRemove = document.getElementById('heart' + (lives + 1));
     if (heartToRemove) {
       heartToRemove.classList.add('pulse');
@@ -949,7 +939,6 @@
     
     if (wrongMsg) wrongMsg.textContent = '';
     
-    // Show hint based on index
     if (hintIndex < HINTS.length) {
       if (hintBox) hintBox.innerHTML = `💡 Hint #${hintIndex + 1}: <b>"${HINTS[hintIndex]}"</b>`;
       hintIndex++;
@@ -957,7 +946,6 @@
       if (hintBox) hintBox.textContent = '😅 Dah habis hint! Cuba teka sendiri sayang...';
     }
     
-    // If lives 0, disable hint and lock
     if (lives <= 0) {
       const hintBtn = document.getElementById('hintBtn');
       if (hintBtn) hintBtn.disabled = true;
@@ -983,9 +971,6 @@
   // Initial setup
   updatePinDisplay();
   updateLivesDisplay();
-  
-  // Focus the hidden input on page load after a small delay
-  setTimeout(focusHiddenInput, 500);
 </script>
 </body>
 </html>
