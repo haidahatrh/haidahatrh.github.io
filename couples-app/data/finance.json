@@ -1,0 +1,18 @@
+[
+    {
+        "id": "43a7bc4292fe",
+        "title": "Date",
+        "date": "2026-09-08",
+        "location": "lala",
+        "purchases": [
+            {
+                "id": "e2d3b629deeb",
+                "item": "popcorn",
+                "amount": 12,
+                "paidBy": "bf",
+                "at": "2026-09-08T06:44:43+02:00"
+            }
+        ],
+        "createdAt": "2026-09-08T06:44:34+02:00"
+    }
+]

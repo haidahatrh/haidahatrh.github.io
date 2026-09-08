@@ -1,0 +1,14 @@
+{
+  "name": "Us",
+  "short_name": "Us",
+  "description": "A private space for us two",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#1a1625",
+  "theme_color": "#1a1625",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}
