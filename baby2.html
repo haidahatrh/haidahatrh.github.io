@@ -43,6 +43,7 @@
     p { font-size: 0.97rem; line-height: 1.75; color: #e0dce8; margin-bottom: 1rem; font-weight: 400; opacity: 0; animation: fadeSlideUp 0.5s ease-out forwards; }
     @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
     b, strong { color: #ff99bb; font-weight: 600; }
+    .highlight { color: #ff88aa; font-weight: 600; background: rgba(255, 136, 170, 0.1); padding: 0 4px; border-radius: 4px; }
     .romantic-quote { background: rgba(255, 136, 170, 0.1); backdrop-filter: blur(5px); padding: 16px 20px; border-radius: 24px; margin: 20px 0; border-left: 4px solid #ff99bb; font-style: italic; animation: gentlePulse 2s ease-in-out infinite; }
     @keyframes gentlePulse { 0%, 100% { transform: scale(1); box-shadow: 0 0 0px rgba(255,100,150,0); } 50% { transform: scale(1.01); box-shadow: 0 5px 20px rgba(255,100,150,0.15); } }
     .malay-message { background: rgba(255, 180, 200, 0.08); backdrop-filter: blur(5px); border-radius: 28px; padding: 20px; margin: 20px 0; border: 1px solid rgba(255, 136, 170, 0.3); position: relative; overflow: hidden; }
@@ -79,7 +80,8 @@
     .slide .card::before { content: "❁"; position: absolute; top: 15px; left: 20px; font-size: 20px; color: #ff88aa; opacity: 0.4; }
     .slide .card::after { content: "❁"; position: absolute; bottom: 15px; right: 20px; font-size: 20px; color: #ff88aa; opacity: 0.4; transform: rotate(180deg); }
     .slide .card h1 { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; background: linear-gradient(135deg, #ff88aa, #ffcce0); background-clip: text; -webkit-background-clip: text; color: transparent; text-align: center; margin-bottom: 20px; animation: titleGlow 2s ease-in-out infinite; }
-    .slide .card p { font-size: 0.97rem; line-height: 1.75; color: #e0dce8; margin-bottom: 1rem; font-weight: 400; opacity: 0; animation: fadeSlideUp 0.5s ease-out forwards; }
+    .slide .card p { font-size: 0.97rem; line-height: 1.75; color: #e0dce8; margin-bottom: 0.7rem; font-weight: 400; opacity: 0; animation: fadeSlideUp 0.5s ease-out forwards; }
+    .slide .card .chapter-badge { text-align: center; font-size: 11px; letter-spacing: 4px; color: #ff88aa; margin-bottom: 15px; text-transform: uppercase; animation: fadeSlideUp 0.5s ease-out; }
 
     .lock-overlay {
       background: rgba(10, 10, 26, 0.96);
@@ -258,6 +260,8 @@
     }
     .clear-btn:hover { background: rgba(255, 255, 255, 0.1); }
     .clear-btn:active { transform: scale(0.95); }
+
+    .card .p-spacer { margin-bottom: 0.7rem; }
   </style>
 </head>
 <body>
@@ -642,217 +646,62 @@
         <div class="chapter-badge">✦ Chapter Ten ✦</div>
         <h1>23 August — Just Another Day With You 🤍</h1>
         
-        <p>Hi, baby sorry sebab sidai lama for this episode.Sorry if this chapter banyak part yang aku terlepas pandang 🥺🥺</p>
-        <p>So, the date starts at Lalaport. And as mentioned, aku mmg tengah cari kedai untuk beli lens. </p>
-    
-        <p>So, luckily kedai tu mmg ada power aku, so beli jela terus and thank you, sayang, sebab bayarkan </p>
-        <p>Aku tahu benda tu bukan untuk kita berdua.</p>
-        <p>Bukan benda dating.</p>
-        <p>Bukan benda yang kau perlukan.</p>
-        <p>It was something I needed for myself.</p>
-        <p>Aku pun sebenarnya dah berniat nak bayar sendiri, tapi kau tetap nak tolong.</p>
-        <p>Even though ada juga moment kita confuse pasal harga, merchant, nak void itu ini… tapi honestly, benda tu tak penting pun.</p>
-        <p>Yang aku ingat cuma satu:</p>
-        <p>kau tetap nak belanja aku.</p>
-        <p>And somehow, benda kecil macam tu buat aku rasa appreciated.</p>
-        <br>
-        <p>Lepas tu kita pergi cari barang makeup aku pula.</p>
-        <p>Kalau tak silap aku, Guardian.</p>
-        <p>Atau Watson.</p>
-        <p>😭</p>
-        <p>Aku pun dah tak ingat.</p>
-        <p>Tapi yang aku ingat…</p>
-        <p>kau bayar lagi.</p>
- 
-        <p>Benda yang langsung tak ada kaitan dengan kau.</p>
-        <p>Tapi kau tetap tolong.</p>
-        <p>Maybe kau kena mula practice dari sekarang kan?</p>
-        <p>Sebab nanti…</p>
-        <p>nak prepare untuk aku. 🤭</p>
-        <p>Lagipun makeup aku bukannya mahal mana pun.</p>
-        <p>Aku pun bukan jenis tiap-tiap minggu pergi beli.</p>
-        <p>Top up barang makeup paling-paling pun tiga atau empat bulan sekali.</p>
-        <p>So tak adalah sampai bankrupt. 😂</p>
-        <br>
-        <p>Lepas tu kita pusing-pusing cari tempat makan.</p>
-        <p>Tapi sebenarnya dari awal aku dah ada satu tempat dalam kepala.</p>
-        <p>Seoul Garden.</p>
-        <p>Aku tak rasa aku akan pergi makan dekat situ dengan orang lain.</p>
-        <p>So bila dah ada kau…</p>
-        <p>"Why not aku cuba dengan kau?"</p>
-        <p>Kita pun pergi.</p>
+        <p>Hai baby, sorry sidai lama hehehe. Aku tak ingat sangat activity kita on that day. So, kalau ada any part yang salah, maaf yee :)</p>
+        <p>Let's start... on that day, kita decide untuk pergi Lalaport and first kedai kita pergi is Focus Point untuk cari contact lens.</p>
+        <p>Nasib baik… ada yang aku nak. 🥹</p>
+        <p>And thank you sayang, sebab bayarkan.</p>
+        <p>Aku tahu benda tu bukan untuk kita berdua. Bukan benda dating. Bukan benda yang kau perlukan. It was something I needed for myself.</p>
+        <p>Even though ada juga moment salah pasal harga, merchant, nak void itu ini….</p>
+        <p>Yang aku ingat cuma satu: <span class="highlight">kau tetap nak belanja aku.</span> And somehow, benda kecil macam tu buat aku rasa appreciated.</p>
 
-        <p>Then kita duduk dan mula pilih lauk.</p>
-        <p>Ayam.</p>
-        <p>Daging.</p>
-        <p>Kambing.</p>
-        <p>Macam-macam.</p>
-        <p>And aku masih ingat kau nak tteokbokki.</p>
-        <p>Nasib baik dekat situ ada.</p>
-        <p>Cuma masalahnya…</p>
-        <p>tak kena dengan tekak kau.</p>
-        <p>So akhirnya siapa yang habiskan?</p>
-        <p>Aku.</p>
-        <p>Of course. 😭</p>
-        <br>
-     
-        <p>As usual, saya jadi princess.</p>
-        <p>Bukan sebab aku sengaja nak mengada.</p>
-        <p>Tapi tiba-tiba semua benda kau yang buat.</p>
-        <p>Aku cuma duduk.</p>
-        <p>Makan.</p>
-        <p>Manja.</p>
-        <p>Dan kau yang handle benda-benda kecil.</p>
-        <p>Thank you, sayang. 🤍</p>
-        <p>Aku hargai benda-benda kecil macam tu walaupun aku kadang-kadang tak cakap.</p>
-        <p>Aku masih ingat yang awal-awal tu kita macam nak duduk depan-depan sebab ruang tu agak sempit.</p>
-        <p>Tapi akhirnya…</p>
-        <p>Tak boleh.</p>
-        <p>Sebab kita ni nak berkepit juga. 😭</p>
-        <p>And aku perasan kau macam tak berapa happy masa tu.</p>
-        <p>So aku fikir,</p>
-        <p>"Kalau aku duduk sebelah kau, at least aku boleh pegang tangan kau."</p>
-        <p>Maybe kalau aku dekat dengan kau, kau akan rasa better.</p>
+        <p>Lepas tu kita pergi cari barang makeup aku pula. Kalau tak silap aku, Guardian. Atau Watson. 😭 Aku pun dah tak ingat.</p>
+        <p>Tapi yang aku ingat… <span class="highlight">kau bayar lagi.</span> Benda yang langsung tak ada kaitan dengan kau. Tapi kau tetap tolong.</p>
+        <p>Maybe kau kena mula practice dari sekarang kan? Sebab nanti… nak prepare untuk aku. 🤭 Lagipun makeup aku bukannya mahal mana pun. Aku pun bukan jenis tiap-tiap minggu pergi beli. Top up barang makeup paling-paling pun tiga atau empat bulan sekali. So still tolerable kan?? 😂</p>
 
-        <br>
-        <p>Lepas tu kita makan macam biasa.</p>
-      
-        <p>pastu record boleh kopek udang paling cepat.</p>
-        <p>😭</p>
-      
-        <p>Last-last…</p>
-        <p>dua-dua pakai tangan.</p>
-  
-        <p>Pastu pasal buat sos pula.</p>
-        <p>Aku tak tahu kau rasa sedap ke tak.</p>
-        <p>Aku main letak je bahan-bahan ikut suka hati.</p>
-        <p>Tapi bagi aku…</p>
-        <p>sedap weh.</p>
-        <p>Gentle.</p>
-        <p>Simple.</p>
-        <p>Tapi sedap.</p>
-        <p>Mungkin sebab aku yang buat.</p>
-        <p>Atau mungkin sebab kau makan.</p>
-        <p>Hehe.</p>
-        <p>Kalau kau baca ni nanti, rate sikit sos aku tu. 🤭</p>
-        <p>And of course…</p>
-        <p>ice cream.</p>
-        <p>Because somehow, dessert memang wajib.</p>
-        <br>
-        <p>Lepas tu kita balik dan singgah semula kedai spec untuk ambil duit.</p>
-        <p>Lepas tu kalau tak silap, kita ada hunting bekal kau juga.</p>
-        <p>Tapi tak jumpa mana yang betul-betul best.</p>
-        <p>So akhirnya aku beli sudu aku.</p>
-   
-     
-        <p>Farm in the City.</p>
-        <p> aku takut kau penat.</p>
-        <p>Aku fikir juga,</p>
-        <p>"Nak ajak ke tak?"</p>
-        <p>Sebab aku tak nak paksa kau.</p>
-        <p>Aku cuma fikir, selagi aku tak spoilkan mood kau, maybe kau okay.</p>
-        <p>And bila kita sampai…</p>
-        <p>Aku happy.</p>
-        <p>Sebab aku ingatkan kau macam main-main je bila kau cakap kau nak tengok haiwan.</p>
-        <p>Rupanya…</p>
-        <p>kau betul-betul excited. 😭</p>
-        <p>Kita tengok macam-macam.</p>
-        <p>Buaya.</p>
-        <p>Kura-kura.</p>
-        <p>Ayam.</p>
-        <p>Swan.</p>
-        <p>Arnab.</p>
-      
-        <p>Aku tengok kau pun aku senyum sendiri.</p>
-        <p>Sebab benda yang simple macam tengok haiwan pun boleh buat kau happy.</p>
-        <p>And honestly, aku suka.</p>
-        <p>Kau sebenarnya boleh pergi dengan kawan-kawan kau.</p>
-        <p>Tak ada benda special pun.</p>
-        <p>Cuma pergi tengok binatang.</p>
-        <p>Tapi somehow bila buat dengan partner…</p>
-        <p>rasa lain.</p>
-        <p>Maybe sebab kita ada someone untuk share the little excitement with.</p>
-        <p>Aku pun suka Farm in the City sebab berbanding Zoo Negara, kita boleh dekat dengan haiwan.</p>
-        <p>Boleh bagi makan.</p>
-        <p>Boleh belai.</p>
-        <p>Boleh ambil gambar dekat-dekat.</p>
-        <p>Tak macam Zoo Negara yang kadang-kadang…</p>
-        <p>jauh nak mampus. 😭</p>
-        <p>Harga pun okay.</p>
-        <p>So kalau kau nak pergi lagi…</p>
-        <p>aku boleh repeat.</p>
-        <p>Sebab aku tahu kau enjoy sangat-sangat.</p>
-        <br>
-        <p>And kalau aku tak salah…</p>
-        <p>Ini mungkin first time aku nampak kau pegang tangan aku in public macam tu.</p>
-        <p>Aku bagi je.</p>
-        <p>Sebab masa tu tak ramai orang.</p>
-        <p>Kalau dekat mall yang ramai orang,aku tak suka.</p>
-        <p>Tapi hari tu…</p>
-        <p>Aku okay.</p>
-        <p>Aku tahu kau suka benda-benda macam ni.</p>
-        <p>Kau selalu cakap kau teringin nak tengok haiwan.</p>
-        <p>So aku tak nak orang lain jadi orang pertama yang teman kau buat benda macam ni.</p>
-        <p>Walaupun aku tak tahu lah…</p>
-        <p>Maybe sebelum ni kau pernah pergi dengan ex kau ke apa.</p>
-        <p>Tapi daripada cara kau excited hari tu…</p>
-        <p>Aku rasa macam first time juga untuk kau.</p>
-        <p>And honestly?</p>
-        <p>Aku suka jadi orang yang ada dengan kau.</p>
-        <br>
-        <p>Lepas tu kita pergi night street sebab nak cari tahu crispy yang viral tu.</p>
-        <p>Tapi macam biasalah…</p>
-        <p>viral = beratur panjang. 😭</p>
-        <p>So aku tengok line tu and terus fikir,</p>
-        <p>"Takpelah. Next time."</p>
-        <p>Kita tunggu sampai kurang orang.</p>
- 
-        <p>Then beli jagung cheese tarik.</p>
-        <p>Yang ni aku happy sebab setiap kali aku balik kerja, kedai tu belum buka.</p>
-        <p>So kali ni…</p>
-        <p>akhirnya aku dapat rasa.</p>
-        <p>Dan paling penting, aku dapat bagi kau rasa juga.</p>
-        <br>
-        <p>Then tiba-tiba…</p>
-        <p>jumpa Cik Yana.</p>
-        <p>😭</p>
-        <p>Aku sendiri pun tak expect akan jumpa dia dekat situ.</p>
-        <p>And kau pula terus jadi segan-segan.</p>
-        <p>Tapi sayang…</p>
-        <p>jangan risau.</p>
-        <p>Aku tak pernah malu pun kau jadi boyfriend aku.</p>
-        <p>Tak pernah.</p>
-        <p>Aku tak kisah siapa yang nampak.</p>
-        <p>Aku tak kisah siapa yang tahu.</p>
-        <p>You're my boyfriend.</p>
-        <p>And aku bangga dengan tu.</p>
-        <p>So jangan fikir yang aku malu dengan kau hanya sebab aku tiba-tiba jumpa orang yang aku kenal.</p>
-        <br>
-        <p>Lepas tu ada orang tu beli shawarma.</p>
-        <p>Walaupun at the end shawarma tu pergi dekat tangan orang lain yang makan…</p>
-    
-        <p>Then kita makan dalam kereta.</p>
-        <p>Borak-borak.</p>
-        <p>Lepak.</p>
-        <p>Dan eventually…</p>
-        <p>kita balik.</p>
-        <br>
-        <p>Aku tahu date ni dah lama.</p>
-        <p>Aku pun tak ingat semua benda.</p>
-        <p>Aku mungkin dah tertinggal beberapa conversation, beberapa tempat, beberapa benda kecil yang sebenarnya berlaku hari tu.</p>
-        <p>So kalau ada part yang aku lupa…</p>
-        <p>kau tolong remind aku okay?</p>
-        <p>Sebab mungkin ada cerita yang kau ingat lebih jelas daripada aku.</p>
-        <p>And maybe one day, bila kita baca balik semua ni sama-sama, kau boleh cerita,</p>
-        <p>"Eh sayang, yang ni sebenarnya jadi macam ni…"</p>
-        <p>And aku akan senyum sebab…</p>
-        <p>walaupun aku lupa detailnya, aku tak lupa yang aku buat dengan kau.</p>
-        <p>Thank you for being there.</p>
-        <p>Thank you for belanja benda-benda yang aku perlukan.</p>
-        <p>Thank you sebab teman aku tengok haiwan.</p>
-        <p>Thank you sebab jadi partner aku dalam semua benda random ni.</p>
- 
-        <p>Love you, sayang. 🤍</p>
+        <p>Lepas tu kita pusing-pusing cari tempat makan. Tapi sebenarnya dari awal aku dah ada satu tempat dalam kepala. Seoul Garden.</p>
+        <p>Aku tak rasa aku akan pergi makan dekat situ dengan orang lain. So bila dah ada kau… "Why not aku cuba dengan kau?" Kita pun pergi.</p>
+        <p>Then kita duduk dan mula pilih lauk. Ayam. Daging. Kambing. Macam-macam.</p>
+        <p>And aku still ingat kau nak tteokbokki. Nasib baik dekat situ ada. Cuma masalahnya… tak kena dengan tekak kau. So akhirnya siapa yang habiskan? Aku. Of course. 😭</p>
+
+        <p>As usual, <span class="highlight">saya jadi princess.</span> Bukan sebab aku sengaja nak mengada. Tapi semua benda kau yang buat. Aku cuma duduk. Makan. Manja. Dan kau yang handle benda-benda kecil.</p>
+        <p>Thank you, sayang. 🤍 Aku hargai benda-benda kecil macam tu walaupun aku kadang-kadang tak cakap.</p>
+        <p>Aku ingat yang awal-awal tu kita macam nak duduk depan-depan sebab ruang tu sempit. Tapi akhirnya… Tak boleh. Sebab kita ni nak berkepit juga. 😭</p>
+        <p>And aku perasan kau macam tak berapa happy masa tu. So aku fikir, "Kalau aku duduk sebelah kau, at least aku boleh tenangkan dia." Maybe kalau aku dekat dengan kau, kau akan rasa better.</p>
+
+        <p>Lepas tu kita makan macam biasa. Pastu record sape kopek udang paling cepat. 😭 Last-last… dua-dua pakai tangan.</p>
+        <p>Pastu pasal buat sos pula. Aku tak tahu kau rasa sedap ke tak. Aku main letak je bahan-bahan ikut suka hati. Tapi bagi aku… <span class="highlight">sedap weh.</span> Gentle. Simple. Tapi sedap. Mungkin sebab aku yang buat. Hehe.</p>
+        <p>Kalau kau baca ni nanti, rate sikit sos aku tu. 🤭 And of course… ice cream as a dessert.</p>
+
+        <p>Lepas tu kita balik dan singgah semula kedai spec untuk ambil duit. Lepas tu kalau tak silap, kita ada hunting bekal kau juga. Tapi tak jumpa mana yang best. So akhirnya aku beli sudu aku je.</p>
+
+        <p>Then, moving on to Farm in the City. Aku takut kau penat. Aku fikir juga, "Nak ajak ke tak?" Sebab aku tak nak paksa kau. Aku cuma fikir, selagi aku tak spoilkan mood kau, maybe kau okay.</p>
+        <p>And bila kita sampai… Aku happy. Sebab aku ingatkan kau macam main-main je bila kau cakap kau nak tengok haiwan. Rupanya… <span class="highlight">kau betul-betul excited.</span> 😭</p>
+        <p>Kita tengok macam-macam. Buaya. Kura-kura. Ayam. Swan. Arnab.</p>
+        <p>Aku tengok kau pun aku boleh tersengih sorang - sorang. Sebab benda yang simple macam tengok haiwan pun boleh buat kau happy. And honestly, aku suka dapat tengok side childish kau.</p>
+        <p>Kau sebenarnya boleh je pergi dengan kawan-kawan kau. Tak ada benda special pun. Cuma pergi tengok binatang. Tapi somehow bila buat dengan partner… rasa lain. Maybe sebab kita ada someone untuk share the little excitement with.</p>
+        <p>Aku pun suka Farm in the City berbanding Zoo Negara, sebab kita boleh dekat dengan haiwan. Boleh bagi makan. Boleh belai. Boleh ambil gambar dekat-dekat. Tak macam Zoo Negara yang kadang-kadang… jauh nak mampus. 😭</p>
+        <p>Harga pun okay. So kalau kau nak pergi lagi… aku onz je nk repeat. Sebab aku tahu kau enjoy sangat-sangat.</p>
+
+        <p>And kalau aku tak salah… Ini mungkin <span class="highlight">first time aku nampak kau pegang tangan aku in public</span> macam tu. Aku bagi je. Sebab masa tu tak ramai orang. Kalau dekat mall yang ramai orang, aku tak suka. Tapi hari tu… Aku okay.</p>
+        <p>Aku tahu kau suka benda-benda macam ni. Kau selalu cakap kau teringin nak tengok haiwan. So aku tak nak orang lain jadi orang pertama yang teman kau buat benda macam ni.</p>
+        <p>Walaupun aku tak tahu lah… Maybe sebelum ni kau pernah pergi dengan ex kau ke apa. Tapi daripada cara kau excited hari tu… Aku rasa macam first time juga untuk kau. And honestly? <span class="highlight">Aku suka jadi orang pertama yang buat something dengan kau.</span></p>
+
+        <p>Lepas tu kita pergi night street sebab nak cari tahu crispy yang viral tu. Tapi macam biasalah… viral = beratur panjang. 😭 So aku tengok line tu and terus fikir, "Takpelah. Next time." Kita tunggu sampai kurang orang.</p>
+        <p>Then beli jagung cheese tarik. Yang ni aku happy sebab setiap kali aku balik kerja, kedai tu belum buka. So kali ni… akhirnya aku dapat rasa. Dan paling penting, aku dapat bagi kau rasa juga.</p>
+
+        <p>Then tiba-tiba… jumpa Cik Yana. 😭 Aku sendiri pun tak expect akan jumpa dia dekat situ. And kau pula terus jadi segan-segan.</p>
+        <p>Tapi sayang… jangan risau. <span class="highlight">Aku tak pernah malu pun kau jadi boyfriend aku.</span> Tak pernah. Aku tak kisah siapa yang nampak. Aku tak kisah siapa yang tahu. You're my boyfriend. And aku bangga dengan tu. So jangan fikir yang aku malu dengan kau hanya sebab aku tiba-tiba jumpa orang yang aku kenal.</p>
+
+        <p>Lepas tu ada orang tu beli shawarma. Walaupun at the end shawarma tu pergi dekat tangan orang lain yang makan…</p>
+        <p>Then kita makan dalam kereta. Borak-borak. Lepak.Then, kita balik.</p>
+
+        <p>Aku tahu date ni dah lama. Aku pun tak ingat semua benda. Aku mungkin dah tertinggal beberapa conversation, beberapa tempat, beberapa benda kecik yang berlaku hari tu.</p>
+        <p>So kalau ada part yang aku lupa… kau tolong remind aku okay? Sebab mungkin ada cerita yang kau ingat lagi jelas daripada aku.</p>
+        <p>And maybe one day, bila kita baca balik semua ni sama-sama, kau boleh cerita, "Eh sayang, yang ni sebenarnya jadi macam ni…"</p>
+        <p>And aku akan senyum sebab… walaupun aku lupa detailnya, <span class="highlight">aku tak lupa yang aku buat dengan kau.</span></p>
+        <p>Thank you for being there. Thank you for belanja benda-benda yang aku perlukan. Thank you sebab teman aku tengok animalsss.</p>
+
+        <p><span class="highlight">Love you, sayang.</span> 🤍</p>
         <p style="text-align:right; margin-top:20px;">— 23 August 2026</p>
         <button class="dashboard-btn" onclick="swiper.slideTo(1)">← Return to Dashboard</button>
       </div>
@@ -864,237 +713,60 @@
         <div class="chapter-badge">✦ Chapter Eleven ✦</div>
         <h1>30 August — The Date That Wasn't Supposed to Happen 🤍</h1>
         
-        <p>Date ni sebenarnya…</p>
-        <p>unexpected gila...</p>
-        <p>Aku tinggal sorang sebab mama papa dah balik kampung. So memang dalam kepala aku, hari tu aku seorang je.</p>
-        <p>Ada terfikir juga nak keluar dengan kau.</p>
-        <p>Tapi aku tak offer pun.</p>
-        <p>Sebab aku tahu kita berdua tengah sengkek. Tengah berjimat.</p>
-        <p>Tapi akhirnya…</p>
-        <p>kau yang ajak aku dulu.</p>
-        
-        <br>
-        <p>Sebenarnya aku ada kenduri kawan dekat Sungai Buloh.</p>
-        <p>Aku tahu aku ada kenduri.</p>
-        <p>Cuma aku lupa. 😭</p>
-        <p>Sebab dalam kepala aku, tarikh tu sepatutnya aku berada dekat Kajang. So aku tak fikir sangat pun pasal kenduri tu.</p>
-        <p>Tapi bila kita dah decide nak keluar, aku fikir,</p>
-        <p>"Okay lah, kita pergi kenduri sekali."</p>
-        <p>So aku pun bawalah baju extra untuk tukar.</p>
-        <p>So, it all starts with buttermilk chicken, taktau la cakap sedap tu sebab jaga hati ke apa, but tu mmg buat pakai kasih sayang heheheh. Best ye? ada orang masak, ada orang suap….</p>
-        <p>then pergi kenduri kawan aku dekat Sungai Buloh.</p>
-        <p>Dan aku tahu kau kena tunggu lama.</p>
-        <p>Sorry sayang.</p>
-        <p>Aku tahu kau kena sidai sorang-sorang while aku dekat kenduri.. nak jumpa member dia tk kerja plak </p>
-      
-        <p>So sekali lagi…</p>
-        <p>sorry.</p>
-        <br>
-        <p>Lepas tu aku tanya kawan aku kalau dia boleh hantarkan aku untuk jumpa kau.</p>
-        <p>Orang-orang dekat kenduri pun sebenarnya dah tahu pasal kau. Bila diaorang tanya aku datang macam mana, aku cakaplah aku datang dengan kau.</p>
-        <p>And bila aku minta kawan aku hantarkan, dia terus okay.</p>
-        <p>So akhirnya aku pergi jumpa kau.</p>
-        <p>Kita parking jauh sikit daripada tempat kau parking.</p>
-        <p>And aku masih ingat muka kau masa tu.</p>
-        <p>Kau macam segan-segan sikit.</p>
-        <p>Duduk kejap…</p>
-        <p>Then tiba-tiba kau terus lari pergi tempat lain. 😭</p>
-        <p>Aku tahu dah.</p>
-        <p>Malu lagi ni.</p>
-        <p>Tak apa.</p>
-        <p>One day nanti kalau ada kesempatan, aku kenalkan kau slowly dengan kawan-kawan aku.</p>
-        <p>Tak payah rushing.</p>
-      
-        <br>
-        <p>Lepas tu aku pergi solat, tukar baju, and macam biasa…</p>
-        <p>kita tak tahu nak pergi mana.</p>
-        <p>HAHAHA.</p>
-      
-   
-        <p>So, kita pergi drive-through McDonald's.</p>
-        <p>Walaupun masa tu aku sebenarnya tengah tak sihat.</p>
-        <p>Sakit tekak.</p>
-        <p>Batuk.</p>
-        <p>Tapi kita ni macam biasa…</p>
-        <p>sakit pun makan.</p>
-        <p>Aku beli McFlurry.</p>
-        <p>Kau beli ayam dengan air.</p>
-        <p>Dan aku masih berdendam dengan McDonald's tu sebab…</p>
-        <p>TAK BAGI FRIES.</p>
-        <p>😭😭😭</p>
-        <p>Aku dah fikir nak makan fries sebab ringan-ringan,.</p>
-       
-        <p>Tiba-tiba fries tak ada.</p>
- 
-        <p>Tapi tak apa.</p>
-        <p>As long as kau dapat dua ayam yang kau nak.</p>
-        <p>Aku okay.</p>
-        <br>
-        <p>Lepas tu kita lepak dekat parking.</p>
-        <p>Sebab aku tahu salah satu benda favourite kau ialah…</p>
-        <p>lepak dalam kereta.</p>
-        <p>Tak perlu tempat fancy.</p>
-        <p>Tak perlu activity besar.</p>
-        <p>Cukup kita parking somewhere, duduk dalam kereta, sembang, main game, peluk-peluk, and spend time together.</p>
-        <p>Masa tu sebenarnya aku rasa sangat-sangat bersalah.</p>
-        <p>Sebab aku tahu aku dah biarkan kau tunggu lama.</p>
-        <p>Kau dah kena sidai sorang-sorang.</p>
-        <p>So bila kita finally dapat masa berdua, aku rasa macam…</p>
-        <p>"Okay. Hari ni aku bagi je apa yang kau nak."</p>
-        <p>Nak peluk?</p>
-        <p>Peluk.</p>
-        <p>Nak cium?</p>
-        <p>Cium.</p>
-        <p>Nak lentuk?</p>
-        <p>Lentuk.</p>
-        <p>Nak main game?</p>
-        <p>Main.</p>
-  
-        <p>Aku cuma nak kau happy.</p>
-        <p>And kau sendiri pun cakap yang moment tu antara moment yang paling kau suka.</p>
-        <p>So aku happy.</p>
-        <p>Kau happy.</p>
-        <p>Dah cukup.</p>
-        <br>
-        <p>Kita ada plan nak solat dekat situ, tapi surau dekat situ buat aku rasa tak berapa selesa.</p>
-        <p>Bukan sebab creepy sangat pun.</p>
-        <p>Aku okay kalau ada orang.</p>
-        <p>Tapi kalau sorang-sorang…</p>
-        <p>tak nak. 😭</p>
-        <p>So kita decide untuk pergi masjid lain.</p>
-        <p>Aku masih ingat yang masa tu aku dah ambil wuduk awal-awal dan kena jaga sampai Maghrib.</p>
-        <p>So aku pun fikir,</p>
-        <p>"Okay lah. Behave."</p>
-        <p>Nasib baik orang tu behave.</p>
-        <p>Tak adalah nak peluk-peluk.</p>
-        <p>Tak adalah nak cium-cium.</p>
-        <p>Masing-masing buat hal sendiri.</p>
-        <p>Walaupun hujung-hujung tu terpegang rambut sikit…</p>
-        <p>Tak apalah.</p>
-        <p>Kita kan ada ChatGPT. 😭</p>
-        <p>ChatGPT TAK BATAL.</p>
-        <p>So boleh lah terus solat.</p>
-        <br>
-        <p>Lepas tu aku daftarkan balik JPJ kau.</p>
-        <p>Yalah, takut ada roadblock.</p>
-        <p>Walaupun akhirnya memang ada roadblock juga.</p>
-        <p>Tapi rupanya dia tahan motor je. 😭</p>
-        <p>Kau pula dah mula gelabah sebab handphone tak ada bateri bagai.</p>
-        <p>Aku tengok pun macam,</p>
+        <p>So now, kita borak pasal date yang tiber tiber je happened, unexpected gila... Aku tinggal sorang sebab mama papa dah balik kampung. So memang dalam kepala aku, hari tu aku seorang je.</p>
+        <p>Ada terfikir juga nak keluar dengan kau. Tapi aku tak offer pun. Sebab aku tahu kita berdua tengah sengkek. Tengah berjimat. Tapi akhirnya… <span class="highlight">kau yang ajak aku dulu.</span></p>
 
-        <br>
-        <p>Then kita pergi Bukit Saga.</p>
-        <p>Dan dekat situ pun sama.</p>
-        <p>Cari parking.</p>
-        <p>Then lepak.</p>
-        <p>Aku tahu kau masih trauma dengan satu kejadian yang melibatkan…</p>
-        <p>handphone terbang.</p>
-        <p>😭</p>
-        <p>Sorry weh.</p>
-        <p>Yang tu memang salah aku.</p>
-        <p>Aku memang ada habit suka campak barang. Kalau dekat rumah pun, barang boleh je aku campak dekat mana-mana yang aku rasa nak campak.</p>
-        <p>So masa tu aku memang tak expect langsung benda tu akan landing dekat situ.</p>
-        <p>Tapi sorry sayang.</p>
-        <p>Aku harap sekarang dah okay.</p>
-        <p>Harap dah tak senak.</p>
-        <p>Harap dah boleh jalan elok-elok.</p>
-        <p>Sebab sebelum ni aku tengok kau jalan macam orang baru lepas sunat. 😭</p>
-        <br>
-        <p>Lepas tu kita pergi cari makan.</p>
-        <p>Tomyam.</p>
-        <p>Kita jalan-jalan sampai hujung, tengok kedai mana yang nampak best.</p>
-        <p>Akhirnya kita pilih satu kedai yang tak ramai orang.</p>
-        <p>And bila dah duduk baru kita sedar…</p>
-        <p>Oh. Patutlah tak ramai orang.</p>
-        <p>Pokok besar betul-betul lindung view. 😭</p>
-        <p>Tapi tak apa.</p>
-       
-        <p>Pastu ada orang tu pegang pegang tangan kita. Depan mata pun boleh rindu lagi ekk.</p>
+        <p>Sebenarnya aku ada kenduri kawan dekat Sungai Buloh. Aku tahu aku ada kenduri. Cuma aku lupa. 😭 Sebab dalam kepala aku, tarikh tu sepatutnya aku kat Kajang. So aku tak fikir sangat pun pasal kenduri tu.</p>
+        <p>Tapi bila kita dah decide nak keluar, aku fikir, "Okay lah, kita pergi kenduri sekali." So aku pun bawalah baju extra untuk tukar.</p>
+        <p>So, it all starts with buttermilk chicken, taktau la cakap sedap tu sebab jaga hati ke apa, but tu mmg buat pakai kasih sayang heheheh. Best ye? ada orang masak, ada orang suap…, and sebab tgh hujung bulan kan, nak keluar dating tapi dok fikir wallet kosong so takpela aku bedal je masak.</p>
+        <p>then pergi kenduri kawan aku dekat Sungai Buloh. Sorry sayang, Aku tahu kau kena sidai sorang-sorang, lama plak tu while aku dekat kenduri.. nak jumpa member dia tk kerja plak. So sekali lagi… sorry.</p>
 
-        <p>Kita order tomyam, udang goreng tepung, telur dadar kalau tak silap.</p>
-        <p>Makan macam biasa.</p>
-        <p>Sembang.</p>
-        <p>Lepak.</p>
-        <p>Enjoy the moment.</p>
-        <br>
-       
-        <p>l kau dah bagitahu family kau yang kau nak tengok bunga api.</p>
-        <p>Dalam kepala aku sebenarnya,</p>
-        <p>"Dah pukul 12 ni. Takkanlah nak keluar lagi berdua?"</p>
-        <p>Tapi aku tengok muka kau.</p>
+        <p>Lepas tu aku tanya kawan aku kalau dia boleh hantarkan aku untuk jumpa kau. Orang-orang dekat kenduri pun sebenarnya dah tahu pasal kau. Bila diaorang tanya aku datang macam mana, aku cakaplah aku datang dengan kau.</p>
+        <p>And bila aku minta kawan aku hantarkan, dia terus okay. So akhirnya aku pergi jumpa kau.</p>
+        <p>Kitorang parking jauh sikit dari tempat kau parking. And aku still ingat muka kau masa tu. Kau macam shy shyton sikit. Then tiba-tiba kau terus lari pergi tempat lain. 😭</p>
 
-        <p>And aku tahu kau betul-betul nak.</p>
-        <p>Dan sebab aku sayang kau.</p>
-        <p> kalau aku tak teman kau malam tu, aku takut satu hari nanti kau buat benda yang kau teringin tu dengan orang lain.</p>
-        <p>Aku takut kehilangan kau.</p>
-        <p>Sangat.</p>
-        <p>So aku fikir,</p>
-        <p>"Why not?"</p>
-        <p>Dah alang-alang kita dah keluar.</p>
-        <p>Dekat rumah pun tak ada siapa.</p>
-        <p>So aku teman kau.</p>
-        <p>Kita decide untuk pergi Bukit Antarabangsa.</p>
-        <p>Sebab aku fikir, dah dekat dengan rumah.</p>
-        <br>
-        <p>Sampai dekat Bukit Antarabangsa, kita berjaya dapat parking.</p>
-        <p>Tapi aku perasan sesuatu.</p>
-        <p>Kau macam…</p>
-        <p>tak okay.</p>
-        <p>Kau nampak risau.</p>
-        <p>Gelisah.</p>
-        <p>Aku tak ingat sangat apa yang kau fikir masa tu, tapi aku rasa mungkin pasal kereta.</p>
-        <p>Esoknya dah kena pulangkan.</p>
-        <p>Entah.</p>
-        <p>Tapi aku masih ingat kau masa tu.</p>
-        <p>Aku tengok kau gigit kuku, kau pula diam je.</p>
-        <p>Comel.</p>
-        <p>Tak tahu kenapa dalam keadaan kau tengah risau pun aku boleh rasa kau comel. 😭</p>
-        <p>Then akhirnya kita keluar tengok bunga api.</p>
-        <p>Dan honestly…</p>
-        <p>sorry kalau kau letak expectation tinggi. 😭</p>
-        <p>Sebab aku tahu sebelum ni bunga api dekat situ lagi jelas.</p>
-        <p>Lagi meriah.</p>
-        <p>Lagi banyak.</p>
-        <p>Tapi tahun ni macam tak berapa meriah sangat.</p>
-        <p>Tak apalah.</p>
-        <p>At least kita dah cuba.</p>
-        <p>At least malam tu aku ada dekat sebelah kau.</p>
-        <br>
-        <p>Lepas bunga api habis, kita balik.</p>
-        <p>Dan aku still ingat cubaan kita nak cilok daripada barisan kereta yang panjang tu.</p>
-        <p>Kita ikut abang yang bawa kereta besar tu.</p>
-        <p>Slow-slow…</p>
-        <p>Cilok…</p>
-        <p>And finally…</p>
-        <p>BERJAYA. 😭</p>
-       
-        <p>Buka tingkap.</p>
-        <p>Angkat tangan.</p>
-        <p>Siap cakap terima kasih dekat orang tu.</p>
-       
-        <br>
-        <p>And then kita balik.</p>
-        <p>Sampai rumah.</p>
-        <p>That's it.</p>
-       
-        <p>And kalau aku fikir balik…</p>
-        <p>seumur hidup aku, aku tak pernah stay lama-lama dengan jantan sampai lewat macam ni.</p>
-        <p>Serious.</p>
-        <p>Tak pernah.</p>
-        <p>Tapi dengan kau…</p>
-        <p>Aku boleh.</p>
-        <p>Aku nak.</p>
-        <p>Sebab walaupun penat, walaupun sakit, walaupun kita tak tahu nak pergi mana, walaupun plan asyik berubah…</p>
-        <p>aku tetap rasa,</p>
-        <p>"Tak apa. Asalkan dengan kau."</p>
-        <p>Maybe that's what made this date special.</p>
-        <p>It wasn't planned.</p>
-        <p>It wasn't perfect.</p>
-        <p>It wasn't even supposed to happen.</p>
-        <p>But somehow…</p>
-        <p>kau ajak, aku datang.</p>
-        
-        <p>That's enough for me. 🤍</p>
+        <p>Lepas tu aku pergi solat, tukar baju, and macam biasa… kita tak tahu nak pergi mana. HAHAHA.</p>
+        <p>So, kita pergi drive-through McDonald's. Walaupun masa tu aku sebenarnya tengah tak sihat. Sakit tekak. Batuk. Tapi wtv… sakit pun nk makan ais jugak.</p>
+        <p>Aku beli McFlurry. Kau beli ayam dengan air. Dan aku masih berdendam dengan McDonald's tu sebab… <span class="highlight">TAK BAGI FRIES.</span> 😭😭😭 Aku dah fikir nak makan fries sebab ringan-ringan. Tiba-tiba fries tak ada.</p>
+        <p>Tapi tak apa. As long as kau dapat dua ayam yang kau nak. Aku okay.</p>
+
+        <p>Lepas tu kita lepak dekat parking. Sebab aku tahu salah satu benda favourite kau ialah… lepak dalam kereta. Tak perlu tempat fancy. Cukup kita parking somewhere, duduk dalam kereta, sembang, main game, and spend time together.</p>
+        <p>Masa tu sebenarnya aku rasa sangat-sangat bersalah. Sebab aku tahu aku dah biarkan kau tunggu lama. Kau dah kena sidai sorang-sorang.</p>
+        <p>So bila kita finally dapat masa berdua, aku rasa macam… "Okay. Hari ni <span class="highlight">aku bagi je apa yang kau nak.</span>" Nak peluk? Peluk. Nak cium? Cium. Nak lentuk? Lentuk. Nak main game? Main.</p>
+        <p>Aku cuma nak kau happy. And kau sendiri pun cakap yang moment tu antara moment yang paling kau suka. So aku happy. Kau happy. Dah cukup.</p>
+
+        <p>Kita ada plan nak solat dekat situ, tapi surau dekat situ buat aku rasa tak berapa selesa. Bukan sebab creepy sangat pun. Aku okay kalau ada orang. Tapi kalau sorang-sorang… tak nak. 😭</p>
+        <p>So kita decide untuk pergi masjid lain. Aku ingat yang masa tu aku dah ambil wuduk awal-awal dan kena jaga sampai Maghrib. So aku pun fikir, "Okay lah. Behave."</p>
+        <p>Nasib baik orang tu behave. Tak adalah nak peluk-peluk. Tak adalah nak cium-cium. Masing-masing buat hal sendiri. Walaupun hujung-hujung tu terpegang rambut sikit… Tak apalah. Kita kan ada ChatGPT. 😭 ChatGPT kata TAK BATAL. So boleh lah terus solat.</p>
+
+        <p>Lepas tu aku daftarkan balik JPJ kau. Yalah, takut ada roadblock. Walaupun akhirnya memang ada roadblock juga. Tapi rupanya dia tahan motor je. 😭 Kau pula dah mula gelabah sebab handphone tak ada bateri bagai.</p>
+
+        <p>Then kita pergi Bukit Saga. Dan dekat situ pun sama. Cari parking. Then lepak.</p>
+        <p>Aku tahu kau masih trauma dengan satu kejadian yang melibatkan… handphone terbang. 😭 Sorry weh. Yang tu memang salah aku. Aku memang ada habit suka campak barang. Kalau dekat rumah pun, barang aku campak dekat mana-mana yang aku rasa nak campak.</p>
+        <p>So masa tu aku memang tak expect langsung benda tu akan landing dekat situ. Tapi sorry sayang. Aku harap sekarang dah okay. Harap dah tak senak. Harap dah boleh jalan elok-elok. Sebab sebelum ni aku tengok kau jalan macam orang baru lepas sunat. 😭</p>
+
+        <p>Lepas tu kita pergi cari makan. Tomyam. Kita jalan-jalan sampai hujung, tengok kedai mana yang nampak best. Then kita pilih satu kedai yang tak ramai orang.</p>
+        <p>And bila dah duduk baru kita sedar… Oh. Patutlah tak ramai orang. Pokok besar betul-betul lindung view. 😭 Tapi tak apa. Pastu ada orang tu pegang pegang tangan kita. Depan mata pun boleh rindu lagi ekk.</p>
+        <p>Kita order tomyam, udang goreng tepung, telur dadar kalau tak silap. Makan macam biasa. Sembang. Lepak. Enjoy the moment.</p>
+
+        <p>Kau dah bagitahu family kau yang kau nak tengok bunga api. Dalam kepala aku sebenarnya, "Dah pukul 12 ni. Takkanlah nak keluar lagi berdua?" Tapi aku tengok muka kau. And aku tahu kau betul-betul nak.</p>
+        <p>Dan sebab aku sayang kau. Kalau aku tak teman kau malam tu, aku takut satu hari nanti kau buat benda yang kau teringin tu dengan orang lain. <span class="highlight">Aku takut kehilangan kau.</span> Sangat.</p>
+        <p>So aku fikir, "Why not?" Dah alang-alang kita dah keluar. Dekat rumah pun tak ada siapa. So aku teman kau. Kita decide untuk pergi Bukit Antarabangsa. Sebab aku fikir, dah dekat dengan rumah.</p>
+
+        <p>Sampai dekat Bukit Antarabangsa, kita berjaya dapat parking. Tapi aku perasan sesuatu. Kau macam… tak okay. Kau nampak risau. Gelisah.</p>
+        <p>Aku tak ingat sangat apa yang kau fikir masa tu, tapi aku rasa mungkin pasal kereta. Esoknya dah kena pulangkan awal pagi.</p>
+        <p>Tapi kau masa tu. Aku tengok kau gigit kuku, kau pula diam je. <span class="highlight">Comel.</span> Tak tahu kenapa dalam keadaan kau tengah risau pun aku boleh rasa kau comel. 😭</p>
+        <p>Then akhirnya kita keluar tengok bunga api. Dan honestly… sorry kalau kau letak expectation tinggi. 😭 Sebab aku tahu sebelum ni bunga api dekat situ lagi jelas. Lagi meriah. Lagi banyak. Tapi tahun ni macam tak berapa meriah sangat.</p>
+        <p>Tak apalah. At least kita dah cuba. At least malam tu aku ada dekat sebelah kau.</p>
+
+        <p>Lepas bunga api habis, kita balik. Dan aku still ingat cubaan kita nak cilok daripada barisan kereta yang panjang tu. Kita ikut abang yang bawa kereta besar tu. Slow-slow… Cilok… And finally… <span class="highlight">BERJAYA.</span> 😭 Buka tingkap. Angkat tangan. Siap cakap terima kasih dekat orang tu.</p>
+
+        <p>And then kita balik. Sampai rumah. That's it.</p>
+        <p>And kalau aku fikir balik… seumur hidup aku, <span class="highlight">aku tak pernah stay lama-lama dengan jantan sampai lewat macam ni.</span> Serious. Tak pernah.</p>
+        <p>Tapi dengan kau… Aku boleh. Aku nak. Sebab walaupun penat, walaupun sakit, walaupun kita tak tahu nak pergi mana, walaupun plan asyik berubah… aku tetap rasa, "Tak apa. Asalkan dengan kau."</p>
+        <p>Maybe that's what made this date special. It wasn't planned. It wasn't perfect. It wasn't even supposed to happen. But somehow… kita dapat create banyak moments.</p>
+
+        <p><span class="highlight">That's enough for me.</span> 🤍</p>
         <p style="text-align:right; margin-top:20px;">30 August 2026 — the date that wasn't supposed to happen.<br>And maybe, somehow, those are always the dates I remember the most. 🤍</p>
         <button class="dashboard-btn" onclick="swiper.slideTo(1)">← Return to Dashboard</button>
       </div>
@@ -1106,154 +778,59 @@
         <div class="chapter-badge">✦ Chapter Twelve ✦</div>
         <h1>31 August — The Date We Never Planned 🤍</h1>
         
-        <p>Honestly, date kali ni bukanlah date yang kita plan. and kita dah pun spend whole day together yesterday. So, bila aku tengok kau lost tktau nak pergi mana, nak balik rumah kakak pun macam tak ada siapa yang offer, nak balik Klang pula jauh so, aku mula fikir.</p>
+        <p>Jangan bosan ye baca, ni last one hehehe... Honestly, date kali ni bukanlah date yang kita plan. and kita dah pun spend whole day together yesterday. So, bila aku tengok kau lost tktau nak pergi mana, nak balik rumah kakak pun macam tak ada siapa yang offer, nak balik Klang pula jauh so, aku mula fikir.</p>
         <p>"Kalau bukan aku yang teman kau, siapa?"</p>
-        <p>So, alang alang rumah pun takde sape and even thought at first aku fikir nak puasa hehehh tapi takpela gagahkan diri jugak keluar. Aku bukan taknak jumla kau cuma dalam kepala aku, keluar dengan kau tetap dikira date. Kena siap, kena nampak elok, kena fikir nak pakai apa.</p>
- 
-        <p>Aku malas nak bersiap. 😭</p>
- 
-        <p>Aku pakai simple-simple. Hoodie, T-shirt, slipper, takde pun effort macam nak pergi mall atau dating tempat fancy. Aku pun tak tahu kita nak buat apa. Aku cuma tahu aku nak teman kau.</p>
-        <p>Nanti fikir dekat sana.</p>
-        <p>Sebab yang penting, kau perlukan aku waktu tu.</p>
-        <br>
+        <p>So, alang alang rumah pun takde sape and even thought at first aku fikir nak puasa hehehh tapi takpela gagahkan diri jugak keluar. Aku bukan taknak jumpa kau cuma dalam kepala aku, keluar dengan kau tetap dikira date. Kena siap, kena nampak elok, kena fikir nak pakai apa.</p>
+        <p><span class="highlight">Aku malas nak bersiap.</span> 😭</p>
+        <p>Aku pakai simple-simple. Hoodie, T-shirt, slipper, takde pun effort macam nak pergi mall atau dating tempat fancy. Aku pun tak tahu kita nak buat apa. Aku cuma tahu aku nak teman kau. Nanti fikir dekat sana. Sebab yang penting, kau perlukan aku waktu tu.</p>
+
         <p>Aku bawa kau pergi makan WONG SOLO. Bukan macam tempat yang kita selalu pergi — grill, steamboat, tempat yang kita kena bangun, cedok makanan sendiri, ulang-alik ambil itu ini.</p>
-        <p>Kali ni aku nak kita duduk bersila.</p>
-        <p>Sembang.</p>
-        <p>Relax.</p>
-        <p>Dan biar orang lain yang serve kita.</p>
-        <p>Aku pun dah lama tak makan dekat situ, so memang craving juga. Cuma aku takut kau tak nak duduk bersila. Tapi tiba-tiba kau yang excited,</p>
-        <p>"Jomlah duduk bersila."</p>
-        <p>HAHAHA.</p>
-        <p>So kita pun duduklah dekat situ.</p>
-        <p>Aku sendiri tak tahu pun masa tu tak ada ikan talapq. 😭 So kita ambil ayam je sebab memang masa tu aku nak makan ayam. Cuma mungkin masin sikit.</p>
-        <p>Aku tak berapa ingat sangat apa yang kita borakkan hari tu.</p>
-        <p>Tapi aku ingat satu benda.</p>
-        <p>Aku sangat selesa dengan kau.</p>
-        <p>Aku boleh duduk macam mana aku nak. Boleh melunjur, boleh naik lutut, boleh duduk sesuka hati. Aku tak perlu fikir,</p>
-        <p>"Eh, kena duduk elok."</p>
-        <p>"Kena nampak ayu."</p>
-        <p>"Kena jaga posture."</p>
-        <p>Tak.</p>
-        <p>Dengan kau, aku tak perlu pretend jadi perempuan yang sempurna.</p>
-        <p>Aku cuma perlu jadi aku.</p>
-        <p>And aku suka feeling tu.</p>
-        <p>Aku tak perlu fake anything bila dengan kau.</p>
-       
-        <br>
+        <p>Kali ni aku nak kita duduk bersila. Sembang. Relax. Dan biar orang lain yang serve kita.</p>
+        <p>Aku pun dah lama tak makan dekat situ, so memang craving juga. Cuma aku takut kau tak nak duduk bersila. Tapi tiba-tiba kau yang excited, "Jomlah duduk bersila." HAHAHA.</p>
+        <p>So kita pun duduklah dekat situ. Aku sendiri tak tahu pun masa tu tak ada ikan talapia. 😭 So kita ambil ayam je sebab memang masa tu aku nak makan ayam. Cuma masin sikit.</p>
+        <p>Aku tak berapa ingat sangat apa yang kita borakkan hari tu. Tapi aku ingat satu benda. <span class="highlight">Aku sangat selesa dengan kau.</span></p>
+        <p>Aku boleh duduk macam mana aku nak. Boleh melunjur, boleh naik lutut, boleh duduk sesuka hati. Aku tak perlu fikir, "Eh, kena duduk elok." "Kena nampak ayu." "Kena jaga posture." Tak.</p>
+        <p>Dengan kau, aku tak perlu pretend jadi perempuan yang sempurna. Aku cuma perlu jadi aku. And aku suka feeling tu. <span class="highlight">Aku tak perlu fake anything bila dengan kau.</span></p>
+
         <p>Lepas makan, kita singgah FamilyMart sebab aku nak cari cheese cottage yang aku suka. Tapi benda yang aku cari tu tak ada. So aku beli je cheese pudding.</p>
         <p>Sebelum pergi cashier, aku sempat ambil strawberry cheese mochi sebab yang tu memang sedap gila. 😭</p>
-        <p>Then sampailah dekat cashier.</p>
-        <p>Ya Allah.</p>
-        <p>Lambatnya.</p>
-        <p>Orang tu sibuk refill macam-macam — ketam lah, sosej lah, entah apa-apa lagi — sedangkan aku dekat situ dah berdiri cam orang bangang tunggu nak bayar.</p>
-        <p>Dalam kepala aku dah mula fikir,</p>
-        <p>"Harap-harap kau tak mengamok." 😭</p>
-        <p>Aku pun cuba cakap elok-elok, bagitahu yang kita nak bayar.</p>
-        <p>Nasib baik everything okay.</p>
-        <p>Kalau lama sangat, aku pun boleh naik angin juga. 😂</p>
-        <br>
-        <p>Lepas tu kita masuk kereta.</p>
-        <p>Kau cakap kau nak cari cable iphone.</p>
-        <p>Tapi sebelum pergi cari cable tu, kita singgah usha rumah sewa Papa. Rumah kos rendah yang orang Indon duduk tu. Aku cuma nak tunjuk salah satu aset yang Papa masih ada.</p>
-        <p>Then kita masuk dekat parking bangunan tu.</p>
-        <p>Dan Again…</p>
-        <p>Palang parking tu buat hal. 😭</p>
-        
-        <p>Dalam hati aku dah mula takut aku sendiri yang mengamok.</p>
-        <p>Tapi Alhamdulillah, semuanya settle juga.</p>
+        <p>Then sampailah dekat cashier. Ya Allah. Lambatnya. Orang tu sibuk refill macam-macam — ketam lah, sosej lah, entah apa-apa lagi — sedangkan aku dekat situ dah berdiri cam orang bangang tunggu nak bayar.</p>
+        <p>Dalam kepala aku dah mula fikir, "Harap-harap kau tak mengamok." 😭 Aku pun cuba cakap elok-elok, bagitahu yang kita nak bayar. Nasib baik everything okay. Kalau lama sangat, aku pun boleh naik angin juga. 😂</p>
+
+        <p>Lepas tu kita masuk kereta. Kau cakap kau nak cari cable iphone. Tapi sebelum pergi cari cable tu, kita singgah usha rumah sewa Papa. Rumah kos rendah yang orang Indon duduk tu. Aku cuma nak tunjuk salah satu aset yang Papa masih ada.</p>
+        <p>Then kita masuk dekat parking bangunan tu. Dan Again… Palang parking tu buat hal. 😭 Dalam hati aku dah mula takut aku sendiri yang mengamok. Tapi Alhamdulillah, semuanya settle juga.</p>
         <p>Lepas tu kita pergi cari cable dekat kedai gadget. Kau nak cari yang murah — aku faham, dah hujung bulan kan. 😂</p>
-        <p>Nak cari cover case pun aku rasa baik beli online sebab yang ada dekat situ pun tak menarik sangat.</p>
-        <p>Kalau tak silap aku, lepas tu kita pergi cari kedai haiwan pula. Sekali kene scam dengan waze hmmm</p>
-    
-        <br>
-        <p>Lepas semua tu, kau cakap kau cuma nak lepak dalam kereta.</p>
-        <p>And honestly, aku tahu kau suka benda tu.</p>
-        <p>Lepak dalam kereta. Sembang. Main game.</p>
+        <p>Nak cari cover case pun aku rasa baik beli online sebab yang ada dekat situ pun tak menarik sangat. Kalau tak silap aku, lepas tu kita pergi cari kedai haiwan pula. Sekali kene scam dengan waze hmmm</p>
+
+        <p>Lepas semua tu, kau cakap kau cuma nak lepak dalam kereta. And honestly, aku tahu kau suka benda tu. Lepak dalam kereta. Sembang. Main game.</p>
         <p>So aku fikir, dekat parking zoo tu mungkin boleh juga kita duduk lama-lama.</p>
+        <p>Then ada seorang ni tiba-tiba cakap dia mengantuk. So kita pun belai belai la dia. Kau pula boleh kata nak dimanja-manjakan macam Hannan. 😭</p>
+        <p>So aku belai kau sampailah kau betul-betul lena. Sebelum ni bukan main susah nak tidur. Tiba-tiba baru kena belai sikit… terus lena.</p>
+        <p>Aku sempat cium kau sikit. Sikit je (kot). Nasib baik kau tak sedar. 🤭</p>
+        <p>Tapi masa aku tengok kau tidur, aku rasa something yang susah nak explain. Bukan sebab kau nampak perfect atau apa. Tapi sebab aku tengok kau dalam keadaan yang tenang.</p>
+        <p>And aku suka tengok kau macam tu. Lately aku tahu kau ada masalah nak tidur. So bila aku tengok kau boleh lena dengan tenang dekat sebelah aku, hati aku rasa… sejuk.</p>
+        <p><span class="highlight">Aku suka tengok muka kau masa tidur.</span> Dalam kepala aku cuma ada satu benda: "Tak buruk pun sayang." Sebab bila dah sayang seseorang, semuanya nampak handsome.</p>
 
-        <p>Then ada seorang ni tiba-tiba cakap dia mengantuk.</p>
-        <p>So kita pun belai belai la dia.</p>
-        <p>Kau pula boleh kata nak dimanja-manjakan macam Hannan. 😭</p>
-        <p>So aku belai kau sampailah kau betul-betul lena. Sebelum ni bukan main susah nak tidur.</p>
-        <p>Tiba-tiba baru kena belai sikit…</p>
-        <p>terus lena.</p>
-        <p>Aku rasa macam,</p>
-        <p>Aku sempat cium kau sikit.</p>
-        <p>Sikit je (kot).</p>
-        <p>Nasib baik kau tak sedar. 🤭</p>
-        <p>Tapi masa aku tengok kau tidur, aku rasa something yang susah nak explain.</p>
-        <p>Bukan sebab kau nampak perfect atau apa.</p>
-        <p>Tapi sebab aku tengok kau dalam keadaan yang tenang.</p>
-        <p>And aku suka tengok kau macam tu.</p>
-        <p>Lately aku tahu kau ada masalah nak tidur. So bila aku tengok kau boleh lena dengan tenang dekat sebelah aku, hati aku rasa…</p>
-        <p>sejuk.</p>
-       
-        <p>Aku suka tengok muka kau masa tidur.</p>
+        <p>Lepas tu kita balik rumah. Solat. Then keluar balik sebab nak cari takoyaki. Dan bermulalah misi takoyaki yang gagal. 😭</p>
+        <p>Kita dah turun sampai Lembah Keramat, sekali tempat tu tutup. So kita pergi pula dekat Street Night Market. Masalahnya… Hari tu Isnin. Dan aku tahu je sebenarnya pasar malam tu tutup hari Isnin. Aku cuma lupa yang hari tu memang Isnin. 😭</p>
+        <p>So kau dah turun jauh-jauh… tapi tak dapat apa-apa. Aku minta maaf sangat sebab menyusahkan kau turun sampai sana.</p>
+        <p>Last-last kita daki balik bukit dan beli burger je. Aku sebenarnya plan nak singgah 7-Eleven sekali sebab nak suruh kau beli air, tapi kau tak nak. So takpela. Burger pun burgerlah.</p>
 
-        <p>Dalam kepala aku cuma ada satu benda:</p>
-        <p>"Tak buruk pun sayang."</p>
-        <p>Sebab bila dah sayang seseorang, l</p>
-        <p>semuanya nampak handsome.</p>
-        <br>
-        <p>Lepas tu kita balik rumah.</p>
-        <p>Solat.</p>
-        <p>Then keluar balik sebab nak cari takoyaki.</p>
-        <p>Dan bermulalah misi takoyaki yang gagal. 😭</p>
-        <p>Kita dah turun sampai Lembah Keramat, sekali tempat tu tutup.</p>
-        <p>So kita pergi pula dekat Street Night Market.</p>
-        <p>Masalahnya…</p>
-        <p>Hari tu Isnin.</p>
-        <p>Dan aku tahu je sebenarnya pasar malam tu tutup hari Isnin.</p>
-        <p>Aku cuma lupa yang hari tu memang Isnin. 😭</p>
-        <p>So kau dah turun jauh-jauh…</p>
-        <p>tapi tak dapat apa-apa.</p>
-        <p>Aku minta maaf sangat sebab menyusahkan kau turun sampai sana.</p>
-        <p>Last-last kita daki balik bukit dan beli burger je.</p>
-        <p>Aku sebenarnya plan nak singgah 7-Eleven sekali sebab nak suruh kau beli air, tapi kau tak nak.</p>
-        <p>So takpela.</p>
-        <p>Burger pun burgerlah.</p>
-        <br>
-        <p>Lepas tu kita lepak pula dekat parking area rumah aku.</p>
-        <p>Dekat situ pun kita tak buat apa sangat.</p>
-        <p>Just duduk.</p>
-        <p>Sembang. 👀👀 Mana ada buat benda bukan bukan kann???</p>
-  
-        <p>And then sampai masa untuk berpisah.</p>
-        <p>Aku balik rumah.</p>
-        <p>Makan burger.</p>
-        <p>Kau pula teruskan perjalanan sampai rumah kakak kau.</p>
+        <p>Lepas tu kita lepak pula dekat parking area rumah aku. Dekat situ pun kita tak buat apa sangat. Just duduk. Sembang. 👀👀 Mana ada buat benda bukan bukan kann???</p>
+        <p>And then sampai masa untuk berpisah. Aku balik rumah. Makan burger. Kau pula teruskan perjalanan sampai rumah kakak kau.</p>
+        <p>Aku makan burger tu hampir setengah jam. Kau? Tiga suap. 😭😭😭</p>
 
-        <p>Aku makan burger tu hampir setengah jam.</p>
-        <p>Kau?</p>
-        <p>Tiga suap.</p>
-        <p>😭😭😭</p>
+        <p>Looking back, date ni memang random. Tapi mungkin itu yang buat aku suka date ni.</p>
+        <p>Sebab aku keluar bukan sebab kita dah plan nak pergi dating. <span class="highlight">Aku keluar sebab aku tahu kau perlukan aku.</span></p>
+        <p>Dan walaupun aku sebenarnya dah penat, dah spend satu hari dengan kau, dan dalam hati memang malas nak bersiap… Aku tetap datang.</p>
+        <p>Sebab kalau aku tak teman kau waktu tu, mesti aku tertanya-tanya juga. "Kau okay ke, cane kalau dia ajak perempuan lain teman?"</p>
+        <p>And thank you sebab kau tak pernah kisah aku nampak macam mana. Aku pakai hoodie, kau okay. Aku pakai T-shirt, kau okay. Aku pakai slipper, kau okay. Aku tak bersiap cantik-cantik pun, kau tetap okay.</p>
+        <p>Sebab bagi kita, as long as kita dapat jumpa, dah cukup. And I think that's one of the things I love most about us. <span class="highlight">Kita tak perlu sentiasa ada plan besar untuk create a memory.</span></p>
 
-        <br>
-        <p>Looking back, date ni memang random.</p>
-        <p>Tapi mungkin itu yang buat aku suka date ni.</p>
-        <p>Sebab aku keluar bukan sebab kita dah plan nak pergi dating.</p>
-        <p>Aku keluar sebab aku tahu kau perlukan aku.</p>
-        <p>Dan walaupun aku sebenarnya dah penat, dah spend satu hari dengan kau, dan dalam hati memang malas nak bersiap…</p>
-        <p>Aku tetap datang.</p>
-        <p>Sebab kalau aku tak teman kau waktu tu, mesti aku tertanya-tanya juga.</p>
-        <p>"Kau okay ke?"</p>
-        <p>And thank you sebab kau tak pernah kisah aku nampak macam mana.</p>
-        <p>Aku pakai hoodie, kau okay.</p>
-        <p>Aku pakai T-shirt, kau okay.</p>
-        <p>Aku pakai slipper, kau okay.</p>
-        <p>Aku tak bersiap cantik-cantik pun, kau tetap okay.</p>
-        <p>Sebab bagi kita, as long as kita dapat jumpa, dah cukup.</p>
-        <p>And I think that's one of the things I love most about us.</p>
-        <p>Kita tak perlu sentiasa ada plan besar untuk create a memory.</p>
-     
-        <p>So thank you, sayang.</p>
-        <p>For saying yes to a date that wasn't even really a date.</p>
-        <p>For not caring whether I looked pretty or not.</p>
-        <p>For letting me be comfortable enough to just be myself.</p>
-        <p>And most of all…</p>
-        <p>thank you sebab bagi aku peluang untuk tengok kau tidur dengan tenang dekat sebelah aku.</p>
+        <p>So thank you, sayang. For saying yes to a date that wasn't even really a date. For not caring whether I looked pretty or not. For letting me be comfortable enough to just be myself.</p>
+        <p>And most of all… thank you sebab bagi aku peluang untuk tengok kau tidur dengan tenang dekat sebelah aku.</p>
 
-        <p>that was my favourite part. 🤍</p>
+        <p><span class="highlight">that was my favourite part.</span> 🤍</p>
         <button class="dashboard-btn" onclick="swiper.slideTo(1)">← Return to Dashboard</button>
       </div>
     </div>
