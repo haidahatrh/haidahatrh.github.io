@@ -925,7 +925,7 @@
     ctaText.textContent = 'Open Us';
     cta.addEventListener('click', () => {
       burstConfetti(200);
-      setTimeout(() => window.location.href = 'index.html', 500);
+      setTimeout(() => window.location.href = 'https://atrh.xo.je/couples-app/', 500);
     });
   }
 
@@ -941,9 +941,11 @@
     rsvpText.textContent = "You've confirmed — see you at 10 PM";
   }
 
+  const API_BASE = 'https://atrh.xo.je/couples-app/api/index.php';
+
   async function loadRsvp() {
     try {
-      const res = await fetch('api/index.php', {
+      const res = await fetch(API_BASE, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'rsvp_get' })
@@ -965,7 +967,7 @@
     }
     setRsvpDone();
     try {
-      await fetch('api/index.php', {
+      await fetch(API_BASE, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'rsvp_set', by: 'bf' })
